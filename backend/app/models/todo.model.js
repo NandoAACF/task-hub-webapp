@@ -1,7 +1,10 @@
 module.exports = (mongoose) => {
     const schema = mongoose.Schema(
         {
-            // Untuk field
+            title: String,
+            desc: String,
+            category: String,
+            deadline: Date,
         },
         { timestamps: true }
     );
