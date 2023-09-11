@@ -3,7 +3,8 @@ module.exports = (mongoose) => {
         {
             username: {
                 type: String,
-                required: true
+                required: true,
+                unique: true
             },
             email: {
                 type: String,
@@ -11,7 +12,9 @@ module.exports = (mongoose) => {
             },
             password: {
                 type: String,
-                required: true
+                required: true,
+                min: 8,
+                max: 20
             },
         },
         { timestamps: true }
