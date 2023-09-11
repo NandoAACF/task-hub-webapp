@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 
-// Kalau mau start server tinggal command npm start
+// Kalau mau start server tinggal command npm start setiap resave bakal tercompile sendiri secara otomatis
 const app = express();
 
 // Menggunakan express.json agar kita melakukan parse request dalam bentuk JSON
@@ -31,6 +31,7 @@ app.get("/", (req, res) => {
 });
 
 require("./app/routes/todo.routes")(app);
+require("./app/routes/user.routes")(app);
 
 const PORT = 8000;
 app.listen(PORT, () => {
