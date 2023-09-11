@@ -37,3 +37,17 @@ exports.create = (req, res) => {
             });
         });
 };
+
+exports.findOne = (req, res) => {
+    // req.params untuk mendapatkan data yang dikirimkan melalui parameter url
+    const id = req.params.id;
+    Todo.findById(id)
+        .then((result) => {
+            res.send(result);
+        })
+        .catch((err) => {
+            res.status(409).send({
+                message: err.message || "Some error occurred while showing the todo.",
+            });
+        });
+};
