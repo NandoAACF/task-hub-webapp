@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 
+// Kalau mau start server tinggal command npm start
 const app = express();
 
 // Menggunakan express.json agar kita melakukan parse request dalam bentuk JSON
