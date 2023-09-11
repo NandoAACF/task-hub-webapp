@@ -70,3 +70,22 @@ exports.delete = (req, res) => {
             });
         });
 };
+
+exports.update = (req, res) => {
+    const id = req.params.id;
+    Todo.findByIdAndUpdate(id, { $set: req.body })
+        .then((result) => {
+            if (!result) {
+                res.status(404).send({
+                    message: `Cannot update Todo with id = ${id}. Maybe Todo was not found!`,
+                });
+            } else {
+                res.send({ message: "Todo was updated successfully." });
+            }
+        })
+        .catch((err) => {
+            res.status(409).send({
+                message: err.message || "Some error occurred while updating the todo.",
+            });
+        });
+}
