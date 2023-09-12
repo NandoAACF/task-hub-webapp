@@ -116,3 +116,17 @@ exports.filterByCategory = (req, res) => {
             });
         });
 };
+
+exports.filterByPriority = (req, res) => {
+    const priority = req.params.priority;
+    const filter = { priority: { $regex: new RegExp(priority, "i") } };
+    Todo.find(filter)
+        .then((result) => {
+            res.send(result);
+        })
+        .catch((err) => {
+            res.status(409).send({
+                message: err.message || "Some error occurred while showing the priority.",
+            });
+        });
+};

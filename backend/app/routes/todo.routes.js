@@ -8,6 +8,7 @@ module.exports = (app) => {
     router.delete("/:id", todos.delete);
     router.delete("/", todos.deleteAll);
     router.get("/filtercategory/:category", todos.filterByCategory);
+    router.get("/filterpriority/:priority", todos.filterByPriority);
 
     app.use("/api/todos", router);
 };
