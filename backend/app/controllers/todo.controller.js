@@ -102,3 +102,17 @@ exports.deleteAll = (req, res) => {
             });
         });
 };
+
+exports.filterByCategory = (req, res) => {
+    const category = req.params.category.replace("-", " ");
+    const filter = { category: { $regex: new RegExp(category, "i") } };
+    Todo.find(filter)
+        .then((result) => {
+            res.send(result);
+        })
+        .catch((err) => {
+            res.status(409).send({
+                message: err.message || "Some error occurred while showing the category.",
+            });
+        });
+};
