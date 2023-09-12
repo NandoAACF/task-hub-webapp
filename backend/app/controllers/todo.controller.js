@@ -25,6 +25,7 @@ exports.create = (req, res) => {
         desc: req.body.desc,
         category: req.body.category,
         deadline: req.body.deadline,
+        priority: req.body.priority,
     });
 
     todo.save(todo)
@@ -52,6 +53,25 @@ exports.findOne = (req, res) => {
         });
 };
 
+exports.update = (req, res) => {
+    const id = req.params.id;
+    Todo.findByIdAndUpdate(id, { $set: req.body })
+        .then((result) => {
+            if (!result) {
+                res.status(404).send({
+                    message: `Cannot update Todo with id = ${id}. Maybe Todo was not found!`,
+                });
+            } else {
+                res.send({ message: "Todo was updated successfully." });
+            }
+        })
+        .catch((err) => {
+            res.status(409).send({
+                message: err.message || "Some error occurred while updating the todo.",
+            });
+        });
+};
+
 exports.delete = (req, res) => {
     const id = req.params.id;
     Todo.findByIdAndRemove(id)
@@ -71,21 +91,14 @@ exports.delete = (req, res) => {
         });
 };
 
-exports.update = (req, res) => {
-    const id = req.params.id;
-    Todo.findByIdAndUpdate(id, { $set: req.body })
+exports.deleteAll = (req, res) => {
+    Todo.deleteMany()
         .then((result) => {
-            if (!result) {
-                res.status(404).send({
-                    message: `Cannot update Todo with id = ${id}. Maybe Todo was not found!`,
-                });
-            } else {
-                res.send({ message: "Todo was updated successfully." });
-            }
+            res.send({ message: `${result.deletedCount} Todos were deleted successfully.` });
         })
         .catch((err) => {
             res.status(409).send({
-                message: err.message || "Some error occurred while updating the todo.",
+                message: err.message || "Some error occurred while delete all todos.",
             });
         });
-}
+};

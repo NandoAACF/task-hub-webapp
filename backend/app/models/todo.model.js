@@ -3,19 +3,23 @@ module.exports = (mongoose) => {
         {
             title: {
                 type: String,
-                required: true
+                required: true,
             },
             desc: {
                 type: String,
-                required: true
+                required: true,
             },
             category: {
                 type: String,
-                required: true
+                required: true,
             },
             deadline: {
                 type: Date,
-                required: true
+                required: true,
+            },
+            priority: {
+                type: String,
+                required: true,
             },
         },
         { timestamps: true }
