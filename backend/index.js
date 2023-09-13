@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
+require("dotenv").config();
 
 // Kalau mau start server tinggal command npm start setiap resave bakal tercompile sendiri secara otomatis
 const app = express();
