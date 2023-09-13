@@ -11,6 +11,7 @@ module.exports = (app) => {
     router.get("/filterpriority/:priority", todos.filterByPriority);
     router.get("/sortdeadlineasc", todos.sortByDeadlineAsc);
     router.get("/sortdeadlinedesc", todos.sortByDeadlineDesc);
+    router.get("/sortbyoldest", todos.sortByOldest);
 
     app.use("/api/todos", router);
 };
