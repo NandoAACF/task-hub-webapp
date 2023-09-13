@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 
 // Kalau mau start server tinggal command npm start setiap resave bakal tercompile sendiri secara otomatis
 const app = express();
@@ -10,6 +11,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // Supaya frontend bisa mengakses backend
 app.use(cors());
+// Mengatur view engine dengan template EJS
+app.set("view engine", "ejs");
+// Mengatur directory untuk views
+app.set("views", path.join(__dirname, "app", "views"));
 
 // Untuk menghubungkan ke database
 const db = require("./app/models");
@@ -27,7 +32,7 @@ db.mongoose
     });
 
 app.get("/", (req, res) => {
-    res.json({ message: "Welcome to my application." });
+    res.render("index", { title: "Welcome to my application" });
 });
 
 require("./app/routes/todo.routes")(app);
@@ -35,5 +40,5 @@ require("./app/routes/user.routes")(app);
 
 const PORT = 8000;
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+    console.log(`Server is running on http://localhost:${PORT}`);
 });
