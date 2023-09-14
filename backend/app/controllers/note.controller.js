@@ -36,3 +36,22 @@ exports.create = (req, res) => {
             });
         });
 };
+
+exports.update = (req, res) => {
+    const id = req.params.id;
+    Note.findByIdAndUpdate(id, req.body)
+        .then((result) => {
+            if (!result) {
+                res.status(404).send({
+                    message: `Cannot update Note with id = ${id}. Maybe Note was not found!`,
+                });
+            } else {
+                res.send({ message: "Note was updated successfully." });
+            }
+        })
+        .catch((err) => {
+            res.status(409).send({
+                message: err.message || "Some error occurred while update the note.",
+            });
+        });
+};
