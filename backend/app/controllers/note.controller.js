@@ -70,7 +70,7 @@ exports.delete = (req, res) => {
         })
         .catch((err) => {
             res.status(409).send({
-                message: err.message || "Some error occurred while delete the note.",
+                message: err.message || "Some error occurred while deleting the note.",
             });
         });
 };
@@ -82,7 +82,19 @@ exports.deleteAll = (req, res) => {
         })
         .catch((err) => {
             res.status(409).send({
-                message: err.message || "Some error occurred while delete all notes.",
+                message: err.message || "Some error occurred while deleting all the notes.",
             });
         });
 };
+
+exports.findOne = (req, res) => {
+    Note.findById(id)
+        .then((result) => {
+            res.send(result);
+        })
+        .catch((err) => {
+            res.status(409).send({
+                message: err.message || "Some error occurred while showing the note.",
+            });
+        });
+}
