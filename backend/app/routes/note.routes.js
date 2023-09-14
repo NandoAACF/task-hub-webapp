@@ -6,6 +6,7 @@ module.exports = (app) => {
     router.post("/", notes.create);
     router.put("/:id", notes.update);
     router.delete("/:id", notes.delete);
+    router.delete("/", notes.deleteAll);
 
     app.use("/api/notes", router);
 };

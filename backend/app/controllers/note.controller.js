@@ -74,3 +74,15 @@ exports.delete = (req, res) => {
             });
         });
 };
+
+exports.deleteAll = (req, res) => {
+    Note.deleteMany()
+        .then((result) => {
+            res.send({ message: `${result.deletedCount} Todos were deleted successfully.` });
+        })
+        .catch((err) => {
+            res.status(409).send({
+                message: err.message || "Some error occurred while delete all notes.",
+            });
+        });
+};
