@@ -4,7 +4,7 @@ const Todo = db.todos;
 exports.findAll = (req, res) => {
     Todo.find()
         .then((result) => {
-            res.send(result);
+            res.status(200).send(result);
         })
         .catch((err) => {
             res.status(500).send({
@@ -30,7 +30,7 @@ exports.create = (req, res) => {
 
     todo.save(todo)
         .then((result) => {
-            res.send(result);
+            res.status(200).send(result);
         })
         .catch((err) => {
             res.status(409).send({
@@ -44,7 +44,7 @@ exports.findOne = (req, res) => {
     const id = req.params.id;
     Todo.findById(id)
         .then((result) => {
-            res.send(result);
+            res.status(200).send(result);
         })
         .catch((err) => {
             res.status(409).send({
@@ -62,7 +62,7 @@ exports.update = (req, res) => {
                     message: `Cannot update Todo with id = ${id}. Maybe Todo was not found!`,
                 });
             } else {
-                res.send({ message: "Todo was updated successfully." });
+                res.status(200).send({ message: "Todo was updated successfully." });
             }
         })
         .catch((err) => {
@@ -81,7 +81,7 @@ exports.delete = (req, res) => {
                     message: `Cannot delete Todo with id = ${id}. Maybe Todo was not found!`,
                 });
             } else {
-                res.send({ message: "Todo was deleted successfully." });
+                res.status(200).send({ message: "Todo was deleted successfully." });
             }
         })
         .catch((err) => {
@@ -94,7 +94,7 @@ exports.delete = (req, res) => {
 exports.deleteAll = (req, res) => {
     Todo.deleteMany()
         .then((result) => {
-            res.send({
+            res.status(200).send({
                 message: `${result.deletedCount} Todos were deleted successfully.`,
             });
         })

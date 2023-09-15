@@ -4,7 +4,7 @@ const Note = db.notes;
 exports.findAll = (req, res) => {
     Note.find()
         .then((result) => {
-            res.send(result);
+            res.status(200).send(result);
         })
         .catch((err) => {
             res.status(500).send({
@@ -28,7 +28,7 @@ exports.create = (req, res) => {
 
     note.save(note)
         .then((result) => {
-            res.send(result);
+            res.status(200).send(result);
         })
         .catch((err) => {
             res.status(409).send({
@@ -41,7 +41,7 @@ exports.findOne = (req, res) => {
     const id = req.params.id;
     Note.findById(id)
         .then((result) => {
-            res.send(result);
+            res.status(200).send(result);
         })
         .catch((err) => {
             res.status(409).send({
@@ -59,7 +59,7 @@ exports.update = (req, res) => {
                     message: `Cannot update Note with id = ${id}. Maybe Note was not found!`,
                 });
             } else {
-                res.send({ message: "Note was updated successfully." });
+                res.status(200).send({ message: "Note was updated successfully." });
             }
         })
         .catch((err) => {
@@ -78,7 +78,7 @@ exports.delete = (req, res) => {
                     message: `Cannot delete Note with id = ${id}. Maybe Note was not found!`,
                 });
             } else {
-                res.send({ message: "Note was deleted successfully." });
+                res.status(200).send({ message: "Note was deleted successfully." });
             }
         })
         .catch((err) => {
@@ -91,7 +91,7 @@ exports.delete = (req, res) => {
 exports.deleteAll = (req, res) => {
     Note.deleteMany()
         .then((result) => {
-            res.send({ message: `${result.deletedCount} Todos were deleted successfully.` });
+            res.status(200).send({ message: `${result.deletedCount} Todos were deleted successfully.` });
         })
         .catch((err) => {
             res.status(409).send({
@@ -105,7 +105,7 @@ exports.filterByTopic = (req, res) => {
     const filter = { topic: { $regex: new RegExp(topic, "i") } };
     Note.find(filter)
         .then((result) => {
-            res.send(result);
+            res.status(200).send(result);
         })
         .catch((err) => {
             res.status(409).send({

@@ -24,7 +24,7 @@ exports.register = (req, res) => {
 
     user.save(user)
         .then((result) => {
-            res.send(result);
+            res.status(200).send(result);
         })
         .catch((err) => {
             res.status(409).send({
@@ -68,7 +68,7 @@ exports.findOne = (req, res) => {
     const id = req.params.id;
     User.findById(id)
         .then((result) => {
-            res.send(result);
+            res.status(200).send(result);
         })
         .catch((err) => {
             res.status(409).send({
