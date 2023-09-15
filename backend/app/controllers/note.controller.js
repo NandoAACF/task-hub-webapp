@@ -113,3 +113,15 @@ exports.filterByTopic = (req, res) => {
             });
         });
 };
+
+exports.filterByFavorite = (req, res) => {
+    Note.find({ favorite: true })
+        .then((result) => {
+            res.send(result);
+        })
+        .catch((err) => {
+            res.status(409).send({
+                message: err.message || "Some error occurred while showing all favorite posts.",
+            });
+        });
+};
