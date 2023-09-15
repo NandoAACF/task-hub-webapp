@@ -4,9 +4,11 @@ module.exports = (app) => {
 
     router.get("/", notes.findAll);
     router.post("/", notes.create);
+    router.get("/:id", notes.findOne);
     router.put("/:id", notes.update);
     router.delete("/:id", notes.delete);
     router.delete("/", notes.deleteAll);
+    router.get("/filtertopic/:topic", notes.filterByTopic);
 
     app.use("/api/notes", router);
 };

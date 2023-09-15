@@ -37,6 +37,19 @@ exports.create = (req, res) => {
         });
 };
 
+exports.findOne = (req, res) => {
+    const id = req.params.id;
+    Note.findById(id)
+        .then((result) => {
+            res.send(result);
+        })
+        .catch((err) => {
+            res.status(409).send({
+                message: err.message || "Some error occurred while showing the note.",
+            });
+        });
+};
+
 exports.update = (req, res) => {
     const id = req.params.id;
     Note.findByIdAndUpdate(id, req.body)
@@ -87,14 +100,16 @@ exports.deleteAll = (req, res) => {
         });
 };
 
-exports.findOne = (req, res) => {
-    Note.findById(id)
+exports.filterByTopic = (req, res) => {
+    const topic = req.params.topic.replace("-", " ");
+    const filter = { topic: { $regex: new RegExp(topic, "i") } };
+    Note.find(filter)
         .then((result) => {
             res.send(result);
         })
         .catch((err) => {
             res.status(409).send({
-                message: err.message || "Some error occurred while showing the note.",
+                message: err.message || "Some error occurred while showing the topic.",
             });
         });
-}
+};
