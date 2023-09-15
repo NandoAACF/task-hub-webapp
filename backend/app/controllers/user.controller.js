@@ -38,8 +38,8 @@ exports.login = async (req, res) => {
         const user = await User.findOne({email: req.body.email});
         if(!user) return res.status(404).send("User not found");
 
-        const isPwdCorrect = await bcrypt.compareSync(req.body.pwd, user.pwd);
-        if(!isPwdCorrect) return res.status(400).send('Wrong password');
+        const isPasswordCorrect = await bcrypt.compareSync(req.body.password, user.password);
+        if(!isPasswordCorrect) return res.status(400).send('Wrong password');
         
         //Membuat token yang terdiri dari dua access token dan refresh token
         const accessToken = jwt.sign({id: user.id}, process.env.AUTH_ACCESS_TOKEN, {expiresIn: '10s'});
@@ -57,8 +57,8 @@ exports.login = async (req, res) => {
         });
 
     } catch(err) {
-        return res.status(500).send({
-            message:err.message
+        return res.status(409).send({
+            message:err.message || "Some error occured while authenticating"
         });
     }
 };
