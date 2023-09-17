@@ -16,6 +16,10 @@ module.exports = (mongoose) => {
                 min: 8,
                 max: 20
             },
+            profilePicture: {
+                type: String,
+                default: 'profile.jpg'
+            },
         },
         { timestamps: true }
     );
