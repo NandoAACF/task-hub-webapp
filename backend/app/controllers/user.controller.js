@@ -3,35 +3,38 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const User = db.user;
 
-exports.register = (req, res) => {
+exports.register = async (req, res) => {
+    try {
+        const { username, email, password } = req.body;
+        if (!email || !username || !password) {
+            res.status(400).send({ message: "Content can not be empty!" });
+            return;
+        }
 
-    const {username, email, password} = req.body;
-    if (!email || !username || !password) {
-        res.status(400).send({ message: "Content can not be empty!" });
-        return;
-    }
+        // Mengecek apakah email sudah diambil sebelumnya
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return res.status(409).send({ message: "Email is already taken!" });
+        }
 
-    //Melakukan hashing terhadap password
-    const salt = bcrypt.genSaltSync(10);
-    const hashedPassword = bcrypt.hashSync(password, salt);
+        // Melakukan encoding terhadap password melalui hashing algorithm
+        const salt = bcrypt.genSaltSync(10);
+        const hashedPassword = bcrypt.hashSync(password, salt);
 
-    // req.body untuk mendapatkan data yang dikirimkan melalui body request
-    const user = new User({
-        username: username,
-        email: email,
-        password: hashedPassword,
-    });
-
-    user.save(user)
-        .then((result) => {
-            res.status(200).send(result);
-        })
-        .catch((err) => {
-            res.status(409).send({
-                message: err.message || "Some error occurred while registering.",
-            });
+        const user = new User({
+            username: username,
+            email: email,
+            password: hashedPassword,
         });
+
+        const result = await user.save();
+
+        res.status(200).send(result);
+    } catch (err) {
+        res.status(500).send({ message: err.message || "Some error occurred while registering." });
+    }
 };
+
 
 exports.login = async (req, res) => {
     try {
