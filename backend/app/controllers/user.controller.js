@@ -41,14 +41,12 @@ exports.login = async (req, res) => {
         const isPasswordCorrect = await bcrypt.compareSync(req.body.password, user.password);
         if(!isPasswordCorrect) return res.status(400).send('Wrong password');
         
-        //Membuat token yang terdiri dari dua access token dan refresh token
-        const accessToken = jwt.sign({id: user.id}, process.env.AUTH_ACCESS_TOKEN, {expiresIn: '10s'});
-        const refreshToken = jwt.sign({id: user.id}, process.env.AUTH_REFRESH_TOKEN, {expiresIn: '1h'});
+        //Membuat token 
+        const token = jwt.sign({id: user.id}, process.env.AUTH_REFRESH_TOKEN, {expiresIn: '1h'});
         
         const data = {
             user: user,
-            accessToken: accessToken,
-            refreshToken: refreshToken
+            token: token
         };  
 
         return res.status(200).json({

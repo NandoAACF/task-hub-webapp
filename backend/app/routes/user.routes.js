@@ -6,6 +6,6 @@ module.exports = (app) => {
     router.post("/register", user.register);
     router.delete("/:id", user.delete);
     router.post("/login", user.login);
-
+    
     app.use("/api/user", router);
 };
