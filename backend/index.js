@@ -36,9 +36,13 @@ app.get("/", (req, res) => {
     res.render("index", { title: "Welcome to my application" });
 });
 
+// Untuk mengakses file yang sudah disimpan di folder uploads
+app.use("/api/images", express.static(path.join(__dirname, "app", "/uploads/")));
+
 require("./app/routes/todo.routes")(app);
 require("./app/routes/user.routes")(app);
 require("./app/routes/note.routes")(app);
+require("./app/routes/upload.routes")(app);
 
 const PORT = 8000;
 app.listen(PORT, () => {
