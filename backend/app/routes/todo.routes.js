@@ -1,6 +1,10 @@
 module.exports = (app) => {
     const todos = require("../controllers/todo.controller.js");
+    const authMiddleware = require("../middlewares/auth.middleware.js");
     var router = require("express").Router();
+
+    // Memanggil fungsi authMiddleware untuk menjalan proses autentikasi sebelum melakukan request
+    router.use(authMiddleware);
 
     router.get("/", todos.findAll);
     router.post("/", todos.create);
