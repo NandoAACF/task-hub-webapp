@@ -5,6 +5,7 @@ module.exports = (app) => {
     router.get("/filterfavorite", notes.filterByFavorite);
     router.get("/filtertopic/:topic", notes.filterByTopic);
     router.get("/sortbyoldest", notes.sortByOldest);
+    router.get("/sortbylatest", notes.sortByLatest);
     router.get("/", notes.findAll);
     router.post("/", notes.create);
     router.get("/:id", notes.findOne);
