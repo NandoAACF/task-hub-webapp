@@ -35,33 +35,43 @@ exports.register = async (req, res) => {
     }
 };
 
-
 exports.login = async (req, res) => {
     try {
-        const user = await User.findOne({email: req.body.email});
-        if(!user) return res.status(404).send("User not found");
+        const user = await User.findOne({ email: req.body.email });
+        if (!user) return res.status(404).send("User not found");
 
         const isPasswordCorrect = await bcrypt.compareSync(req.body.password, user.password);
-        if(!isPasswordCorrect) return res.status(400).send('Wrong password');
-        
-        //Membuat token 
-        const token = jwt.sign({id: user.id}, process.env.AUTH_REFRESH_TOKEN, {expiresIn: '1h'});
-        
+        if (!isPasswordCorrect) return res.status(400).send("Wrong password");
+
+        //Membuat token
+        const token = jwt.sign({ id: user.id }, process.env.AUTH_REFRESH_TOKEN, { expiresIn: "1h" });
+
         const data = {
             user: user,
-            token: token
-        };  
+            token: token,
+        };
 
         return res.status(200).json({
             message: "You are authenticated",
             data: data,
         });
-
-    } catch(err) {
+    } catch (err) {
         return res.status(409).send({
-            message:err.message || "Some error occured while authenticating"
+            message: err.message || "Some error occured while authenticating",
         });
     }
+};
+
+exports.findAll = (req, res) => {
+    User.find()
+        .then((result) => {
+            res.status(200).send(result);
+        })
+        .catch((err) => {
+            res.status(500).send({
+                message: err.message || "Some error occurred while retrieving users.",
+            });
+        });
 };
 
 exports.findOne = (req, res) => {
