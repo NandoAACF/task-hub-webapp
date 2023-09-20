@@ -1,6 +1,10 @@
 module.exports = (app) => {
     const notes = require("../controllers/note.controller.js");
+    const authMiddleware = require("../middlewares/auth.middleware.js");
     var router = require("express").Router();
+
+    // Memanggil fungsi authMiddleware untuk menjalan proses autentikasi sebelum melakukan request
+    router.use(authMiddleware);
 
     // Membuat endpoint untuk mengakses note controller
     router.get("/filterfavorite", notes.filterByFavorite);
