@@ -162,6 +162,32 @@ Task Hub Web App adalah sebuah aplikasi web yang digunakan untuk mengelola todo 
     ````````````
     DELETE /api/users/:id
     ````````````
+24. Get Notes By UserId <br>
+    Mendapatkan daftar notes berdasarkan id user dan juga bisa filtering berdasarkan query yang dimasukkan, opsinya berupa favorite, topik, dan urutan<br>
+    Endpoint: <br>
+    ````````````
+    GET /api/notes/list/:userId
+    GET /api/notes/list/:userId?sortBy=latest&favorite=true&topic=Daily
+    ````````````
+25. Get Todos By UserId <br>
+    Mendapatkan daftar todos berdasarkan id user dan juga bisa filtering berdasarkan query yang dimasukkan, opsinya berupa kategori, deadline, dan urutan <br>
+    Endpoint: <br>
+    ````````````
+    GET /api/todos/list/:userId
+    GET /api/todos/list/:userId?sortBy=latest&deadline=asc&kategori=Kuliah
+    ````````````
+26. Upload File <br>
+    Mengunggah file dalam format jpg atau png <br>
+    Endpoint: <br>
+    ````````````
+    POST /api/upload
+    ````````````
+27. Akses File <br>
+    Mengakses file dalam format jpg atau png yang sudah diupload sebelumnya dan tersimpan di folder uploads <br>
+    Endpoint: <br>
+    ````````````
+    POST /api/images/{namaFile}
+    ````````````
 
 ## 💻 Tech Stack
 - NodeJS
@@ -183,7 +209,7 @@ Task Hub Web App adalah sebuah aplikasi web yang digunakan untuk mengelola todo 
     ```````````
 4. Run App
     ```````````
-    nodemon
+    npm start
     ```````````
 5. Access the API via Postman Documentation
     ```````````
