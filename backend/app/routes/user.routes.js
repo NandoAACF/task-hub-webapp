@@ -1,14 +1,15 @@
 module.exports = (app) => {
-    const user = require("../controllers/user.controller.js");
+    // Import user controller dan express router
+    const users = require("../controllers/user.controller.js");
     var router = require("express").Router();
 
     // Membuat endpoint untuk mengakses user controller
-    router.get("/", user.findAll);
-    router.get("/:id", user.findOne);
-    router.post("/register", user.register);
-    router.delete("/:id", user.delete);
-    router.post("/login", user.login);
+    router.get("/", users.findAll);
+    router.get("/:id", users.findOne);
+    router.post("/register", users.register);
+    router.delete("/:id", users.delete);
+    router.post("/login", users.login);
 
-    // Jika user mengakses endpoint /api/user, maka akan diarahkan ke router yang telah dibuat di atas
-    app.use("/api/user", router);
+    // Jika user mengakses endpoint /api/users, maka akan diarahkan ke router yang telah dibuat di atas
+    app.use("/api/users", router);
 };
