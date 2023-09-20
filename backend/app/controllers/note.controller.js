@@ -157,7 +157,26 @@ exports.sortByLatest = (req, res) => {
 
 exports.findByUserId = (req, res) => {
     const userId = req.params.userId;
-    Note.find({ userId: userId })
+    const { topic, favorite, sortBy } = req.query;
+
+    let filteredData = { userId: userId };
+    if(topic) {
+        filteredData.topic = topic;
+    }
+
+    if(favorite) {
+        filteredData.favorite = (favorite.toLowerCase() === 'true');
+    }
+
+    let sortedCondition = {};
+    if(sortBy === "oldest") {
+        sortedCondition.updatedAt = 1;
+    } else if (sortBy === "latest") {
+        sortedCondition.updatedAt = -1;
+    }
+
+    Note.find(filteredData)
+        .sort(sortedCondition)
         .then((result) => {
             res.send(result);
         })
@@ -168,32 +187,4 @@ exports.findByUserId = (req, res) => {
         });
 }
 
-exports.filterAndSortNotes = (req, res) => {
-    const { topic, favorite, sortBy } = req.query;
 
-    let filter = {};
-    if (topic) {
-        filter.topic = { $regex: new RegExp(topic.replace("-", " "), "i") };
-    }
-    if (favorite) {
-        filter.favorite = true;
-    }
-
-    let sort = {};
-    if (sortBy === "oldest") {
-        sort.updatedAt = 1;
-    } else if (sortBy === "latest") {
-        sort.updatedAt = -1;
-    }
-
-    Note.find(filter)
-        .sort(sort)
-        .then((result) => {
-            res.status(200).send(result);
-        })
-        .catch((err) => {
-            res.status(500).send({
-                message: err.message || "Some error occurred while retrieving notes.",
-            });
-        });
-};
