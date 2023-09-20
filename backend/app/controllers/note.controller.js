@@ -20,6 +20,7 @@ exports.create = (req, res) => {
     }
 
     const note = new Note({
+        userId: req.body.userId,
         title: req.body.title,
         desc: req.body.desc,
         topic: req.body.topic,
@@ -150,6 +151,49 @@ exports.sortByLatest = (req, res) => {
         .catch((err) => {
             res.status(500).send({
                 message: err.message || "Some error occurred while retrieving todos.",
+            });
+        });
+};
+
+exports.findByUserId = (req, res) => {
+    const userId = req.params.userId;
+    Note.find({ userId: userId })
+        .then((result) => {
+            res.send(result);
+        })
+        .catch((err) => {
+            res.status(500).send({
+                message: err.message || "Some error occurred while retrieving todos.",
+            });
+        });
+}
+
+exports.filterAndSortNotes = (req, res) => {
+    const { topic, favorite, sortBy } = req.query;
+
+    let filter = {};
+    if (topic) {
+        filter.topic = { $regex: new RegExp(topic.replace("-", " "), "i") };
+    }
+    if (favorite) {
+        filter.favorite = true;
+    }
+
+    let sort = {};
+    if (sortBy === "oldest") {
+        sort.updatedAt = 1;
+    } else if (sortBy === "latest") {
+        sort.updatedAt = -1;
+    }
+
+    Note.find(filter)
+        .sort(sort)
+        .then((result) => {
+            res.status(200).send(result);
+        })
+        .catch((err) => {
+            res.status(500).send({
+                message: err.message || "Some error occurred while retrieving notes.",
             });
         });
 };

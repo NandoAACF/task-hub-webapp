@@ -8,6 +8,7 @@ module.exports = (app) => {
     router.get("/sortbyoldest", notes.sortByOldest);
     router.get("/sortbylatest", notes.sortByLatest);
     router.get("/", notes.findAll);
+    router.get("/list/:userId", notes.findByUserId);
     router.post("/", notes.create);
     router.get("/:id", notes.findOne);
     router.put("/:id", notes.update);
