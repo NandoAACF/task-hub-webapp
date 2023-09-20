@@ -184,3 +184,41 @@ exports.sortByLatest = (req, res) => {
             });
         });
 };
+
+exports.findByUserId = (req, res) => {
+    const userId = req.params.userId;
+    const { category, deadline, sortBy } = req.query;
+
+    let filteredData = { userId: userId };
+    if(category) {
+        filteredData.category = category;
+    }
+
+    let sortedCondition = {};
+    if(deadline) {
+        if(deadline === "asc") {
+            sortedCondition.deadline = 1;
+        } else if (deadline === "desc") {
+            sortedCondition.deadline = -1;
+        }
+    }
+
+    if(sortBy) {
+        if(sortBy === "oldest") {
+            sortedCondition.updatedAt = 1;
+        } else if (sortBy === "latest") {
+            sortedCondition.updatedAt = -1;
+        }
+    }
+
+    Note.find(filteredData)
+        .sort(sortedCondition)
+        .then((result) => {
+            res.status(200).send(result);
+        })
+        .catch((err) => {
+            res.status(500).send({
+                message: err.message || "Some error occurred while retrieving todos.",
+            });
+        });
+}

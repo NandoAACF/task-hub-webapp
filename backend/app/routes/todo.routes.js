@@ -12,6 +12,7 @@ module.exports = (app) => {
     router.put("/:id", todos.update);
     router.delete("/:id", todos.delete);
     router.delete("/", todos.deleteAll);
+    router.get("/list/:userId", todos.findByUserId);
     router.get("/filtercategory/:category", todos.filterByCategory);
     router.get("/filterpriority/:priority", todos.filterByPriority);
     router.get("/sortdeadlineasc", todos.sortByDeadlineAsc);

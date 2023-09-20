@@ -178,7 +178,7 @@ exports.findByUserId = (req, res) => {
     Note.find(filteredData)
         .sort(sortedCondition)
         .then((result) => {
-            res.send(result);
+            res.status(200).send(result);
         })
         .catch((err) => {
             res.status(500).send({
