@@ -1,9 +1,9 @@
 <h1 align="center">
-    Task Hub Web App
+    Taskify Web App
 </h1>
 
 ## 📝 Deskripsi Web App
-Task Hub Web App adalah sebuah aplikasi web yang digunakan untuk mengelola todo dan notes pengguna. Aplikasi ini menggunakan fitur authentication agar pengguna bisa mengakses datanya di mana pun dan kapan pun. 
+Taskify Web App adalah sebuah aplikasi web yang digunakan untuk mengelola todo dan notes pengguna. Aplikasi ini menggunakan fitur authentication agar pengguna bisa mengakses datanya di mana pun dan kapan pun. 
 
 ## 📦 Fitur & Endpoint Web App
 1. Create Todo <br>
