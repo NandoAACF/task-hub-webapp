@@ -30,17 +30,17 @@ Taskify Web App adalah sebuah aplikasi web yang digunakan untuk mengelola todo d
     ````````````
     PUT /api/todos/:id
     ````````````
-5. Delete Todo <br>
+5. Delete Todo by ID <br>
     Menghapus todo berdasarkan id. <br>
     Endpoint: <br>
     ````````````
     DELETE /api/todos/:id
     ````````````
-6. Delete all Todos <br>
+6. Delete Todos By User ID <br>
     Menghapus semua todo yang ada di database. <br>
     Endpoint: <br>
     ````````````
-    DELETE /api/todos
+    DELETE /api/todos/list/:userId
     ````````````
 7. Filter Todo by Category <br>
     Menampilkan todo berdasarkan kategori. <br>

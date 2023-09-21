@@ -92,8 +92,10 @@ exports.delete = (req, res) => {
         });
 };
 
-exports.deleteAll = (req, res) => {
-    Todo.deleteMany()
+exports.deleteAllTodosByUserId = (req, res) => {
+    const userId = req.params.userId;
+    const filter = { userId: userId };
+    Todo.deleteMany(filter)
         .then((result) => {
             res.status(200).send({
                 message: `${result.deletedCount} Todos were deleted successfully.`,

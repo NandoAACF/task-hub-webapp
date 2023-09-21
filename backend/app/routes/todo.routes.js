@@ -11,7 +11,7 @@ module.exports = (app) => {
     router.post("/", todos.create);
     router.put("/:id", todos.update);
     router.delete("/:id", todos.delete);
-    router.delete("/", todos.deleteAll);
+    router.delete("/list/:userId", todos.deleteAllTodosByUserId);
     router.get("/list/:userId", todos.findByUserId);
     router.get("/filtercategory/:category", todos.filterByCategory);
     router.get("/filterpriority/:priority", todos.filterByPriority);
