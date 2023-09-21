@@ -5,6 +5,9 @@
 ## 📝 Deskripsi Web App
 Taskify Web App adalah sebuah aplikasi web yang digunakan untuk mengelola todo dan notes pengguna. Aplikasi ini menggunakan fitur authentication agar pengguna bisa mengakses datanya di mana pun dan kapan pun. 
 
+## 🔥 API Documentation Postman
+https://documenter.getpostman.com/view/29914685/2s9YCASWgw
+
 ## 📦 Fitur & Endpoint Web App
 1. Create Todo <br>
     Pengguna dapat membuat todo. <br>
