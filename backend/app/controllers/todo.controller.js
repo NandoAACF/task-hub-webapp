@@ -21,6 +21,7 @@ exports.create = (req, res) => {
 
     // req.body untuk mendapatkan data yang dikirimkan melalui body request
     const todo = new Todo({
+        userId: req.body.userId,
         title: req.body.title,
         desc: req.body.desc,
         category: req.body.category,
@@ -190,28 +191,28 @@ exports.findByUserId = (req, res) => {
     const { category, deadline, sortBy } = req.query;
 
     let filteredData = { userId: userId };
-    if(category) {
+    if (category) {
         filteredData.category = category;
     }
 
     let sortedCondition = {};
-    if(deadline) {
-        if(deadline === "asc") {
+    if (deadline) {
+        if (deadline === "asc") {
             sortedCondition.deadline = 1;
         } else if (deadline === "desc") {
             sortedCondition.deadline = -1;
         }
     }
 
-    if(sortBy) {
-        if(sortBy === "oldest") {
+    if (sortBy) {
+        if (sortBy === "oldest") {
             sortedCondition.updatedAt = 1;
         } else if (sortBy === "latest") {
             sortedCondition.updatedAt = -1;
         }
     }
 
-    Note.find(filteredData)
+    Todo.find(filteredData)
         .sort(sortedCondition)
         .then((result) => {
             res.status(200).send(result);
@@ -221,4 +222,4 @@ exports.findByUserId = (req, res) => {
                 message: err.message || "Some error occurred while retrieving todos.",
             });
         });
-}
+};
