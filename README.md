@@ -40,7 +40,7 @@ https://documenter.getpostman.com/view/29914685/2s9YCASWgw
     DELETE /api/todos/:id
     ````````````
 6. Delete Todos By User ID <br>
-    Menghapus semua todo yang ada di database. <br>
+    Menghapus semua todo milik seorang user yang ada di database. <br>
     Endpoint: <br>
     ````````````
     DELETE /api/todos/list/:userId
@@ -107,11 +107,11 @@ https://documenter.getpostman.com/view/29914685/2s9YCASWgw
     ````````````
     DELETE /api/notes/:id
     ````````````
-16. Delete all Notes <br>
-    Menghapus semua note yang ada di database. <br>
+16. Delete Notes by User ID <br>
+    Menghapus semua note milik seorang user yang ada di database. <br>
     Endpoint: <br>
     ````````````
-    DELETE /api/notes
+    DELETE /api/notes/list/:userId
     ````````````
 17. Filter Note by Favorite <br>
     Menampilkan note yang diberi tanda favorite <br>

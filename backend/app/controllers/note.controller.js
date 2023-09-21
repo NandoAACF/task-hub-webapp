@@ -89,8 +89,10 @@ exports.delete = (req, res) => {
         });
 };
 
-exports.deleteAll = (req, res) => {
-    Note.deleteMany()
+exports.deleteAllNotesByUserId = (req, res) => {
+    const userId = req.params.userId;
+    const filter = { userId: userId };
+    Note.deleteMany(filter)
         .then((result) => {
             res.status(200).send({
                 message: `${result.deletedCount} Todos were deleted successfully.`,
@@ -160,16 +162,16 @@ exports.findByUserId = (req, res) => {
     const { topic, favorite, sortBy } = req.query;
 
     let filteredData = { userId: userId };
-    if(topic) {
+    if (topic) {
         filteredData.topic = topic;
     }
 
-    if(favorite) {
-        filteredData.favorite = (favorite.toLowerCase() === 'true');
+    if (favorite) {
+        filteredData.favorite = favorite.toLowerCase() === "true";
     }
 
     let sortedCondition = {};
-    if(sortBy === "oldest") {
+    if (sortBy === "oldest") {
         sortedCondition.updatedAt = 1;
     } else if (sortBy === "latest") {
         sortedCondition.updatedAt = -1;
@@ -185,6 +187,4 @@ exports.findByUserId = (req, res) => {
                 message: err.message || "Some error occurred while retrieving todos.",
             });
         });
-}
-
-
+};
