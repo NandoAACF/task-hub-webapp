@@ -191,6 +191,12 @@ Taskify Web App adalah sebuah aplikasi web yang digunakan untuk mengelola todo d
     ````````````
     POST /api/images/{namaFile}
     ````````````
+29. Update User <br>
+    Mengupdate attribut dari user <br>
+    Endpoint: <br>
+    ````````````
+    PUT /api/users/:id
+    ````````````
 
 ## 💻 Tech Stack
 - NodeJS
