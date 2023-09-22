@@ -43,6 +43,7 @@ require("./app/routes/todo.routes")(app);
 require("./app/routes/user.routes")(app);
 require("./app/routes/note.routes")(app);
 require("./app/routes/upload.routes")(app);
+require("./app/routes/auth.routes")(app);
 
 const PORT = 8000;
 app.listen(PORT, () => {
