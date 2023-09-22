@@ -56,7 +56,7 @@ exports.login = async (req, res) => {
             data: data,
         });
     } catch (err) {
-        return res.status(409).send({
+        return res.status(500).send({
             message: err.message || "Some error occured while authenticating",
         });
     }
@@ -82,7 +82,7 @@ exports.findOne = (req, res) => {
             res.status(200).send(result);
         })
         .catch((err) => {
-            res.status(409).send({
+            res.status(500).send({
                 message: err.message || "Some error occurred while getting the detail of user.",
             });
         });
@@ -97,12 +97,31 @@ exports.delete = (req, res) => {
                     message: `Cannot delete User with id = ${id}. Maybe User was not found!`,
                 });
             } else {
-                res.send({ message: "User was deleted successfully." });
+                res.status(200).send({ message: "User was deleted successfully." });
             }
         })
         .catch((err) => {
             res.status(409).send({
                 message: err.message || "Some error occurred while deleting the user.",
+            });
+        });
+};
+
+exports.update = (req, res) => {
+    const id = req.params.id;
+    User.findByIdAndUpdate(id, { $set: req.body})
+        .then((result) => {
+            if (!result) {
+                res.status(404).send({
+                    message: `Cannot update User with id = ${id}. Maybe User was not found!`,
+                });
+            } else {
+                res.status(200).send({ message: "User was updated successfully." });
+            }
+        })
+        .catch((err) => {
+            res.status(500).send({
+                message: err.message || "Some error occurred while updating the user.",
             });
         });
 };
