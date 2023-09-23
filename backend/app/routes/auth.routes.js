@@ -7,6 +7,6 @@ module.exports = (app) => {
     router.post("/register", users.register);
     router.post("/login", users.login);
 
-    // Jika user mengakses endpoint /api/users, maka akan diarahkan ke router yang telah dibuat di atas
-    app.use("/api/users", router);
+    // Jika user mengakses endpoint /api/auth, maka akan diarahkan ke router yang telah dibuat di atas
+    app.use("/api/auth", router);
 };

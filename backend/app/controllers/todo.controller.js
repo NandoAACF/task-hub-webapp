@@ -14,6 +14,7 @@ exports.findAll = (req, res) => {
 };
 
 exports.create = (req, res) => {
+    // Title harus terisi
     if (!req.body.title) {
         res.status(400).send({ message: "Content can not be empty!" });
         return;
@@ -29,6 +30,7 @@ exports.create = (req, res) => {
         priority: req.body.priority,
     });
 
+    // Save todo
     todo.save(todo)
         .then((result) => {
             res.status(200).send(result);
