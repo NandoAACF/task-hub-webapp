@@ -26,6 +26,12 @@ module.exports = (mongoose) => {
                 type: String,
                 required: true,
             },
+            status: {
+                type: String,
+                enum: ["Hold", "In Progress", "Done"],
+                default: "Hold",
+                required: true,
+            }
         },
         { timestamps: true }
     );
