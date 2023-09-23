@@ -9,6 +9,7 @@ module.exports = (app) => {
     // Membuat endpoint untuk mengakses todo controller
     router.get("/", todos.findAll);
     router.post("/", todos.create);
+    router.get("/:id", todos.findOne);
     router.put("/:id", todos.update);
     router.delete("/:id", todos.delete);
     router.delete("/list/:userId", todos.deleteAllTodosByUserId);
