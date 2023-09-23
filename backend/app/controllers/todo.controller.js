@@ -193,7 +193,7 @@ exports.sortByLatest = (req, res) => {
 
 exports.findByUserId = (req, res) => {
     const userId = req.params.userId;
-    const { category, deadline, sortBy } = req.query;
+    const { category, deadline, sortBy, status, priority } = req.query;
 
     let filteredData = { userId: userId };
     if (category) {
@@ -215,6 +215,10 @@ exports.findByUserId = (req, res) => {
         } else if (sortBy === "latest") {
             sortedCondition.updatedAt = -1;
         }
+    }
+
+    if(priority && ["low", "medium", "high"].includes(priority)) {
+        filteredData.priority = priority;
     }
 
     Todo.find(filteredData)
