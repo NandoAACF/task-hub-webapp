@@ -44,7 +44,7 @@ exports.login = async (req, res) => {
         if (!isPasswordCorrect) return res.status(400).send("Wrong password");
 
         //Membuat token
-        const token = jwt.sign({ id: user.id }, process.env.AUTH_REFRESH_TOKEN, { expiresIn: "1h" });
+        const token = jwt.sign({ id: user.id }, process.env.AUTH_REFRESH_TOKEN, { expiresIn: "12h" });
 
         const data = {
             user: user,
@@ -109,7 +109,7 @@ exports.delete = (req, res) => {
 
 exports.update = (req, res) => {
     const id = req.params.id;
-    User.findByIdAndUpdate(id, { $set: req.body})
+    User.findByIdAndUpdate(id, { $set: req.body })
         .then((result) => {
             if (!result) {
                 res.status(404).send({

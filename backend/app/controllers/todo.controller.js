@@ -28,6 +28,7 @@ exports.create = (req, res) => {
         category: req.body.category,
         deadline: req.body.deadline,
         priority: req.body.priority,
+        status: req.body.status,
     });
 
     // Save todo

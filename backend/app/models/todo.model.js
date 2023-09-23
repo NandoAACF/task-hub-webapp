@@ -3,7 +3,7 @@ module.exports = (mongoose) => {
         {
             userId: {
                 type: mongoose.Schema.Types.ObjectId,
-                ref: 'user',
+                ref: "user",
                 required: true,
             },
             title: {
@@ -12,11 +12,10 @@ module.exports = (mongoose) => {
             },
             desc: {
                 type: String,
-                required: true,
             },
             category: {
                 type: String,
-                required: true,
+                default: "General",
             },
             deadline: {
                 type: Date,
@@ -25,6 +24,10 @@ module.exports = (mongoose) => {
             priority: {
                 type: String,
                 required: true,
+            },
+            status: {
+                type: String,
+                default: "To Do",
             },
         },
         { timestamps: true }
