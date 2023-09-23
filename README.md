@@ -239,6 +239,18 @@ Taskify Web App adalah sebuah aplikasi web yang digunakan untuk mengelola todo d
     ````````````
     PUT /api/users/:id
     ````````````
+30. Forgot Password <br>
+    Mengirimkan link reset password ke email user. Setelah klik akan diarahkan ke halaman untuk reset password, desainnya ada di folder views/resetPassword.ejs <br>
+    Endpoint: <br>
+    ````````````
+    POST /api/auth/forgot-password
+    ````````````
+31. Reset Password <br>
+    Melakukan reset password <br>
+    Endpoint: <br>
+    ````````````
+    POST /api/auth/reset-password/:id
+    ````````````
 
 ## 💻 Tech Stack
 - NodeJS
