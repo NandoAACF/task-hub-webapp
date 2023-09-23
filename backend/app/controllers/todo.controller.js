@@ -37,7 +37,7 @@ exports.create = (req, res) => {
             res.status(200).send(result);
         })
         .catch((err) => {
-            res.status(409).send({
+            res.status(500).send({
                 message: err.message || "Some error occurred while creating the todo.",
             });
         });
@@ -51,7 +51,7 @@ exports.findOne = (req, res) => {
             res.status(200).send(result);
         })
         .catch((err) => {
-            res.status(409).send({
+            res.status(500).send({
                 message: err.message || "Some error occurred while showing the todo.",
             });
         });
@@ -70,7 +70,7 @@ exports.update = (req, res) => {
             }
         })
         .catch((err) => {
-            res.status(409).send({
+            res.status(500).send({
                 message: err.message || "Some error occurred while updating the todo.",
             });
         });
@@ -89,7 +89,7 @@ exports.delete = (req, res) => {
             }
         })
         .catch((err) => {
-            res.status(409).send({
+            res.status(500).send({
                 message: err.message || "Some error occurred while deleting the todo.",
             });
         });
@@ -105,7 +105,7 @@ exports.deleteAllTodosByUserId = (req, res) => {
             });
         })
         .catch((err) => {
-            res.status(409).send({
+            res.status(500).send({
                 message: err.message || "Some error occurred while delete all todos.",
             });
         });
@@ -119,7 +119,7 @@ exports.filterByCategory = (req, res) => {
             res.send(result);
         })
         .catch((err) => {
-            res.status(409).send({
+            res.status(500).send({
                 message: err.message || "Some error occurred while showing the category.",
             });
         });
@@ -133,7 +133,7 @@ exports.filterByPriority = (req, res) => {
             res.send(result);
         })
         .catch((err) => {
-            res.status(409).send({
+            res.status(500).send({
                 message: err.message || "Some error occurred while showing the priority.",
             });
         });

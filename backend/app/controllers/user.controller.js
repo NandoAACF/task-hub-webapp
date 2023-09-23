@@ -14,7 +14,7 @@ exports.register = async (req, res) => {
         // Mengecek apakah email sudah diambil sebelumnya
         const existingUser = await User.findOne({ email });
         if (existingUser) {
-            return res.status(409).send({ message: "Email is already taken!" });
+            return res.status(500).send({ message: "Email is already taken!" });
         }
 
         // Melakukan encoding terhadap password melalui hashing algorithm
@@ -101,7 +101,7 @@ exports.delete = (req, res) => {
             }
         })
         .catch((err) => {
-            res.status(409).send({
+            res.status(500).send({
                 message: err.message || "Some error occurred while deleting the user.",
             });
         });

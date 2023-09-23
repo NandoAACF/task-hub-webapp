@@ -32,7 +32,7 @@ exports.create = (req, res) => {
             res.status(200).send(result);
         })
         .catch((err) => {
-            res.status(409).send({
+            res.status(500).send({
                 message: err.message || "Some error occurred while creating the note.",
             });
         });
@@ -45,7 +45,7 @@ exports.findOne = (req, res) => {
             res.status(200).send(result);
         })
         .catch((err) => {
-            res.status(409).send({
+            res.status(500).send({
                 message: err.message || "Some error occurred while showing the note.",
             });
         });
@@ -64,7 +64,7 @@ exports.update = (req, res) => {
             }
         })
         .catch((err) => {
-            res.status(409).send({
+            res.status(500).send({
                 message: err.message || "Some error occurred while update the note.",
             });
         });
@@ -83,7 +83,7 @@ exports.delete = (req, res) => {
             }
         })
         .catch((err) => {
-            res.status(409).send({
+            res.status(500).send({
                 message: err.message || "Some error occurred while deleting the note.",
             });
         });
@@ -99,7 +99,7 @@ exports.deleteAllNotesByUserId = (req, res) => {
             });
         })
         .catch((err) => {
-            res.status(409).send({
+            res.status(500).send({
                 message: err.message || "Some error occurred while deleting all the notes.",
             });
         });
@@ -113,7 +113,7 @@ exports.filterByTopic = (req, res) => {
             res.status(200).send(result);
         })
         .catch((err) => {
-            res.status(409).send({
+            res.status(500).send({
                 message: err.message || "Some error occurred while showing the topic.",
             });
         });
@@ -125,7 +125,7 @@ exports.filterByFavorite = (req, res) => {
             res.send(result);
         })
         .catch((err) => {
-            res.status(409).send({
+            res.status(500).send({
                 message: err.message || "Some error occurred while showing all favorite posts.",
             });
         });
