@@ -36,6 +36,10 @@ app.get("/", (req, res) => {
     res.render("index", { title: "Welcome to my application" });
 });
 
+app.get("/reset-password-page/:id", (req, res) => {
+    res.render("resetPassword");
+});
+
 // Untuk mengakses file yang sudah disimpan di folder uploads
 app.use("/api/images", express.static(path.join(__dirname, "app", "/uploads/")));
 

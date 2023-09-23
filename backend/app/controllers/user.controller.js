@@ -41,10 +41,10 @@ exports.register = async (req, res) => {
 exports.login = async (req, res) => {
     try {
         const user = await User.findOne({ email: req.body.email });
-        if (!user) return res.status(404).send("User not found");
+        if (!user) return res.status(404).send({message: "User not found"});
 
         const isPasswordCorrect = await bcrypt.compareSync(req.body.password, user.password);
-        if (!isPasswordCorrect) return res.status(400).send("Wrong password");
+        if (!isPasswordCorrect) return res.status(400).send({message: "Wrong password"});
 
         //Membuat token
         const token = jwt.sign({ id: user.id }, process.env.AUTH_REFRESH_TOKEN, { expiresIn: "12h" });
@@ -191,14 +191,17 @@ exports.resetPassword = (req, res) => {
             message: "Password and password confirmation do not match",
         });
     }
-    User.findByIdAndUpdate(userId, { $set: { password: new_password} })
+    const salt = bcrypt.genSaltSync(10);
+    const hashedNewPassword = bcrypt.hashSync(new_password, salt);
+
+    User.findByIdAndUpdate(userId, { password: hashedNewPassword })
         .then((result) => {
             if (!result) {
                 res.status(404).send({
                     message: `Cannot update User with id = ${id}. Maybe User was not found!`,
                 });
             } else {
-                res.status(200).send({ message: "User was updated successfully." });
+                res.status(200).send({ message: "Password was reset successfully." });
             }
         })
         .catch((err) => {

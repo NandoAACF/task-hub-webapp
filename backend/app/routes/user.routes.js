@@ -5,7 +5,7 @@ module.exports = (app) => {
     var router = require("express").Router();
 
     // Memanggil fungsi authMiddleware untuk menjalan proses autorisasi sebelum melakukan request
-    router.use(authMiddleware);
+    // router.use(authMiddleware);
 
     // Membuat endpoint untuk mengakses user controller
     router.get("/", users.findAll);
