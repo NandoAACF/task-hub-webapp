@@ -195,34 +195,51 @@ exports.findByUserId = (req, res) => {
     const userId = req.params.userId;
     const { category, deadline, sortBy, status, priority } = req.query;
 
-    let filteredData = { userId: userId };
-    if (category) {
-        filteredData.category = category;
-    }
+    const validStatusValues = ["Hold", "InProgress", "Done"];
+    const validPriorityValues = ["low", "medium", "high"];
 
-    let sortedCondition = {};
-    if (deadline) {
-        if (deadline === "asc") {
-            sortedCondition.deadline = 1;
-        } else if (deadline === "desc") {
-            sortedCondition.deadline = -1;
+    const filterMappings = {
+        category,
+        status: (status && validStatusValues.includes(status)) ? status : undefined,
+        priority: (priority && validPriorityValues.includes(priority)) ? priority : undefined,
+        userId,
+    };
+
+    const sortMappings = {
+        asc: 1,
+        desc: -1,
+        oldest: 1,
+        latest: -1,
+    };
+
+    const filteredData = Object.entries(filterMappings).reduce((acc, [key, value]) => {
+        if (value !== undefined) {
+            acc[key] = value;
         }
+        return acc;
+    }, {});
+
+    const sortedCondition = {};
+    if (deadline && sortMappings[deadline]) {
+        sortedCondition.deadline = sortMappings[deadline];
     }
 
-    if (sortBy) {
-        if (sortBy === "oldest") {
-            sortedCondition.updatedAt = 1;
-        } else if (sortBy === "latest") {
-            sortedCondition.updatedAt = -1;
-        }
+    if (sortBy && sortMappings[sortBy]) {
+        sortedCondition.updatedAt = sortMappings[sortBy];
     }
 
-    if(status && ["Hold", "InProgress", "Done"].includes(status)) {
-        filteredData.status = status;
+    // Mengecek jika ada value status untuk query yang invalid
+    if (status && !validStatusValues.includes(status)) {
+        return res.status(400).send({
+            message: "Invalid status value. Allowed values are 'Hold', 'InProgress', 'Done'."
+        });
     }
 
-    if(priority && ["low", "medium", "high"].includes(priority)) {
-        filteredData.priority = priority;
+    // Mengecek jika ada value priority untuk query yang invalid
+    if (priority && !validPriorityValues.includes(priority)) {
+        return res.status(400).send({
+            message: "Invalid priority value. Allowed values are 'low', 'medium', 'high'."
+        });
     }
 
     Todo.find(filteredData)
