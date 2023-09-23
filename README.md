@@ -76,11 +76,36 @@ Taskify Web App adalah sebuah aplikasi web yang digunakan untuk mengelola todo d
     DELETE /api/todos/list/:userId
     ````````````
 12. Filter Todos By UserId <br>
-    Mendapatkan daftar todos berdasarkan id user dan juga bisa filtering berdasarkan query yang dimasukkan, opsinya berupa kategori, deadline, dan urutan <br>
+    Mendapatkan daftar todos berdasarkan id user <br>
     Endpoint: <br>
     ````````````
     GET /api/todos/list/:userId
-    GET /api/todos/list/:userId?sortBy=latest&deadline=asc&category=Kuliah
+    ````````````
+    Mendapatkan daftar todos berdasarkan id user dan juga bisa filtering berdasarkan query yang dimasukkan, opsinya berupa kategori, deadline, urutan, prioritas, dan status <br>
+    Endpoint dengan query kategori, nilai kategori bisa bernilai apa saja: <br>
+    ```````````` 
+    GET /api/todos/list/:userId?category=Kuliah
+    ````````````
+    Endpoint dengan query prioritas, nilai prioritas diantaranya low, medium, dan high: <br>
+    ```````````` 
+    GET /api/todos/list/:userId?priority=low
+    ````````````
+    Endpoint dengan query urutan, nilai urutan diantaranya oldest dan latest: <br>
+    ```````````` 
+    GET /api/todos/list/:userId?sortBy=oldest
+    ````````````
+    Endpoint dengan query status, nilai status diantaranya Hold, InProgress, dan Done: <br>
+    ```````````` 
+    GET /api/todos/list/:userId?status=Hold
+    ````````````
+    Endpoint dengan query deadline, nilai status diantaranya asc dan desc: <br>
+    ```````````` 
+    GET /api/todos/list/:userId?deadline=asc
+    ````````````
+    Bisa menggabungkan lebih dari satu query dimana opsi filter bisa dua hingga lima <br>
+    Endpoint dengan contoh query lebih dari satu: <br>
+    ```````````` 
+    GET /api/todos/list/:userId?deadline=asc&status=Hold&sortBy=oldest
     ````````````
 13. Filter Todo by Category <br>
     Menampilkan todo berdasarkan kategori. <br>
@@ -155,7 +180,24 @@ Taskify Web App adalah sebuah aplikasi web yang digunakan untuk mengelola todo d
     Endpoint: <br>
     ````````````
     GET /api/notes/list/:userId
-    GET /api/notes/list/:userId?sortBy=latest&favorite=true&topic=Daily
+    ````````````
+    Mendapatkan daftar todos berdasarkan id user dan juga bisa filtering berdasarkan query yang dimasukkan, opsinya berupa kategori, deadline, urutan, prioritas, dan status <br>
+    Endpoint dengan query favorit, nilai favorit hanya untuk yang bernilai true saja <br>
+    ```````````` 
+    GET /api/notes/list/:userId?favorite=true
+    ````````````
+    Endpoint dengan query topik, nilai topik bisa bernilai apa saja selama ada: <br>
+    ```````````` 
+    GET /api/notes/list/:userId?topic=Motivasi
+    ````````````
+    Endpoint dengan query urutan, nilai urutan diantaranya oldest dan latest: <br>
+    ```````````` 
+    GET /api/notes/list/:userId?sortBy=oldest
+    ````````````
+    Bisa menggabungkan lebih dari satu query dimana opsi filter bisa dua hingga tiga <br>
+    Endpoint dengan contoh query lebih dari satu: <br>
+    ```````````` 
+    GET /api/notes/list/:userId?favorite=true&topic=Motivasi&sortBy=latest
     ````````````
 24. Filter Note by Favorite <br>
     Menampilkan note yang diberi tanda favorite <br>
