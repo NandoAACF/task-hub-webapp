@@ -14,11 +14,6 @@ exports.findAll = (req, res) => {
 };
 
 exports.create = (req, res) => {
-    if (!req.body.title) {
-        res.status(400).send({ message: "Content can not be empty!" });
-        return;
-    }
-
     const note = new Note({
         userId: req.body.userId,
         title: req.body.title,

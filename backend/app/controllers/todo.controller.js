@@ -14,12 +14,6 @@ exports.findAll = (req, res) => {
 };
 
 exports.create = (req, res) => {
-    // Title harus terisi
-    if (!req.body.title) {
-        res.status(400).send({ message: "Content can not be empty!" });
-        return;
-    }
-
     // req.body untuk mendapatkan data yang dikirimkan melalui body request
     const todo = new Todo({
         userId: req.body.userId,
@@ -200,8 +194,8 @@ exports.findByUserId = (req, res) => {
 
     const filterMappings = {
         category,
-        status: (status && validStatusValues.includes(status)) ? status : undefined,
-        priority: (priority && validPriorityValues.includes(priority)) ? priority : undefined,
+        status: status && validStatusValues.includes(status) ? status : undefined,
+        priority: priority && validPriorityValues.includes(priority) ? priority : undefined,
         userId,
     };
 
@@ -231,14 +225,14 @@ exports.findByUserId = (req, res) => {
     // Mengecek jika ada value status untuk query yang invalid
     if (status && !validStatusValues.includes(status)) {
         return res.status(400).send({
-            message: "Invalid status value. Allowed values are 'Hold', 'InProgress', 'Done'."
+            message: "Invalid status value. Allowed values are 'Hold', 'InProgress', 'Done'.",
         });
     }
 
     // Mengecek jika ada value priority untuk query yang invalid
     if (priority && !validPriorityValues.includes(priority)) {
         return res.status(400).send({
-            message: "Invalid priority value. Allowed values are 'low', 'medium', 'high'."
+            message: "Invalid priority value. Allowed values are 'low', 'medium', 'high'.",
         });
     }
 
