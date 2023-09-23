@@ -138,48 +138,58 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-exports.sendResetPasswordEmail = (req, res) => {
-    const {email} = req.body;
-    const user = User.findOne({ email: email });
+exports.sendResetPasswordEmail = async (req, res) => {
+    const { email } = req.body;
 
-    // Mengecek apakah email yang dimasukkan sudah pernah digunakan
-    if (!user) return res.status(404).send({
-        message: "Your email hasn't been registered. Create a new account!",
-    });
-    // Konten dari email yang dikirimkan sehingga user diarahkan ke halaman untuk reset password
-    ejs.renderFile(path.join(__dirname, '..', 'views', 'email.ejs'), {}, (err, data) => {
-        if(err) {
-            return res.status(500).send({
-                message: err.message || "Some error occurred while generating email content.",
+    try {
+        const user = await User.findOne({ email });
+
+        // Mengecek apakah email yang dimasukkan sudah pernah digunakan
+        if (!user) {
+            return res.status(404).send({
+                message: "Your email hasn't been registered. Create a new account!",
             });
         }
 
-        // Buat mendefenisikan email penerima
-        const mailOptions = {
-            from: process.env.SENDER_EMAIL,
-            to: email,
-            subject: 'Reset Password',
-            html: data,
-            attachments: [
-                {
-                    filename: 'email.ejs',
-                    content: data
-                }
-            ]
-        };
-
-        transporter.sendMail(mailOptions, (err, info) => {
+        // Konten dari email yang dikirimkan sehingga user diarahkan ke halaman untuk reset password
+        ejs.renderFile(path.join(__dirname, '..', 'views', 'email.ejs'), { userId: user.id }, (err, data) => {
             if(err) {
                 return res.status(500).send({
-                    message: err.message || "Some error occurred while sending email.",
-                });
-            } else {
-                return res.status(200).send({
-                    message: "Email sent successfully"
+                    message: err.message || "Some error occurred while generating email content.",
                 });
             }
+
+            // Buat mendefenisikan email penerima
+            const mailOptions = {
+                from: process.env.SENDER_EMAIL,
+                to: email,
+                subject: 'Reset Password',
+                html: data,
+                attachments: [
+                    {
+                        filename: 'email.ejs',
+                        content: data
+                    }
+                ]
+            };
+
+            transporter.sendMail(mailOptions, (err, info) => {
+                if(err) {
+                    return res.status(500).send({
+                        message: err.message || "Some error occurred while sending email.",
+                    });
+                } else {
+                    return res.status(200).send({
+                        message: "Email sent successfully"
+                    });
+                }
+            });
         });
-    });
+    } catch (err) {
+        return res.status(500).send({
+            message: err.message || "Some error occurred while processing the request.",
+        });
+    }
 };
 
 exports.resetPassword = (req, res) => {
