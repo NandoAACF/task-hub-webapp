@@ -140,6 +140,12 @@ const transporter = nodemailer.createTransport({
 
 exports.sendResetPasswordEmail = (req, res) => {
     const {email} = req.body;
+    const user = User.findOne({ email: email });
+
+    // Mengecek apakah email yang dimasukkan sudah pernah digunakan
+    if (!user) return res.status(404).send({
+        message: "Your email hasn't been registered. Create a new account!",
+    });
     // Konten dari email yang dikirimkan sehingga user diarahkan ke halaman untuk reset password
     ejs.renderFile(path.join(__dirname, '..', 'views', 'email.ejs'), {}, (err, data) => {
         if(err) {
@@ -174,4 +180,4 @@ exports.sendResetPasswordEmail = (req, res) => {
             }
         });
     });
-}
+};
