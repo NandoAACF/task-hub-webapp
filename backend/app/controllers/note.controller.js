@@ -100,6 +100,37 @@ exports.deleteAllNotesByUserId = (req, res) => {
         });
 };
 
+exports.findByUserId = (req, res) => {
+    const userId = req.params.userId;
+    const { topic, favorite, sortBy } = req.query;
+
+    let filteredData = { userId: userId };
+    if (topic) {
+        filteredData.topic = topic;
+    }
+    if (favorite) {
+        filteredData.favorite = favorite.toLowerCase() === "true";
+    }
+
+    let sortedCondition = {};
+    if (sortBy === "oldest") {
+        sortedCondition.updatedAt = 1;
+    } else if (sortBy === "latest") {
+        sortedCondition.updatedAt = -1;
+    }
+
+    Note.find(filteredData)
+        .sort(sortedCondition)
+        .then((result) => {
+            res.status(200).send(result);
+        })
+        .catch((err) => {
+            res.status(500).send({
+                message: err.message || "Some error occurred while retrieving todos.",
+            });
+        });
+};
+
 exports.filterByTopic = (req, res) => {
     const topic = req.params.topic.replace("-", " ");
     const filter = { topic: { $regex: new RegExp(topic, "i") } };
@@ -144,38 +175,6 @@ exports.sortByLatest = (req, res) => {
         .sort({ updatedAt: -1 })
         .then((result) => {
             res.send(result);
-        })
-        .catch((err) => {
-            res.status(500).send({
-                message: err.message || "Some error occurred while retrieving todos.",
-            });
-        });
-};
-
-exports.findByUserId = (req, res) => {
-    const userId = req.params.userId;
-    const { topic, favorite, sortBy } = req.query;
-
-    let filteredData = { userId: userId };
-    if (topic) {
-        filteredData.topic = topic;
-    }
-
-    if (favorite) {
-        filteredData.favorite = favorite.toLowerCase() === "true";
-    }
-
-    let sortedCondition = {};
-    if (sortBy === "oldest") {
-        sortedCondition.updatedAt = 1;
-    } else if (sortBy === "latest") {
-        sortedCondition.updatedAt = -1;
-    }
-
-    Note.find(filteredData)
-        .sort(sortedCondition)
-        .then((result) => {
-            res.status(200).send(result);
         })
         .catch((err) => {
             res.status(500).send({
