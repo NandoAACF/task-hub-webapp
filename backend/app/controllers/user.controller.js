@@ -174,10 +174,36 @@ exports.sendResetPasswordEmail = (req, res) => {
                     message: err.message || "Some error occurred while sending email.",
                 });
             } else {
-                return res.status(200).json({
+                return res.status(200).send({
                     message: "Email sent successfully"
                 });
             }
         });
     });
+};
+
+exports.resetPassword = (req, res) => {
+    const userId = req.params.id;
+    const { new_password, new_password_confirmation } = req.body;
+
+    if (new_password !== new_password_confirmation) {
+        return res.status(400).send({
+            message: "Password and password confirmation do not match",
+        });
+    }
+    User.findByIdAndUpdate(userId, { $set: { password: new_password} })
+        .then((result) => {
+            if (!result) {
+                res.status(404).send({
+                    message: `Cannot update User with id = ${id}. Maybe User was not found!`,
+                });
+            } else {
+                res.status(200).send({ message: "User was updated successfully." });
+            }
+        })
+        .catch((err) => {
+            res.status(500).send({
+                message: err.message || "Some error occurred while resetting password.",
+            });
+        });
 };
