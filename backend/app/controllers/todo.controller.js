@@ -217,6 +217,10 @@ exports.findByUserId = (req, res) => {
         }
     }
 
+    if(status && ["Hold", "InProgress", "Done"].includes(status)) {
+        filteredData.status = status;
+    }
+
     if(priority && ["low", "medium", "high"].includes(priority)) {
         filteredData.priority = priority;
     }

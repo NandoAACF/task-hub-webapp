@@ -29,7 +29,7 @@ module.exports = (mongoose) => {
             },
             status: {
                 type: String,
-                enum: ["Hold", "In Progress", "Done"],
+                enum: ["Hold", "InProgress", "Done"],
                 default: "Hold",
                 required: true,
             }
