@@ -33,7 +33,7 @@ db.mongoose
     });
 
 app.get("/", (req, res) => {
-    res.render("index", { title: "Welcome to my application" });
+    res.render("index", { title: "Welcome to Taskify Backend" });
 });
 
 app.get("/reset-password-page/:id", (req, res) => {
