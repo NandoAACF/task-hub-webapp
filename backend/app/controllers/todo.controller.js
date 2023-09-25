@@ -1,18 +1,6 @@
 const db = require("../models");
 const Todo = db.todos;
 
-exports.findAll = (req, res) => {
-    Todo.find()
-        .then((result) => {
-            res.status(200).send(result);
-        })
-        .catch((err) => {
-            res.status(500).send({
-                message: err.message || "Some error occurred while retrieving todos.",
-            });
-        });
-};
-
 exports.create = (req, res) => {
     // req.body untuk mendapatkan data yang dikirimkan melalui body request
     const todo = new Todo({
@@ -36,6 +24,19 @@ exports.create = (req, res) => {
             });
         });
 };
+
+exports.findAll = (req, res) => {
+    Todo.find()
+        .then((result) => {
+            res.status(200).send(result);
+        })
+        .catch((err) => {
+            res.status(500).send({
+                message: err.message || "Some error occurred while retrieving todos.",
+            });
+        });
+};
+
 
 exports.findOne = (req, res) => {
     // req.params untuk mendapatkan data yang dikirimkan melalui parameter url
