@@ -257,9 +257,9 @@ exports.sortByDeadlineDesc = (req, res) => {
         });
 };
 
-exports.sortByLatest = (req, res) => {
+exports.sortByOldest = (req, res) => {
     Todo.find()
-        .sort({ updatedAt: -1 })
+        .sort({ updatedAt: 1 })
         .then((result) => {
             res.send(result);
         })
@@ -272,9 +272,9 @@ exports.sortByLatest = (req, res) => {
         });
 };
 
-exports.sortByOldest = (req, res) => {
+exports.sortByLatest = (req, res) => {
     Todo.find()
-        .sort({ updatedAt: 1 })
+        .sort({ updatedAt: -1 })
         .then((result) => {
             res.send(result);
         })
