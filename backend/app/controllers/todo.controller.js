@@ -8,7 +8,9 @@ exports.findAll = (req, res) => {
         })
         .catch((err) => {
             res.status(500).send({
-                message: err.message || "Some error occurred while retrieving todos.",
+                message:
+                    err.message ||
+                    "Some error occurred while retrieving todos.",
             });
         });
 };
@@ -32,7 +34,9 @@ exports.create = (req, res) => {
         })
         .catch((err) => {
             res.status(500).send({
-                message: err.message || "Some error occurred while creating the todo.",
+                message:
+                    err.message ||
+                    "Some error occurred while creating the todo.",
             });
         });
 };
@@ -46,7 +50,9 @@ exports.findOne = (req, res) => {
         })
         .catch((err) => {
             res.status(500).send({
-                message: err.message || "Some error occurred while showing the todo.",
+                message:
+                    err.message ||
+                    "Some error occurred while showing the todo.",
             });
         });
 };
@@ -60,12 +66,16 @@ exports.update = (req, res) => {
                     message: `Cannot update Todo with id = ${id}. Maybe Todo was not found!`,
                 });
             } else {
-                res.status(200).send({ message: "Todo was updated successfully." });
+                res.status(200).send({
+                    message: "Todo was updated successfully.",
+                });
             }
         })
         .catch((err) => {
             res.status(500).send({
-                message: err.message || "Some error occurred while updating the todo.",
+                message:
+                    err.message ||
+                    "Some error occurred while updating the todo.",
             });
         });
 };
@@ -79,12 +89,16 @@ exports.delete = (req, res) => {
                     message: `Cannot delete Todo with id = ${id}. Maybe Todo was not found!`,
                 });
             } else {
-                res.status(200).send({ message: "Todo was deleted successfully." });
+                res.status(200).send({
+                    message: "Todo was deleted successfully.",
+                });
             }
         })
         .catch((err) => {
             res.status(500).send({
-                message: err.message || "Some error occurred while deleting the todo.",
+                message:
+                    err.message ||
+                    "Some error occurred while deleting the todo.",
             });
         });
 };
@@ -100,7 +114,9 @@ exports.deleteAllTodosByUserId = (req, res) => {
         })
         .catch((err) => {
             res.status(500).send({
-                message: err.message || "Some error occurred while delete all todos.",
+                message:
+                    err.message ||
+                    "Some error occurred while delete all todos.",
             });
         });
 };
@@ -114,17 +130,24 @@ exports.findByUserId = (req, res) => {
 
     const filterMappings = {
         category,
-        status: status && validStatusValues.includes(status) ? status : undefined,
-        priority: priority && validPriorityValues.includes(priority) ? priority : undefined,
+        status:
+            status && validStatusValues.includes(status) ? status : undefined,
+        priority:
+            priority && validPriorityValues.includes(priority)
+                ? priority
+                : undefined,
         userId,
     };
 
-    const filteredData = Object.entries(filterMappings).reduce((acc, [key, value]) => {
-        if (value !== undefined) {
-            acc[key] = value;
-        }
-        return acc;
-    }, {});
+    const filteredData = Object.entries(filterMappings).reduce(
+        (acc, [key, value]) => {
+            if (value !== undefined) {
+                acc[key] = value;
+            }
+            return acc;
+        },
+        {}
+    );
 
     const sortMappings = {
         asc: 1,
@@ -145,14 +168,16 @@ exports.findByUserId = (req, res) => {
     // Mengecek jika ada value status untuk query yang invalid
     if (status && !validStatusValues.includes(status)) {
         return res.status(400).send({
-            message: "Invalid status value. Allowed values are 'Hold', 'InProgress', 'Done'.",
+            message:
+                "Invalid status value. Allowed values are 'Hold', 'InProgress', 'Done'.",
         });
     }
 
     // Mengecek jika ada value priority untuk query yang invalid
     if (priority && !validPriorityValues.includes(priority)) {
         return res.status(400).send({
-            message: "Invalid priority value. Allowed values are 'low', 'medium', 'high'.",
+            message:
+                "Invalid priority value. Allowed values are 'low', 'medium', 'high'.",
         });
     }
 
@@ -163,7 +188,9 @@ exports.findByUserId = (req, res) => {
         })
         .catch((err) => {
             res.status(500).send({
-                message: err.message || "Some error occurred while retrieving todos.",
+                message:
+                    err.message ||
+                    "Some error occurred while retrieving todos.",
             });
         });
 };
@@ -177,7 +204,9 @@ exports.filterByCategory = (req, res) => {
         })
         .catch((err) => {
             res.status(500).send({
-                message: err.message || "Some error occurred while showing the category.",
+                message:
+                    err.message ||
+                    "Some error occurred while showing the category.",
             });
         });
 };
@@ -191,7 +220,9 @@ exports.filterByPriority = (req, res) => {
         })
         .catch((err) => {
             res.status(500).send({
-                message: err.message || "Some error occurred while showing the priority.",
+                message:
+                    err.message ||
+                    "Some error occurred while showing the priority.",
             });
         });
 };
@@ -204,7 +235,9 @@ exports.sortByDeadlineAsc = (req, res) => {
         })
         .catch((err) => {
             res.status(500).send({
-                message: err.message || "Some error occurred while retrieving todos.",
+                message:
+                    err.message ||
+                    "Some error occurred while retrieving todos.",
             });
         });
 };
@@ -217,20 +250,9 @@ exports.sortByDeadlineDesc = (req, res) => {
         })
         .catch((err) => {
             res.status(500).send({
-                message: err.message || "Some error occurred while retrieving todos.",
-            });
-        });
-};
-
-exports.sortByOldest = (req, res) => {
-    Todo.find()
-        .sort({ updatedAt: 1 })
-        .then((result) => {
-            res.send(result);
-        })
-        .catch((err) => {
-            res.status(500).send({
-                message: err.message || "Some error occurred while retrieving todos.",
+                message:
+                    err.message ||
+                    "Some error occurred while retrieving todos.",
             });
         });
 };
@@ -243,7 +265,24 @@ exports.sortByLatest = (req, res) => {
         })
         .catch((err) => {
             res.status(500).send({
-                message: err.message || "Some error occurred while retrieving todos.",
+                message:
+                    err.message ||
+                    "Some error occurred while retrieving todos.",
+            });
+        });
+};
+
+exports.sortByOldest = (req, res) => {
+    Todo.find()
+        .sort({ updatedAt: 1 })
+        .then((result) => {
+            res.send(result);
+        })
+        .catch((err) => {
+            res.status(500).send({
+                message:
+                    err.message ||
+                    "Some error occurred while retrieving todos.",
             });
         });
 };
