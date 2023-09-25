@@ -57,29 +57,6 @@ exports.findOne = (req, res) => {
         });
 };
 
-exports.update = (req, res) => {
-    const id = req.params.id;
-    Todo.findByIdAndUpdate(id, { $set: req.body })
-        .then((result) => {
-            if (!result) {
-                res.status(404).send({
-                    message: `Cannot update Todo with id = ${id}. Maybe Todo was not found!`,
-                });
-            } else {
-                res.status(200).send({
-                    message: "Todo was updated successfully.",
-                });
-            }
-        })
-        .catch((err) => {
-            res.status(500).send({
-                message:
-                    err.message ||
-                    "Some error occurred while updating the todo.",
-            });
-        });
-};
-
 exports.delete = (req, res) => {
     const id = req.params.id;
     Todo.findByIdAndRemove(id)
@@ -99,6 +76,29 @@ exports.delete = (req, res) => {
                 message:
                     err.message ||
                     "Some error occurred while deleting the todo.",
+            });
+        });
+};
+
+exports.update = (req, res) => {
+    const id = req.params.id;
+    Todo.findByIdAndUpdate(id, { $set: req.body })
+        .then((result) => {
+            if (!result) {
+                res.status(404).send({
+                    message: `Cannot update Todo with id = ${id}. Maybe Todo was not found!`,
+                });
+            } else {
+                res.status(200).send({
+                    message: "Todo was updated successfully.",
+                });
+            }
+        })
+        .catch((err) => {
+            res.status(500).send({
+                message:
+                    err.message ||
+                    "Some error occurred while updating the todo.",
             });
         });
 };
