@@ -65,22 +65,6 @@ exports.update = (req, res) => {
         });
 };
 
-exports.deleteAllNotesByUserId = (req, res) => {
-    const userId = req.params.userId;
-    const filter = { userId: userId };
-    Note.deleteMany(filter)
-        .then((result) => {
-            res.status(200).send({
-                message: `${result.deletedCount} Notes were deleted successfully.`,
-            });
-        })
-        .catch((err) => {
-            res.status(500).send({
-                message: err.message || "Some error occurred while deleting all the notes.",
-            });
-        });
-};
-
 exports.delete = (req, res) => {
     const id = req.params.id;
     Note.findByIdAndRemove(id)
@@ -99,6 +83,24 @@ exports.delete = (req, res) => {
             });
         });
 };
+
+exports.deleteAllNotesByUserId = (req, res) => {
+    const userId = req.params.userId;
+    const filter = { userId: userId };
+    Note.deleteMany(filter)
+        .then((result) => {
+            res.status(200).send({
+                message: `${result.deletedCount} Notes were deleted successfully.`,
+            });
+        })
+        .catch((err) => {
+            res.status(500).send({
+                message: err.message || "Some error occurred while deleting all the notes.",
+            });
+        });
+};
+
+
 
 exports.findByUserId = (req, res) => {
     const userId = req.params.userId;
