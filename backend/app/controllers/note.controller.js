@@ -90,7 +90,7 @@ exports.deleteAllNotesByUserId = (req, res) => {
     Note.deleteMany(filter)
         .then((result) => {
             res.status(200).send({
-                message: `${result.deletedCount} Todos were deleted successfully.`,
+                message: `${result.deletedCount} Notes were deleted successfully.`,
             });
         })
         .catch((err) => {
