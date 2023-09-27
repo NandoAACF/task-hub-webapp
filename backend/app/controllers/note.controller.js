@@ -100,8 +100,6 @@ exports.deleteAllNotesByUserId = (req, res) => {
         });
 };
 
-
-
 exports.findByUserId = (req, res) => {
     const userId = req.params.userId;
     const { topic, favorite, sortBy } = req.query;
@@ -154,7 +152,7 @@ exports.filterByFavorite = (req, res) => {
         })
         .catch((err) => {
             res.status(500).send({
-                message: err.message || "Some error occurred while showing all favorite posts.",
+                message: err.message || "Some error occurred while showing all favorite notes.",
             });
         });
 };
