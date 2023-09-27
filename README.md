@@ -13,13 +13,13 @@ Taskify Web App adalah sebuah aplikasi web yang digunakan untuk mengelola todo d
     Pengguna dapat membuat akun. <br>
     Endpoint: <br>
     ````````````
-    POST /api/users/register
+    POST /api/auth/register
     ````````````
 2.  Login User <br>
     Pengguna dapat login ke akun. <br>
     Endpoint: <br>
     ````````````
-    POST /api/users/login
+    POST /api/auth/login
     ````````````
 3.  Find All Users <br>
     Mencari semua user yang ada di database. <br>
@@ -277,6 +277,5 @@ Taskify Web App adalah sebuah aplikasi web yang digunakan untuk mengelola todo d
 5. Understand the API via Postman Documentation **(please read this for better understanding)**
     https://documenter.getpostman.com/view/29914685/2s9YCASWgw
 
-<h2 align="center">
-    😀 Thank You 😀
-</h2>
+
+## Thank You 😀
