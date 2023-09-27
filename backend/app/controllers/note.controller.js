@@ -126,7 +126,7 @@ exports.findByUserId = (req, res) => {
         })
         .catch((err) => {
             res.status(500).send({
-                message: err.message || "Some error occurred while retrieving todos.",
+                message: err.message || "Some error occurred while retrieving notes.",
             });
         });
 };
@@ -165,7 +165,7 @@ exports.sortByOldest = (req, res) => {
         })
         .catch((err) => {
             res.status(500).send({
-                message: err.message || "Some error occurred while retrieving todos.",
+                message: err.message || "Some error occurred while retrieving notes.",
             });
         });
 };
@@ -178,7 +178,7 @@ exports.sortByLatest = (req, res) => {
         })
         .catch((err) => {
             res.status(500).send({
-                message: err.message || "Some error occurred while retrieving todos.",
+                message: err.message || "Some error occurred while retrieving notes.",
             });
         });
 };
