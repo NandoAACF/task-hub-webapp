@@ -5,7 +5,7 @@ export default function Register() {
     return (
         <div className="flex flex-row items-center justify-center min-h-screen overflow-hidden relative">
             <div className="flex flex-col items-center justify-center w-full h-full gap-[30px]">
-                <h1 className="text-[60px] font-semibold">
+                <h1 className="text-[60px] font-semibold text-center">
                     Register to{" "}
                     <span className="bg-gradient-to-r from-[#2984C9] via-[#3681B8] to-[#0B3654] text-transparent bg-clip-text">
                         Taskify.
