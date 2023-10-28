@@ -2,8 +2,7 @@ import Button from "@/components/Button";
 import Input from "@/components/Input";
 import useAuth from "@/utils/hooks/useAuth";
 import { useState } from "react";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"
+
 
 export default function Register() {
     const {registerUser} = useAuth();
@@ -26,22 +25,15 @@ export default function Register() {
         e.preventDefault();
         try {
             const response = await registerUser(formData);
-            if(response) console.log("Registrastion is successfull");
+            if(response) {
+                onSuccess("Registrasi berhasil");
+            }
             else {
-                toast('Proses registrasi tidak berhasil, email anda mungkin sudah terdaftar', {
-                    position: "top-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
-                });
+                onError("Registrasi tidak berhasil, email mungkin sudah terdaftar");
             }
         }
         catch(err) {
-            console.log(err);
+            onError(err);
         }
     }
 
@@ -71,7 +63,6 @@ export default function Register() {
                     Already have an account?{" "}
                     <span className="underline cursor-pointer text-[#2984C9] hover:text-[#2471AB]">Login</span>
                 </h3>
-                <ToastContainer />
             </div>
         </div>
     );
