@@ -1,7 +1,33 @@
 import Button from "@/components/Button";
 import Input from "@/components/Input";
+import useAuth from "@/utils/hooks/useAuth";
+import { useState } from "react";
 
 export default function Login() {
+    const {loginUser} = useAuth();
+    const [formData, setFormData] = useState({
+        email: '',
+        password: '',
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value
+        });
+    };
+
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await loginUser(formData);
+            if(response) console.log("You are logged in successfully");
+        }
+        catch(err) {
+            console.log(err);
+        }
+    }
     return (
         <div className="flex flex-row items-center justify-center min-h-screen overflow-hidden relative">
             <div className="flex flex-col items-center justify-center w-full h-full">
@@ -14,9 +40,9 @@ export default function Login() {
                 <img src="/assets/images/Login/people.png" className="" />
             </div>
             <div className="flex flex-col items-center justify-center w-full h-full mt-[40px]">
-                <form className="flex flex-col items-start justify-center w-full h-full gap-[14px] px-[18%] relative">
-                    <Input label="Email" type="email" className="w-full" />
-                    <Input label="Password" type="password" className="w-full" />
+                <form className="flex flex-col items-start justify-center w-full h-full gap-[14px] px-[18%] relative" onSubmit={handleLogin}>
+                    <Input label="Email" type="email" className="w-full" name="email" value={formData.email} onChange={handleChange}/>
+                    <Input label="Password" type="password" className="w-full" name="password" value={formData.password} onChange={handleChange}/>
                     <h5 className="text-[14px] underline cursor-pointer hover:text-[#2984C9] hover:scale-110 transition-all ease-in-out duration-300">
                         Forgot Password?
                     </h5>
