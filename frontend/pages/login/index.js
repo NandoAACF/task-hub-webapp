@@ -1,12 +1,13 @@
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 import useAuth from "@/utils/hooks/useAuth";
+import useNotifications from "@/utils/hooks/useNotifications";
 import { useState } from "react";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"
 
 export default function Login() {
     const {loginUser} = useAuth();
+    const { onError, onSuccess} = useNotifications();
+
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -24,22 +25,15 @@ export default function Login() {
         e.preventDefault();
         try {
             const response = await loginUser(formData);
-            if(response) console.log("You are logged in successfully");
+            if(response) {
+                onSuccess("Login berhasil");
+            }
             else {
-                toast('Login tidak berhasil, email atau password anda salah', {
-                    position: "top-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
-                });
+                onError("Login tidak berhasil, email atau password salah")
             }
         }
         catch(err) {
-            console.log(err);
+            onError(err);
         }
     }
     return (
@@ -75,7 +69,6 @@ export default function Login() {
                     Don't have an account?{" "}
                     <span className="underline cursor-pointer text-[#2984C9] hover:text-[#2471AB]">Register</span>
                 </h3>
-                <ToastContainer />
             </div>
         </div>
     );
