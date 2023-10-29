@@ -5,6 +5,7 @@ import { jwtDecode } from "jwt-decode";
 
 export const AuthContext = createContext();
 
+// Untuk menyimpan token di cookie dan user info di local storage
 export function AuthContextProvider ({children}) {
     const [userInfo, setUserInfo] = useState(() => {
       const storedToken = Cookies.get('user_auth_token');
