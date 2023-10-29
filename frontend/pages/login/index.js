@@ -1,11 +1,13 @@
 import Button from "@/components/Button";
 import Input from "@/components/Input";
-import useAuth from "@/utils/hooks/useAuth";
+import { AuthContext } from "@/utils/context/AuthContext";
 import useNotifications from "@/utils/hooks/useNotifications";
-import { useState } from "react";
+import { useRouter } from "next/router";
+import { useContext, useState } from "react";
 
 export default function Login() {
-    const {loginUser} = useAuth();
+    const {loginUser} = useContext(AuthContext);
+    const router = useRouter();
     const { onError, onSuccess} = useNotifications();
 
     const [formData, setFormData] = useState({
@@ -27,6 +29,7 @@ export default function Login() {
             const response = await loginUser(formData);
             if(response) {
                 onSuccess("Login berhasil");
+                router.push("/");
             }
             else {
                 onError("Login tidak berhasil, email atau password salah")

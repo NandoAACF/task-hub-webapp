@@ -1,11 +1,11 @@
 import Button from "@/components/Button";
 import Input from "@/components/Input";
-import useAuth from "@/utils/hooks/useAuth";
-import { useState } from "react";
+import { AuthContext } from "@/utils/context/AuthContext";
+import { useContext, useState } from "react";
 
 
 export default function Register() {
-    const {registerUser} = useAuth();
+    const {registerUser} = useContext(AuthContext);
     const [formData, setFormData] = useState({
         username: '',
         email: '',
