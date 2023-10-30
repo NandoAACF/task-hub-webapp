@@ -73,7 +73,7 @@ export default function Todos() {
                         <CardTodo
                             status="Done"
                             title="My Todo 3 Title"
-                            description="My todo 3 description."
+                            description="My todo 3 description.My todo 3 description.My todo 3 description.My todo 3 description.My todo 3 description.My todo 3 description.My todo 3 description.My todo 3 description.My todo 3 description.My todo 3 description."
                             deadline="25 December 2023"
                             valuePriority="Low"
                             valueCat="Category B"
