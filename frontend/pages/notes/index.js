@@ -60,7 +60,7 @@ export default function Notes() {
                         <CardNote
                             title="My Title"
                             topic="My Topic"
-                            description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. sit amet consectetur adipisicing elit. Quisquam, voluptatum."
+                            description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. sit amet consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. sit amet consectetur adipisicing elit. Quisquam, voluptatum."
                             updateDate="12/12/2021"
                         />
                         <CardNote
