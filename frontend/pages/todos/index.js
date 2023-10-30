@@ -74,7 +74,7 @@ export default function Todos() {
                             </select>
                         </div>
                     </div>
-                    <div className="flex flex-col items-start justify-start mt-[30px] mb-[70px] w-full relative gap-[20px]">
+                    <div className="flex flex-col flex-wrap items-start justify-start mt-[30px] mb-[70px] w-full relative gap-[20px]">
                         <CardTodo
                             status="Hold"
                             title="My Todo Title"
@@ -89,6 +89,22 @@ export default function Todos() {
                             description="My todo 2 description."
                             deadline="22 December 2023"
                             valuePriority="Medium"
+                            valueCat="Category B"
+                        />
+                        <CardTodo
+                            status="Done"
+                            title="My Todo 3 Title"
+                            description="My todo 3 description.My todo 3 description.My todo 3 description.My todo 3 description.My todo 3 description.My todo 3 description.My todo 3 description.My todo 3 description.My todo 3 description.My todo 3 description."
+                            deadline="25 December 2023"
+                            valuePriority="Low"
+                            valueCat="Category B"
+                        />
+                        <CardTodo
+                            status="Done"
+                            title="My Todo 3 Title"
+                            description="My todo 3 description.My todo 3 description.My todo 3 description.My todo 3 description.My todo 3 description.My todo 3 description.My todo 3 description.My todo 3 description.My todo 3 description.My todo 3 description."
+                            deadline="25 December 2023"
+                            valuePriority="Low"
                             valueCat="Category B"
                         />
                         <CardTodo
