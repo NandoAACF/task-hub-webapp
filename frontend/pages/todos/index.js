@@ -37,19 +37,40 @@ export default function Todos() {
                         </span>{" "}
                         Todos.
                     </h2>
-                    <div className="flex flex-row items-start justify-start gap-[70px] mt-[28px]">
+                    <div className="flex flex-row flex-wrap items-start justify-start gap-x-[70px] gap-y-[10px] mt-[28px]">
                         <div className="flex flex-row items-center justify-start gap-[10px]">
                             <h3 className="text-[18px]">Sort By:</h3>
                             <select className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200">
-                                <option value="newest">Latest</option>
+                                <option value="deadlinedesc">Deadline Desc</option>
+                                <option value="deadlineasc">Deadline Asc</option>
+                                <option value="latest">Latest</option>
                                 <option value="oldest">Oldest</option>
                             </select>
                         </div>
                         <div className="flex flex-row items-center justify-start gap-[10px]">
-                            <h3 className="text-[18px]">Topic:</h3>
+                            <h3 className="text-[18px]">Filter Priority:</h3>
                             <select className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200">
-                                <option value="newest">All</option>
-                                <option value="oldest">Topik A</option>
+                                <option value="all_priority">All</option>
+                                <option value="high">High</option>
+                                <option value="medium">Medium</option>
+                                <option value="low">Low</option>
+                            </select>
+                        </div>
+                        <div className="flex flex-row items-center justify-start gap-[10px]">
+                            <h3 className="text-[18px]">Filter Category:</h3>
+                            <select className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200">
+                                <option value="all_topic">All</option>
+                                <option value="category_a">Category A</option>
+                                <option value="category_b">Category B</option>
+                            </select>
+                        </div>
+                        <div className="flex flex-row items-center justify-start gap-[10px]">
+                            <h3 className="text-[18px]">Filter Status:</h3>
+                            <select className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200">
+                                <option value="all_status">All</option>
+                                <option value="hold">Hold</option>
+                                <option value="inprogress">In Progress</option>
+                                <option value="done">Done</option>
                             </select>
                         </div>
                     </div>
