@@ -9,8 +9,13 @@ import { MdDateRange } from "react-icons/md";
 import TagTodo from "@/components/TagTodo";
 import StatusTodo from "@/components/StatusTodo";
 import CardTodo from "@/components/CardTodo";
+import Button from "@/components/Button";
+
+import { useState } from "react";
 
 export default function Todos() {
+    const [create, setCreate] = useState(false);
+
     return (
         <>
             <div className="flex flex-row items-start justify-start min-h-[100vh] relative overflow-hidden">
@@ -59,7 +64,7 @@ export default function Todos() {
                         <div className="flex flex-row items-center justify-start gap-[10px]">
                             <h3 className="text-[18px]">Filter Category:</h3>
                             <select className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200">
-                                <option value="all_topic">All</option>
+                                <option value="all_category">All</option>
                                 <option value="category_a">Category A</option>
                                 <option value="category_b">Category B</option>
                             </select>
@@ -118,9 +123,79 @@ export default function Todos() {
                     </div>
                 </div>
             </div>
-            <div className="fixed right-[50px] bottom-[40px] text-[90px] text-[#2984C9] hover:text-[#396688] active:text-[#223e53] transition-all ease-in-out duration-200 cursor-pointer hover:scale-110">
+            <div
+                className="fixed right-[50px] bottom-[40px] text-[90px] text-[#2984C9] hover:text-[#396688] active:text-[#223e53] transition-all ease-in-out duration-200 cursor-pointer hover:scale-110"
+                onClick={() => {
+                    setCreate(true);
+                }}
+            >
                 <RiAddCircleFill />
             </div>
+            {create ? (
+                <div className="flex flex-col items-center justify-center bg-opacity-50 bg-black w-full min-h-[100vh] overflow-hidden top-0 left-0 z-50 fixed">
+                    <div className="flex flex-col items-start justify-start bg-white rounded-2xl p-[30px] overflow-hidden relative max-h-[95vh]">
+                        <h4 className="text-[25px] font-bold -mt-[3px]">Add Todo</h4>
+                        <form className="flex flex-col items-start justify-start gap-[13px] mt-[14px] mb-[1px]">
+                            <div className="flex flex-col relative w-[600px]">
+                                <input
+                                    type="text"
+                                    className=" bg-white border-[1px] border-slate-300 rounded-[10px] w-full py-[5px] px-[9px] mt-[2px] focus:border-[4px] outline-none text-[22px] font-semibold"
+                                    placeholder="Title"
+                                />
+                            </div>
+                            <div className="flex flex-col relative w-[600px]">
+                                <input
+                                    type="text"
+                                    className=" bg-white border-[1px] border-slate-300 rounded-[10px] w-full py-[5px] px-[9px] mt-[2px] focus:border-[4px] outline-none text-[18px] font-medium"
+                                    placeholder="Category"
+                                />
+                            </div>
+                            <div className="flex flex-row items-center justify-start gap-[10px]">
+                                <h3 className="text-[18px]">Status:</h3>
+                                <select className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200">
+                                    <option value="hold">Hold</option>
+                                    <option value="inprogress">In Progress</option>
+                                    <option value="done">Done</option>
+                                </select>
+                            </div>
+                            <div className="flex flex-row items-center justify-start gap-[10px]">
+                                <h3 className="text-[18px]">Priority:</h3>
+                                <select className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200">
+                                    <option value="high">High</option>
+                                    <option value="medium">Medium</option>
+                                    <option value="low">Low</option>
+                                </select>
+                            </div>
+                            <div className="flex flex-row items-center justify-start gap-[10px]">
+                                <h3 className="text-[18px]">Deadline:</h3>
+                                <input
+                                    type="date"
+                                    className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200"
+                                />
+                            </div>
+                            <div className="flex flex-col relative w-[600px]">
+                                <textarea
+                                    className=" bg-white border-[1px] border-slate-300 rounded-[10px] w-full py-[5px] px-[9px] mt-[2px] focus:border-[4px] outline-none min-h-[100px] max-h-[300px]"
+                                    placeholder="Description"
+                                />
+                            </div>
+                            <div className="flex flex-row items-center justify-end gap-[20px] w-full mt-[20px]">
+                                <Button
+                                    text="Cancel"
+                                    type="secondary"
+                                    size="sm"
+                                    onClick={() => {
+                                        setCreate(false);
+                                    }}
+                                />
+                                <Button text="Add Todo" type="primary" size="sm" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            ) : (
+                ""
+            )}
         </>
     );
 }
