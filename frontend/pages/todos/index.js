@@ -21,7 +21,7 @@ export default function Todos() {
             <div className="flex flex-row items-start justify-start min-h-[100vh] relative overflow-hidden">
                 <div className="fixed flex flex-col items-center justify-between w-[110px] h-[100vh] bg-[#2984C9]">
                     <div className="flex flex-col items-start justify-start gap-[20px] mt-[30px]">
-                        <div className="text-[35px] hover:bg-[#2b587a] active:bg-[#1e3c53] transition-all ease-in-out duration-200 hover:scale-110 rounded-lg p-[15px] cursor-pointer">
+                        <div className="text-[35px] bg-[#1e3c53] transition-all ease-in-out duration-200 hover:scale-110 rounded-lg p-[15px] cursor-pointer">
                             <FaTasks color="white" />
                         </div>
                         <div className="text-[35px]  hover:bg-[#2b587a] active:bg-[#1e3c53] transition-all ease-in-out duration-200 hover:scale-110 rounded-lg p-[15px] cursor-pointer">
