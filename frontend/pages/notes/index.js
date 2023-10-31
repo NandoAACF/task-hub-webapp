@@ -6,7 +6,13 @@ import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 import { MdFavorite } from "react-icons/md";
 import CardNote from "@/components/CardNote";
 
+import { useState } from "react";
+import Input from "@/components/Input";
+import Button from "@/components/Button";
+
 export default function Notes() {
+    const [create, setCreate] = useState(false);
+
     return (
         <>
             <div className="flex flex-row items-start justify-start min-h-[100vh] relative overflow-hidden">
@@ -90,9 +96,57 @@ export default function Notes() {
                     </div>
                 </div>
             </div>
-            <div className="fixed right-[50px] bottom-[40px] text-[90px] text-[#2984C9] hover:text-[#396688] active:text-[#223e53] transition-all ease-in-out duration-200 cursor-pointer hover:scale-110">
+            <div
+                className="fixed right-[50px] bottom-[40px] text-[90px] text-[#2984C9] hover:text-[#396688] active:text-[#223e53] transition-all ease-in-out duration-200 cursor-pointer hover:scale-110"
+                onClick={() => {
+                    setCreate(true);
+                }}
+            >
                 <RiAddCircleFill />
             </div>
+            {/* Modal create note */}
+            {create ? (
+                <div className="flex flex-col items-center justify-center bg-opacity-50 bg-black w-full min-h-[100vh] overflow-hidden top-0 left-0 z-50 fixed">
+                    <div className="flex flex-col items-start justify-start bg-white rounded-2xl p-[30px] overflow-hidden relative">
+                        <h4 className="text-[25px] font-bold -mt-[3px]">Add Note</h4>
+                        <form className="flex flex-col items-start justify-start gap-[13px] mt-[14px] mb-[1px]">
+                            <div className="flex flex-col relative w-[600px]">
+                                <input
+                                    type="text"
+                                    className=" bg-white border-[1px] border-slate-300 rounded-[10px] w-full py-[5px] px-[9px] mt-[2px] focus:border-[4px] outline-none text-[22px] font-semibold"
+                                    placeholder="Title"
+                                />
+                            </div>
+                            <div className="flex flex-col relative w-[600px]">
+                                <input
+                                    type="text"
+                                    className=" bg-white border-[1px] border-slate-300 rounded-[10px] w-full py-[5px] px-[9px] mt-[2px] focus:border-[4px] outline-none text-[18px] font-medium"
+                                    placeholder="Topic"
+                                />
+                            </div>
+                            <div className="flex flex-col relative w-[600px]">
+                                <textarea
+                                    className=" bg-white border-[1px] border-slate-300 rounded-[10px] w-full py-[5px] px-[9px] mt-[2px] focus:border-[4px] outline-none min-h-[100px]"
+                                    placeholder="Description"
+                                />
+                            </div>
+                            <div className="flex flex-row items-center justify-end gap-[20px] w-full mt-[20px]">
+                                <Button
+                                    text="Cancel"
+                                    type="secondary"
+                                    size="sm"
+                                    onClick={() => {
+                                        setCreate(false);
+                                    }}
+                                />
+                                <Button text="Add Note" type="primary" size="sm" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            ) : (
+                ""
+            )}
         </>
     );
 }

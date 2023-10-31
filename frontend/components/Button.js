@@ -28,7 +28,7 @@ export default function Button({
         if (type === "primary")
             return `text-white bg-[#2984C9] hover:bg-[#2471AB] active:bg-[#1A5481] hover:shadow-lg hover:shadow-[#2471AB]/[29%] hover:-translate-y-[6px]`;
         if (type === "secondary")
-            return `bg-transparant ring-[2px] ring-white ring-inset text-white ring-opacity-60 active:ring-opacity-90 neon neonact`;
+            return `text-black bg-transparant hover:text-white hover:bg-[#2471AB] active:bg-[#1A5481] hover:shadow-lg hover:shadow-[#2471AB]/[29%] hover:-translate-y-[6px]`;
         if (type == "disabled")
             return `bg-gradient-to-b from-[#6F6B3C] to-[#695435] cursor-not-allowed text-[#3F3C48] pointer-events-none`;
         if (type == "disabledsecondary")
@@ -41,7 +41,7 @@ export default function Button({
     const fontSize = useMemo(() => {
         return {
             xsm: `text-sm px-5 py-1.5 gap-2.5`,
-            sm: `text-[14px] px-[24px] py-[13px] gap-2.5`,
+            sm: `text-[15px] px-[24px] py-[10px] gap-2.5`,
             md: `text-[18px] px-[24px] py-[15px] gap-3.5`,
             lg: `text-[18px] px-[24px] py-[19px] gap-4`,
         }[size];
