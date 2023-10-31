@@ -107,7 +107,7 @@ export default function Notes() {
             {/* Modal create note */}
             {create ? (
                 <div className="flex flex-col items-center justify-center bg-opacity-50 bg-black w-full min-h-[100vh] overflow-hidden top-0 left-0 z-50 fixed">
-                    <div className="flex flex-col items-start justify-start bg-white rounded-2xl p-[30px] overflow-hidden relative">
+                    <div className="flex flex-col items-start justify-start bg-white rounded-2xl p-[30px] overflow-hidden relative max-h-[95vh]">
                         <h4 className="text-[25px] font-bold -mt-[3px]">Add Note</h4>
                         <form className="flex flex-col items-start justify-start gap-[13px] mt-[14px] mb-[1px]">
                             <div className="flex flex-col relative w-[600px]">
@@ -126,7 +126,7 @@ export default function Notes() {
                             </div>
                             <div className="flex flex-col relative w-[600px]">
                                 <textarea
-                                    className=" bg-white border-[1px] border-slate-300 rounded-[10px] w-full py-[5px] px-[9px] mt-[2px] focus:border-[4px] outline-none min-h-[100px]"
+                                    className=" bg-white border-[1px] border-slate-300 rounded-[10px] w-full py-[5px] px-[9px] mt-[2px] focus:border-[4px] outline-none min-h-[100px] max-h-[300px]"
                                     placeholder="Description"
                                 />
                             </div>
