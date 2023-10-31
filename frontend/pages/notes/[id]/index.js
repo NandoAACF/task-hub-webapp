@@ -11,7 +11,7 @@ import { useState } from "react";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
 
-export default function Notes() {
+export default function NotesById() {
     const [edit, setEdit] = useState(false);
 
     return (
