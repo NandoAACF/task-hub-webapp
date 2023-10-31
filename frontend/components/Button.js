@@ -29,12 +29,12 @@ export default function Button({
             return `text-white bg-[#2984C9] hover:bg-[#2471AB] active:bg-[#1A5481] hover:shadow-lg hover:shadow-[#2471AB]/[29%] hover:-translate-y-[6px]`;
         if (type === "secondary")
             return `text-black bg-transparant hover:text-white hover:bg-[#2471AB] active:bg-[#1A5481] hover:shadow-lg hover:shadow-[#2471AB]/[29%] hover:-translate-y-[6px]`;
+        if (type == "resetpassword")
+            return `text-white bg-red-500 hover:bg-red-600 active:bg-red-700 hover:shadow-lg hover:shadow-red-500/[29%] hover:-translate-y-[6px]`;
         if (type == "disabled")
             return `bg-gradient-to-b from-[#6F6B3C] to-[#695435] cursor-not-allowed text-[#3F3C48] pointer-events-none`;
         if (type == "disabledsecondary")
             return `bg-transparant ring-[2px] ring-white ring-inset text-white ring-opacity-60 text-[#747680] cursor-not-allowed pointer-events-none`;
-        if (type == "dashboard")
-            return `bg-[#E6E6E6] text-[#606060] hover:to-[#73C2FB] active:from-[#0047A7] active:to-[#0047A7] hover:text-white hover:bg-gradient-to-l hover:from-[#045DD4] focus:bg-gradient-to-l focus:from-[#045DD4] focus:to-[#73C2FB] focus:text-white`;
         if (type == "logout") return `bg-[#878888] text-white hover:bg-black`;
     }, [color, type]);
 
