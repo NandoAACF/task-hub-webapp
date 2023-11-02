@@ -9,9 +9,12 @@ import CardNote from "@/components/CardNote";
 import { useState } from "react";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
+import useAxios from "@/utils/hooks/useAxios";
+import useNotifications from "@/utils/hooks/useNotifications";
 
 export default function Notes() {
     const [create, setCreate] = useState(false);
+    const notesData = useAxios("/notes", "GET");
 
     return (
         <>

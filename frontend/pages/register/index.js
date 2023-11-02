@@ -1,6 +1,7 @@
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 import { AuthContext } from "@/utils/context/AuthContext";
+import useNotifications from "@/utils/hooks/useNotifications";
 import { useContext, useState } from "react";
 
 
@@ -12,6 +13,7 @@ export default function Register() {
         password: '',
         passwordConfirmation: ''
     });
+    const { onError, onSuccess} = useNotifications();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
