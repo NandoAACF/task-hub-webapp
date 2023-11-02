@@ -47,7 +47,7 @@ exports.login = async (req, res) => {
         if (!isPasswordCorrect) return res.status(400).send({message: "Wrong password"});
 
         //Membuat token
-        const token = jwt.sign({ id: user.id }, process.env.AUTH_REFRESH_TOKEN, { expiresIn: "12h" });
+        const token = jwt.sign({ id: user.id, username: user.username, email: user.email }, process.env.AUTH_REFRESH_TOKEN, { expiresIn: "12h" });
 
         const data = {
             user: user,
