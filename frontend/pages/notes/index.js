@@ -7,15 +7,48 @@ import { MdFavorite } from "react-icons/md";
 import CardNote from "@/components/CardNote";
 import Link from "next/link";
 
-import { useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
 import useAxios from "@/utils/hooks/useAxios";
 import useNotifications from "@/utils/hooks/useNotifications";
+import { AuthContext } from "@/utils/context/AuthContext";
 
 export default function Notes() {
     const [create, setCreate] = useState(false);
-    const notesData = useAxios("/notes", "GET");
+    const {userInfo} = useContext(AuthContext);
+    const [notesData, setNotesData] = useState(null);
+    const {onSuccess, onError} = useNotifications();
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const data = await useAxios('/notes', 'GET');
+            setNotesData(data);
+        };
+
+        fetchData();
+    }, [notesData]);
+
+    const handleCreate = async (e) => {
+        e.preventDefault();
+        const userId = userInfo.userInfo.id;
+        const title = e.target.title.value;
+        const topic = e.target.topic.value;
+        const desc = e.target.description.value;
+
+        const response = await useAxios('/notes', 'POST', {
+            userId,
+            title, 
+            topic,
+            desc,
+            updateDate: new Date().toLocaleDateString(),
+        });
+
+        if(response) {
+            setCreate(false);
+            onSuccess("Notes added succesfully");
+        }
+    }
 
     return (
         <>
@@ -45,7 +78,7 @@ export default function Notes() {
                 <div className="flex flex-col items-start justify-start ml-[160px] mr-[60px]">
                     <h2 className="text-[53px] font-semibold mt-[20px]">
                         <span className="bg-gradient-to-r from-[#2984C9] via-[#3681B8] to-[#0B3654] text-transparent bg-clip-text">
-                            Username's
+                            {userInfo.userInfo.username}'s
                         </span>{" "}
                         Notes.
                     </h2>
@@ -73,36 +106,17 @@ export default function Notes() {
                         </div>
                     </div>
                     <div className="flex flex-row flex-wrap items-start justify-start mt-[31px] gap-[60px] mb-[70px] w-full relative">
-                        <CardNote
-                            title="My Title"
-                            topic="My Topic"
-                            description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. sit amet consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. sit amet consectetur adipisicing elit. Quisquam, voluptatum."
-                            updateDate="12/12/2021"
-                        />
-                        <CardNote
-                            title="My Title"
-                            topic="My Topic"
-                            description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. sit amet consectetur adipisicing elit. Quisquam, voluptatum."
-                            updateDate="12/12/2021"
-                        />
-                        <CardNote
-                            title="My Title"
-                            topic="My Topic"
-                            description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. sit amet consectetur adipisicing elit. Quisquam, voluptatum."
-                            updateDate="12/12/2021"
-                        />
-                        <CardNote
-                            title="My Title"
-                            topic="My Topic"
-                            description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. sit amet consectetur adipisicing elit. Quisquam, voluptatum."
-                            updateDate="12/12/2021"
-                        />
-                        <CardNote
-                            title="My Title"
-                            topic="My Topic"
-                            description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. sit amet consectetur adipisicing elit. Quisquam, voluptatum."
-                            updateDate="12/12/2021"
-                        />
+                        {notesData && notesData.map((note, index) => (
+                            <CardNote 
+                                key={index}
+                                id={note.id}
+                                title={note.title}
+                                topic={note.topic}
+                                description={note.desc}
+                                favorite={note.favorite}
+                                updateDate={note.updateDate}
+                            />
+                        ))}
                     </div>
                 </div>
             </div>
@@ -119,12 +133,13 @@ export default function Notes() {
                 <div className="flex flex-col items-center justify-center bg-opacity-50 bg-black w-full min-h-[100vh] overflow-hidden top-0 left-0 z-50 fixed">
                     <div className="flex flex-col items-start justify-start bg-white rounded-2xl p-[30px] overflow-hidden relative max-h-[95vh]">
                         <h4 className="text-[25px] font-bold -mt-[3px]">Add Note</h4>
-                        <form className="flex flex-col items-start justify-start gap-[13px] mt-[14px] mb-[1px]">
+                        <form onSubmit={handleCreate} className="flex flex-col items-start justify-start gap-[13px] mt-[14px] mb-[1px]">
                             <div className="flex flex-col relative w-[600px]">
                                 <input
                                     type="text"
                                     className=" bg-white border-[1px] border-slate-300 rounded-[10px] w-full py-[5px] px-[9px] mt-[2px] focus:border-[4px] outline-none text-[22px] font-semibold"
                                     placeholder="Title"
+                                    name="title"
                                 />
                             </div>
                             <div className="flex flex-col relative w-[600px]">
@@ -132,12 +147,14 @@ export default function Notes() {
                                     type="text"
                                     className=" bg-white border-[1px] border-slate-300 rounded-[10px] w-full py-[5px] px-[9px] mt-[2px] focus:border-[4px] outline-none text-[18px] font-medium"
                                     placeholder="Topic"
+                                    name="topic"
                                 />
                             </div>
                             <div className="flex flex-col relative w-[600px]">
                                 <textarea
                                     className=" bg-white border-[1px] border-slate-300 rounded-[10px] w-full py-[5px] px-[9px] mt-[2px] focus:border-[4px] outline-none min-h-[100px] max-h-[300px]"
                                     placeholder="Description"
+                                    name="description"
                                 />
                             </div>
                             <div className="flex flex-row items-center justify-end gap-[20px] w-full mt-[20px]">
