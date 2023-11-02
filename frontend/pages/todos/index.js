@@ -10,6 +10,7 @@ import TagTodo from "@/components/TagTodo";
 import StatusTodo from "@/components/StatusTodo";
 import CardTodo from "@/components/CardTodo";
 import Button from "@/components/Button";
+import Link from "next/link";
 
 import { useState } from "react";
 
@@ -21,14 +22,20 @@ export default function Todos() {
             <div className="flex flex-row items-start justify-start min-h-[100vh] relative overflow-hidden">
                 <div className="fixed flex flex-col items-center justify-between w-[110px] h-[100vh] bg-[#2984C9]">
                     <div className="flex flex-col items-start justify-start gap-[20px] mt-[30px]">
+                        <div className="text-[35px] hover:bg-[#2b587a] active:bg-[#1e3c53] transition-all ease-in-out duration-200 hover:scale-110 rounded-lg p-[15px] cursor-pointer">
+                            <Link href="/todos">
+                                <FaTasks color="white" />
+                            </Link>
+                        </div>
+                        <div className="text-[35px]  hover:bg-[#2b587a] active:bg-[#1e3c53] transition-all ease-in-out duration-200 hover:scale-110 rounded-lg p-[15px] cursor-pointer">
+                            <Link href="/notes">
+                                <CgNotes color="white" />
+                            </Link>
+                        </div>
                         <div className="text-[35px] bg-[#1e3c53] transition-all ease-in-out duration-200 hover:scale-110 rounded-lg p-[15px] cursor-pointer">
-                            <FaTasks color="white" />
-                        </div>
-                        <div className="text-[35px]  hover:bg-[#2b587a] active:bg-[#1e3c53] transition-all ease-in-out duration-200 hover:scale-110 rounded-lg p-[15px] cursor-pointer">
-                            <CgNotes color="white" />
-                        </div>
-                        <div className="text-[35px]  hover:bg-[#2b587a] active:bg-[#1e3c53] transition-all ease-in-out duration-200 hover:scale-110 rounded-lg p-[15px] cursor-pointer">
-                            <CgProfile color="white" />
+                            <Link href="/">
+                                <CgProfile color="white" />
+                            </Link>
                         </div>
                     </div>
                     <div className="text-[35px] hover:bg-[#2b587a] active:bg-[#1e3c53] transition-all ease-in-out duration-300 hover:scale-110 rounded-lg p-[15px] cursor-pointer mb-[30px]">
