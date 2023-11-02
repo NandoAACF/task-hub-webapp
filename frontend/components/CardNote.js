@@ -1,12 +1,23 @@
+import useAxios from "@/utils/hooks/useAxios";
+import { useState } from "react";
 import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 import { MdFavorite } from "react-icons/md";
 
 export default function CardNote({
+    id,
     title = "My Title",
     topic = "My Topic",
     description = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
     updateDate = "12/12/2021",
+    favorite = false,
 }) {
+
+    const [isFavorite, setIsFavorite] = useState(favorite);
+    const handleAddToFavorite = async () => {
+        await useAxios(`/notes/${id}`, 'PUT', { favorite: !isFavorite });
+        setIsFavorite(!isFavorite);
+    };
+
     return (
         <>
             <div className="flex flex-row items-start justify-start w-full xl:w-[500px] h-[215px] rounded-[20px] shadow-lg shadow-[999999]/[29%] relative cursor-pointer hover:bg-slate-100 transition-all ease-in-out duration-200 bg-slate-50">
@@ -23,7 +34,7 @@ export default function CardNote({
                     <div className="text-[25px] text-white mt-[15px] hover:bg-[#2b587a] active:bg-[#1e3c53] transition-all ease-in-out duration-200 hover:scale-110 rounded-lg p-[5px] cursor-pointer">
                         <AiFillDelete />
                     </div>
-                    <div className="text-[25px] text-white mt-[15px] hover:text-red-500 hover:bg-[#2b587a] active:bg-[#1e3c53] transition-all ease-in-out duration-200 hover:scale-110 rounded-lg p-[5px] cursor-pointer">
+                    <div onClick={handleAddToFavorite} className={`text-[25px] text-white mt-[15px] transition-all ease-in-out duration-200 hover:scale-110 rounded-lg p-[5px] cursor-pointer ${isFavorite ? 'text-red-500' : ''}`}>
                         <MdFavorite />
                     </div>
                 </div>
