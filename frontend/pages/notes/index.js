@@ -14,9 +14,12 @@ import FormNote from "@/components/FormNote";
 export default function Notes() {
     const [create, setCreate] = useState(false);
     const [update, setUpdate] = useState(false);
+    const [remove, setRemove] = useState(false);
+
+    const {onSuccess} = useNotifications();
     const {userInfo} = useContext(AuthContext);
     const [notesData, setNotesData] = useState(null);
-    const [editingNoteId, setEditingNoteId] = useState(null);
+    const [noteId, setNoteId] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -27,13 +30,25 @@ export default function Notes() {
     }, [notesData]);
 
     const handleEditClick = (id) => {
-        setEditingNoteId(id);
+        setNoteId(id);
         setUpdate(true);
+    };
+
+    const handleDeleteClick = (id) => {
+        setNoteId(id);
+        setRemove(true);
+    };
+
+    const handleRemove = async () => {
+        await useAxios(`/notes/${noteId}`, 'DELETE');
+        onSuccess("Notes removed succesfully");
+        setRemove(false);
     };
 
     const handleExit = () => {
         setCreate(false);
         setUpdate(false);
+        setRemove(false);
     };
 
     return (
@@ -81,6 +96,7 @@ export default function Notes() {
                                 favorite={note.favorite}
                                 updateDate={note.updateDate}
                                 handleEditClick={handleEditClick}
+                                handleDeleteClick={handleDeleteClick}
                             />
                         ))}
                     </div>
@@ -105,10 +121,34 @@ export default function Notes() {
             {/* Modal update note */}
             {update ? (
                 <FormNote 
-                    id={editingNoteId}
+                    id={noteId}
                     isUpdate={true}
                     handleExit={handleExit}
                 />
+            ) : (
+                ""
+            )}
+            {/* Modal remove note */}
+            {remove ? (
+                <div className="flex flex-col items-center justify-center bg-opacity-50 bg-black w-full min-h-[100vh] overflow-hidden top-0 left-0 z-50 fixed">
+                    <div className="flex flex-col items-start justify-start bg-white rounded-2xl p-[30px] overflow-hidden relative max-h-[95vh]">
+                        <h4 className="text-[25px] font-bold -mt-[3px]">Are you sure want to remove this note?</h4>
+                            <div className="flex flex-row items-center justify-end gap-[20px] w-full mt-[20px]">
+                                <Button
+                                    text="Yes"
+                                    type="secondary"
+                                    size="sm"
+                                    onClick={handleRemove}
+                                />
+                                <Button
+                                    text="No"
+                                    type="secondary"
+                                    size="sm"
+                                    onClick={handleExit}
+                                />
+                            </div>
+                    </div>
+                </div>
             ) : (
                 ""
             )}

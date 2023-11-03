@@ -10,7 +10,8 @@ export default function CardNote({
     description = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
     updateDate = "12/12/2021",
     favorite = false,
-    handleEditClick
+    handleEditClick,
+    handleDeleteClick
 }) {
 
     const [isFavorite, setIsFavorite] = useState(favorite);
@@ -22,6 +23,10 @@ export default function CardNote({
 
     const handleToogleEdit = () => {
         handleEditClick(id);
+    };
+
+    const handleToogleDelete = () => {
+        handleDeleteClick(id);
     };
 
     return (
@@ -37,7 +42,7 @@ export default function CardNote({
                     <div onClick={handleToogleEdit} className="text-[25px] text-white mt-[15px] hover:bg-[#2b587a] active:bg-[#1e3c53] transition-all ease-in-out duration-200 hover:scale-110 rounded-lg p-[5px] cursor-pointer">
                         <AiFillEdit />
                     </div>
-                    <div className="text-[25px] text-white mt-[15px] hover:bg-[#2b587a] active:bg-[#1e3c53] transition-all ease-in-out duration-200 hover:scale-110 rounded-lg p-[5px] cursor-pointer">
+                    <div onClick={handleToogleDelete} className="text-[25px] text-white mt-[15px] hover:bg-[#2b587a] active:bg-[#1e3c53] transition-all ease-in-out duration-200 hover:scale-110 rounded-lg p-[5px] cursor-pointer">
                         <AiFillDelete />
                     </div>
                     <div onClick={handleAddToFavorite} className={`text-[25px] text-white mt-[15px] transition-all ease-in-out duration-200 hover:scale-110 rounded-lg p-[5px] cursor-pointer ${isFavorite ? 'text-red-500' : ''}`}>
