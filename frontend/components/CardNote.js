@@ -10,12 +10,18 @@ export default function CardNote({
     description = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
     updateDate = "12/12/2021",
     favorite = false,
+    handleEditClick
 }) {
 
     const [isFavorite, setIsFavorite] = useState(favorite);
+
     const handleAddToFavorite = async () => {
         await useAxios(`/notes/${id}`, 'PUT', { favorite: !isFavorite });
         setIsFavorite(!isFavorite);
+    };
+
+    const handleToogleEdit = () => {
+        handleEditClick(id);
     };
 
     return (
@@ -28,7 +34,7 @@ export default function CardNote({
                     <h4 className="text-[14px] mt-[5px] ml-[2px] text-slate-500">Updated at: {updateDate}</h4>
                 </div>
                 <div className="flex flex-col items-center justify-start min-w-[60px] h-full bg-[#2984C9] rounded-r-[20px] shadow-lg shadow-[999999]/[29%]">
-                    <div className="text-[25px] text-white mt-[15px] hover:bg-[#2b587a] active:bg-[#1e3c53] transition-all ease-in-out duration-200 hover:scale-110 rounded-lg p-[5px] cursor-pointer">
+                    <div onClick={handleToogleEdit} className="text-[25px] text-white mt-[15px] hover:bg-[#2b587a] active:bg-[#1e3c53] transition-all ease-in-out duration-200 hover:scale-110 rounded-lg p-[5px] cursor-pointer">
                         <AiFillEdit />
                     </div>
                     <div className="text-[25px] text-white mt-[15px] hover:bg-[#2b587a] active:bg-[#1e3c53] transition-all ease-in-out duration-200 hover:scale-110 rounded-lg p-[5px] cursor-pointer">
