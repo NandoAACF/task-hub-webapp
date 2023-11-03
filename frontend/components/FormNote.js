@@ -2,15 +2,28 @@ import Button from "@/components/Button";
 import { AuthContext } from "@/utils/context/AuthContext";
 import useAxios from "@/utils/hooks/useAxios";
 import useNotifications from "@/utils/hooks/useNotifications";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 
 export default function FormNote({
     id,
     isUpdate = false,
     handleExit,
 }) {
-    const {onSuccess} = useNotifications();
+    const {onSuccess, onError} = useNotifications();
     const {userInfo} = useContext(AuthContext);
+    const [initialPayload, setInitialPayload] = useState({});
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await useAxios(`/notes/${id}`, 'GET');
+                setInitialPayload(response);
+            } catch (error) {
+                onError("Error occur while fetching the data");
+            }
+        }
+        if(isUpdate) fetchData();
+    }, [isUpdate, id]);
 
     const preparePayload = (e) => {
         e.preventDefault();
@@ -39,8 +52,19 @@ export default function FormNote({
         }
     };
 
+    const handleUpdate = async (e) => {
+        const noteData = preparePayload(e);
+        const response = await useAxios(`/notes/${id}`, 'PUT', noteData);
+
+        if(response) {
+            handleExit();
+            onSuccess("Notes edited succesfully");
+        }
+    };
+
     const handleSubmit = (e) => {
-        handleCreate(e);
+        if(isUpdate) handleUpdate(e);
+        else handleCreate(e);
     };
 
     return (
@@ -55,6 +79,7 @@ export default function FormNote({
                                 className=" bg-white border-[1px] border-slate-300 rounded-[10px] w-full py-[5px] px-[9px] mt-[2px] focus:border-[4px] outline-none text-[22px] font-semibold"
                                 placeholder="Title"
                                 name="title"
+                                defaultValue={initialPayload?.title}
                             />
                         </div>
                         <div className="flex flex-col relative w-[600px]">
@@ -63,6 +88,7 @@ export default function FormNote({
                                 className=" bg-white border-[1px] border-slate-300 rounded-[10px] w-full py-[5px] px-[9px] mt-[2px] focus:border-[4px] outline-none text-[18px] font-medium"
                                 placeholder="Topic"
                                 name="topic" 
+                                defaultValue={initialPayload?.topic}
                             />
                         </div>
                         <div className="flex flex-col relative w-[600px]">
@@ -70,6 +96,7 @@ export default function FormNote({
                                 className=" bg-white border-[1px] border-slate-300 rounded-[10px] w-full py-[5px] px-[9px] mt-[2px] focus:border-[4px] outline-none min-h-[100px] max-h-[300px]"
                                 placeholder="Description"
                                 name="description"
+                                defaultValue={initialPayload?.desc}
                             />
                         </div>
                         <div className="flex flex-row items-center justify-end gap-[20px] w-full mt-[20px]">
