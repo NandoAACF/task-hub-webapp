@@ -10,7 +10,7 @@ export default function StatusTodo({ status = "Hold" }) {
     return (
         <div
             className={clsx(
-                "flex flex-col items-center justify-center rounded-xl min-w-[90px] max-w-[90px] h-[90px] font-semibold",
+                "flex flex-col items-center justify-center rounded-xl sm:min-w-[90px] sm:max-w-[90px] w-[130px] h-[38px] sm:h-[90px] font-semibold",
                 statusType(status)
             )}
         >
