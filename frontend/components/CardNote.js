@@ -11,13 +11,13 @@ export default function CardNote({
     updateDate = "12/12/2021",
     favorite = false,
     handleEditClick,
-    handleDeleteClick
+    handleDeleteClick,
+    onClick,
 }) {
-
     const [isFavorite, setIsFavorite] = useState(favorite);
 
     const handleAddToFavorite = async () => {
-        await useAxios(`/notes/${id}`, 'PUT', { favorite: !isFavorite });
+        await useAxios(`/notes/${id}`, "PUT", { favorite: !isFavorite });
         setIsFavorite(!isFavorite);
     };
 
@@ -31,21 +31,35 @@ export default function CardNote({
 
     return (
         <>
-            <div className="flex flex-row items-start justify-start w-full xl:w-[500px] h-[215px] rounded-[20px] shadow-lg shadow-[999999]/[29%] relative cursor-pointer hover:bg-slate-100 transition-all ease-in-out duration-200 bg-slate-50">
+            <div
+                className="flex flex-row items-start justify-start w-full xl:w-[500px] h-[215px] rounded-[20px] shadow-lg shadow-[999999]/[29%] relative cursor-pointer hover:bg-slate-100 transition-all ease-in-out duration-200 bg-slate-50"
+                onClick={onClick}
+            >
                 <div className="flex flex-col items-start justify-start my-[14px] mx-[25px]">
-                    <h1 className="text-[30px] font-semibold">{title}</h1>
-                    <h3 className="text-[22px] text-slate-400">{topic}</h3>
-                    <h6 className="text-[16px] mt-[3px] ml-[2px] line-clamp-3">{description}</h6>
+                    <h1 className="text-[26px] sm:text-[30px] font-semibold line-clamp-1">{title}</h1>
+                    <h3 className="text-[19px] sm:text-[22px] text-slate-400 line-clamp-1">{topic}</h3>
+                    <h6 className="text-[15px] sm:text-[16px] mt-[3px] ml-[2px] line-clamp-3">{description}</h6>
                     <h4 className="text-[14px] mt-[5px] ml-[2px] text-slate-500">Updated at: {updateDate}</h4>
                 </div>
-                <div className="flex flex-col items-center justify-start min-w-[60px] h-full bg-[#2984C9] rounded-r-[20px] shadow-lg shadow-[999999]/[29%]">
-                    <div onClick={handleToogleEdit} className="text-[25px] text-white mt-[15px] hover:bg-[#2b587a] active:bg-[#1e3c53] transition-all ease-in-out duration-200 hover:scale-110 rounded-lg p-[5px] cursor-pointer">
+                <div className="hidden sm:flex flex-col items-center justify-start min-w-[50px] sm:min-w-[60px] h-full bg-[#2984C9] rounded-r-[20px] shadow-lg shadow-[999999]/[29%]">
+                    <div
+                        onClick={handleToogleEdit}
+                        className="text-[21px] sm:text-[25px] text-white mt-[15px] hover:bg-[#2b587a] active:bg-[#1e3c53] transition-all ease-in-out duration-200 hover:scale-110 rounded-lg p-[5px] cursor-pointer"
+                    >
                         <AiFillEdit />
                     </div>
-                    <div onClick={handleToogleDelete} className="text-[25px] text-white mt-[15px] hover:bg-[#2b587a] active:bg-[#1e3c53] transition-all ease-in-out duration-200 hover:scale-110 rounded-lg p-[5px] cursor-pointer">
+                    <div
+                        onClick={handleToogleDelete}
+                        className="text-[21px] sm:text-[25px] text-white mt-[15px] hover:bg-[#2b587a] active:bg-[#1e3c53] transition-all ease-in-out duration-200 hover:scale-110 rounded-lg p-[5px] cursor-pointer"
+                    >
                         <AiFillDelete />
                     </div>
-                    <div onClick={handleAddToFavorite} className={`text-[25px] text-white mt-[15px] transition-all ease-in-out duration-200 hover:scale-110 rounded-lg p-[5px] cursor-pointer ${isFavorite ? 'text-red-500' : ''}`}>
+                    <div
+                        onClick={handleAddToFavorite}
+                        className={`text-[21px] sm:text-[25px] text-white mt-[15px] transition-all ease-in-out duration-200 hover:scale-110 rounded-lg p-[5px] cursor-pointer ${
+                            isFavorite ? "text-red-500" : ""
+                        }`}
+                    >
                         <MdFavorite />
                     </div>
                 </div>
