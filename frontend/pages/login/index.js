@@ -46,9 +46,9 @@ export default function Login() {
                         Taskify.
                     </span>
                 </h1>
-                <img src="/assets/images/Login/people.png" className="w-[66%] sm:w-[60%] md:w-[70%] lg:w-full" />
+                <img src="/assets/images/Login/peoplenew.png" className="scale-75 md:scale-100 -mt-[30px] md:mt-0" />
             </div>
-            <div className="flex flex-col items-center justify-center w-full h-full mt-[40px]">
+            <div className="flex flex-col items-center justify-center w-full h-full mt-[0px] md:mt-[40px]">
                 <form
                     className="flex flex-col items-start justify-center w-full h-full gap-[14px] px-[16%] md:px-[18%] relative"
                     onSubmit={handleLogin}
