@@ -10,6 +10,7 @@ import CardNote from "@/components/CardNote";
 import { useState } from "react";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
+import Sidebar from "@/components/Sidebar";
 
 export default function NotesById() {
     const [edit, setEdit] = useState(false);
@@ -17,28 +18,13 @@ export default function NotesById() {
     return (
         <>
             <div className="flex flex-row items-start justify-start min-h-[100vh] relative overflow-hidden">
-                <div className="fixed flex flex-col items-center justify-between w-[110px] h-[100vh] bg-[#2984C9]">
-                    <div className="flex flex-col items-start justify-start gap-[20px] mt-[30px]">
-                        <div className="text-[35px] hover:bg-[#2b587a] active:bg-[#1e3c53] transition-all ease-in-out duration-200 hover:scale-110 rounded-lg p-[15px] cursor-pointer">
-                            <FaTasks color="white" />
-                        </div>
-                        <div className="text-[35px] bg-[#1e3c53] transition-all ease-in-out duration-200 hover:scale-110 rounded-lg p-[15px] cursor-pointer">
-                            <CgNotes color="white" />
-                        </div>
-                        <div className="text-[35px]  hover:bg-[#2b587a] active:bg-[#1e3c53] transition-all ease-in-out duration-200 hover:scale-110 rounded-lg p-[15px] cursor-pointer">
-                            <CgProfile color="white" />
-                        </div>
-                    </div>
-                    <div className="text-[35px] hover:bg-[#2b587a] active:bg-[#1e3c53] transition-all ease-in-out duration-300 hover:scale-110 rounded-lg p-[15px] cursor-pointer mb-[30px]">
-                        <TbLogout2 color="white" />
-                    </div>
-                </div>
-                <div className="flex flex-col items-start justify-start ml-[160px] mr-[60px] mt-[40px] w-full relative">
-                    <div className="flex flex-row items-center justify-between w-full text-[30px] text-[#2984C9]">
+                <Sidebar />
+                <div className="flex flex-col items-start justify-start ml-[100px] sm:ml-[160px] mr-[30px] sm:mr-[60px] mt-[40px] w-full relative">
+                    <div className="flex flex-row items-center justify-between w-full text-[26px] sm:text-[30px] text-[#2984C9]">
                         <div className="cursor-pointer hover:scale-[118%] transition-all ease-in-out duration-200 hover:bg-[#2984C9] hover:text-white rounded-xl p-[5px]">
                             <IoMdArrowRoundBack />
                         </div>
-                        <div className="flex flex-row items-center justify-start gap-[30px]">
+                        <div className="flex flex-row items-center justify-start gap-[10px] sm:gap-[30px]">
                             <div
                                 className="cursor-pointer hover:scale-[118%] transition-all ease-in-out duration-200 hover:bg-[#2984C9] hover:text-white rounded-xl p-[5px]"
                                 onClick={() => {
@@ -55,14 +41,16 @@ export default function NotesById() {
                             </div>
                         </div>
                     </div>
-                    <h2 className="text-[43px] font-semibold mt-[15px] ml-[7px]">
+                    <h2 className="text-[33px] sm:text-[43px] font-semibold mt-[15px] ml-[7px]">
                         <span className="bg-gradient-to-r from-[#2984C9] via-[#3681B8] to-[#0B3654] text-transparent bg-clip-text">
                             My Note Title
                         </span>{" "}
                     </h2>
-                    <div className="flex flex-row items-end justify-between w-full mt-[12px]">
+                    <div className="flex flex-col sm:flex-row  items-start sm:items-end justify-start sm:justify-between w-full mt-[7px] sm:mt-[12px]">
                         <h3 className="text-[26px] ml-[7px] font-medium">My Note Topic</h3>
-                        <h4 className="text-[19px] text-slate-400">Last Updated: 2 December 2023</h4>
+                        <h4 className="text-[16px] sm:text-[19px] text-slate-400 ml-[7px] sm:ml-0">
+                            Last Updated: 2 December 2023
+                        </h4>
                     </div>
                     <h5 className="text-[17px] ml-[7px] mt-[17px]">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer a convallis magna, in volutpat
@@ -89,27 +77,27 @@ export default function NotesById() {
                     <div className="flex flex-col items-start justify-start bg-white rounded-2xl p-[30px] overflow-hidden relative max-h-[95vh]">
                         <h4 className="text-[25px] font-bold -mt-[3px]">Edit Note</h4>
                         <form className="flex flex-col items-start justify-start gap-[13px] mt-[14px] mb-[1px]">
-                            <div className="flex flex-col relative w-[600px]">
+                            <div className="flex flex-col relative w-[200px] sm:w-[400px] md:w-[600px]">
                                 <input
                                     type="text"
                                     className=" bg-white border-[1px] border-slate-300 rounded-[10px] w-full py-[5px] px-[9px] mt-[2px] focus:border-[4px] outline-none text-[22px] font-semibold"
                                     placeholder="Title"
                                 />
                             </div>
-                            <div className="flex flex-col relative w-[600px]">
+                            <div className="flex flex-col relative w-[200px] sm:w-[400px] md:w-[600px]">
                                 <input
                                     type="text"
                                     className=" bg-white border-[1px] border-slate-300 rounded-[10px] w-full py-[5px] px-[9px] mt-[2px] focus:border-[4px] outline-none text-[18px] font-medium"
                                     placeholder="Topic"
                                 />
                             </div>
-                            <div className="flex flex-col relative w-[600px]">
+                            <div className="flex flex-col relative w-[200px] sm:w-[400px] md:w-[600px]">
                                 <textarea
                                     className=" bg-white border-[1px] border-slate-300 rounded-[10px] w-full py-[5px] px-[9px] mt-[2px] focus:border-[4px] outline-none min-h-[100px] max-h-[300px]"
                                     placeholder="Description"
                                 />
                             </div>
-                            <div className="flex flex-row items-center justify-end gap-[20px] w-full mt-[20px]">
+                            <div className="flex flex-col sm:flex-row items-center justify-end gap-[18px] sm:gap-[20px] w-full mt-[15px] sm:mt-[20px]">
                                 <Button
                                     text="Cancel"
                                     type="secondary"
@@ -117,8 +105,9 @@ export default function NotesById() {
                                     onClick={() => {
                                         setEdit(false);
                                     }}
+                                    className="order-2 sm:order-1"
                                 />
-                                <Button text="Add Note" type="primary" size="sm" />
+                                <Button text="Add Note" type="primary" size="sm" className="order-1 sm:order-2" />
                             </div>
                         </form>
                     </div>
