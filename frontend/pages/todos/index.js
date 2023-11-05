@@ -136,7 +136,7 @@ export default function Todos() {
                             </div>
                             <div className="flex flex-row items-center justify-start gap-[10px]">
                                 <h3 className="text-[18px]">Status:</h3>
-                                <select className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[100px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200">
+                                <select className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[100px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200">
                                     <option value="hold">Hold</option>
                                     <option value="inprogress">In Progress</option>
                                     <option value="done">Done</option>
@@ -144,7 +144,7 @@ export default function Todos() {
                             </div>
                             <div className="flex flex-row items-center justify-start gap-[10px]">
                                 <h3 className="text-[18px]">Priority:</h3>
-                                <select className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[100px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200">
+                                <select className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[100px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200">
                                     <option value="high">High</option>
                                     <option value="medium">Medium</option>
                                     <option value="low">Low</option>
@@ -154,7 +154,7 @@ export default function Todos() {
                                 <h3 className="text-[18px]">Deadline:</h3>
                                 <input
                                     type="date"
-                                    className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[100px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200"
+                                    className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[100px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200"
                                 />
                             </div>
                             <div className="flex flex-col relative w-[200px] sm:w-[400px] md:w-[600px]">
