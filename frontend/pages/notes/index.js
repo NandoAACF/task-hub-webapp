@@ -10,7 +10,7 @@ import useNotifications from "@/utils/hooks/useNotifications";
 import { AuthContext } from "@/utils/context/AuthContext";
 import Sidebar from "@/components/Sidebar";
 import FormNote from "@/components/FormNote";
-import { router } from "next/router";
+import { router, useRouter } from "next/router";
 
 export default function Notes() {
     const [create, setCreate] = useState(false);
@@ -21,6 +21,18 @@ export default function Notes() {
     const { userInfo } = useContext(AuthContext);
     const [notesData, setNotesData] = useState(null);
     const [noteId, setNoteId] = useState(null);
+
+    const router = useRouter();
+
+    useEffect(() => {
+        if (!userInfo.isLoggedIn) {
+            router.replace("/login");
+        }
+    }, [userInfo.isLoggedIn, router]);
+
+    if (!userInfo.isLoggedIn) {
+        return null;
+    }
 
     useEffect(() => {
         const fetchData = async () => {
