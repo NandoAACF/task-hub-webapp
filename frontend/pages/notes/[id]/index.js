@@ -54,7 +54,7 @@ export default function NotesById() {
             <div className="flex flex-row items-start justify-start min-h-[100vh] relative overflow-hidden">
                 <Sidebar />
                 <div className="flex flex-col items-start justify-start ml-[100px] sm:ml-[160px] mr-[30px] sm:mr-[60px] mt-[40px] w-full relative">
-                    <div className="flex flex-row items-center justify-between w-full text-[26px] sm:text-[30px] text-[#F56C4E]">
+                    <div className="flex flex-row items-center justify-between w-full text-[26px] sm:text-[30px] text-[#2984C9]">
                         <div className="cursor-pointer hover:scale-[118%] transition-all ease-in-out duration-200 hover:bg-[#2984C9] hover:text-white rounded-xl p-[5px]">
                             <IoMdArrowRoundBack />
                         </div>
@@ -92,7 +92,6 @@ export default function NotesById() {
                     <h5 className="text-[17px] ml-[7px] mt-[17px]">
                         {noteData?.desc}
                     </h5>
-                    <p className="text-[14px] mt-3">Allan, please add detail. Or anyone, really. Anything else to fill this?</p>
                 </div>
             </div>
             {/* Modal update note */}
@@ -103,8 +102,8 @@ export default function NotesById() {
                     <div className="flex flex-col items-start justify-start bg-white rounded-2xl p-[30px] overflow-hidden relative max-h-[95vh]">
                         <h4 className="text-[25px] font-bold -mt-[3px]">Are you sure want to remove this note?</h4>
                         <div className="flex flex-row items-center justify-end gap-[20px] w-full mt-[20px]">
-                            <Button text="Confirm" type="primary" size="sm" onClick={handleRemove} />
-                            <Button text="Cancel" type="secondary" size="sm" onClick={handleExit} />
+                            <Button text="Yes" type="secondary" size="sm" onClick={handleRemove} />
+                            <Button text="No" type="secondary" size="sm" onClick={handleExit} />
                         </div>
                     </div>
                 </div>
