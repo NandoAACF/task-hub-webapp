@@ -1,16 +1,19 @@
 import { RiAddCircleFill } from "react-icons/ri";
 import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 import { MdFavorite } from "react-icons/md";
-import CardNote from "@/components/CardNote";
+
 import { useContext, useState, useEffect } from "react";
-import Input from "@/components/Input";
-import Button from "@/components/Button";
+import { router, useRouter } from "next/router";
+
 import useAxios from "@/utils/hooks/useAxios";
 import useNotifications from "@/utils/hooks/useNotifications";
 import { AuthContext } from "@/utils/context/AuthContext";
+
 import Sidebar from "@/components/Sidebar";
 import FormNote from "@/components/FormNote";
-import { router, useRouter } from "next/router";
+import Input from "@/components/Input";
+import Button from "@/components/Button";
+import CardNote from "@/components/CardNote";
 
 export default function Notes() {
     const [create, setCreate] = useState(false);
@@ -102,6 +105,9 @@ export default function Notes() {
                         {notesData &&
                             notesData.map((note, index) => (
                                 <CardNote
+                                    onClick={() => {
+                                        router.push(`/notes/${note.id}`)
+                                    }}
                                     key={index}
                                     id={note.id}
                                     title={note.title}
