@@ -21,7 +21,7 @@ export default function ForgotPassword() {
                     {/* Return to{" "} */}
                     <span className="underline cursor-pointer text-[#2984C9] hover:text-[#2471AB]" ><a href="/login">Sign In</a></span>
                     {" | "}
-                    <span className="underline cursor-pointer text-[#2984C9] hover:text-[#2471AB]">Register</span>
+                    <span className="underline cursor-pointer text-[#2984C9] hover:text-[#2471AB]"><a href="/register">Register</a></span>
                 </h3>
             </div>
             <div className="hidden lg:flex flex-col items-center justify-center w-full h-full">
