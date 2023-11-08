@@ -1,6 +1,8 @@
 import { MdDateRange } from "react-icons/md";
 import TagTodo from "@/components/TagTodo";
 import StatusTodo from "@/components/StatusTodo";
+import moment from "moment";
+
 
 export default function CardTodo({
     status = "Hold",
@@ -21,10 +23,10 @@ export default function CardTodo({
                 </h3>
                 <div className="flex flex-row items-center justify-start gap-[6px] text-[18px]">
                     <MdDateRange />
-                    <h4 className="text-[15px] mt-[3px]">{deadline}</h4>
+                    <h4 className="text-[15px] mt-[3px]">{moment(deadline).format("DD MMM YYYY HH:mm")}</h4>
                 </div>
                 <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-[9px] mt-[10px] sm:mt-[5px]">
-                    <TagTodo type={tagType1} value={valuePriority} />
+                    <TagTodo type={tagType1} value={valuePriority.charAt(0).toUpperCase() + valuePriority.slice(1)} />
                     <TagTodo type={tagType2} value={valueCat} />
                 </div>
             </div>
