@@ -92,6 +92,7 @@ export default function NotesById() {
                     <h5 className="text-[17px] ml-[7px] mt-[17px]">
                         {noteData?.desc}
                     </h5>
+                    <p className="text-[14px] mt-3">Allan, please add detail. Or anyone, really. Anything else to fill this?</p>
                 </div>
             </div>
             {/* Modal update note */}
