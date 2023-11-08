@@ -54,7 +54,7 @@ export default function NotesById() {
             <div className="flex flex-row items-start justify-start min-h-[100vh] relative overflow-hidden">
                 <Sidebar />
                 <div className="flex flex-col items-start justify-start ml-[100px] sm:ml-[160px] mr-[30px] sm:mr-[60px] mt-[40px] w-full relative">
-                    <div className="flex flex-row items-center justify-between w-full text-[26px] sm:text-[30px] text-[#2984C9]">
+                    <div className="flex flex-row items-center justify-between w-full text-[26px] sm:text-[30px] text-[#F56C4E]">
                         <div className="cursor-pointer hover:scale-[118%] transition-all ease-in-out duration-200 hover:bg-[#2984C9] hover:text-white rounded-xl p-[5px]">
                             <IoMdArrowRoundBack />
                         </div>
