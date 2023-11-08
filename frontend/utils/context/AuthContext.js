@@ -10,16 +10,16 @@ export function AuthContextProvider ({children}) {
     const [userInfo, setUserInfo] = useState(() => {
       const storedToken = Cookies.get('user_auth_token');
       if(storedToken) {
-        // const decodedToken = jwtDecode(storedToken);
-        // const tokenExpiration = new Date((decodedToken.exp ?? 0) *1000);
-        // if(tokenExpiration > new Date()) {
-        //   return {
-        //     isLoggedIn: true,
-        //     userInfo: decodedToken
-        //   };
-        // } else {
-        //   Cookies.remove('user_auth_token');
-        // }
+        const decodedToken = jwtDecode(storedToken);
+        const tokenExpiration = new Date((decodedToken.exp ?? 0) *1000);
+        if(tokenExpiration > new Date()) {
+          return {
+            isLoggedIn: true,
+            userInfo: decodedToken
+          };
+        } else {
+          Cookies.remove('user_auth_token');
+        }
       }
       return {
         isLoggedIn: false,
@@ -28,7 +28,7 @@ export function AuthContextProvider ({children}) {
     });
 
     useEffect(() => {
-      localStorage.setItem('user-info', JSON.stringify(userInfo));
+      if(userInfo?.length) localStorage.setItem('user-info', JSON.stringify(userInfo));
     }, [userInfo]);
     
     const loginUser = async (data) => {
