@@ -102,8 +102,8 @@ export default function NotesById() {
                     <div className="flex flex-col items-start justify-start bg-white rounded-2xl p-[30px] overflow-hidden relative max-h-[95vh]">
                         <h4 className="text-[25px] font-bold -mt-[3px]">Are you sure want to remove this note?</h4>
                         <div className="flex flex-row items-center justify-end gap-[20px] w-full mt-[20px]">
-                            <Button text="Yes" type="secondary" size="sm" onClick={handleRemove} />
-                            <Button text="No" type="secondary" size="sm" onClick={handleExit} />
+                            <Button text="Confirm" type="primary" size="sm" onClick={handleRemove} />
+                            <Button text="Cancel" type="secondary" size="sm" onClick={handleExit} />
                         </div>
                     </div>
                 </div>
