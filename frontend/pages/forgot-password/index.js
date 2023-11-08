@@ -18,8 +18,10 @@ export default function ForgotPassword() {
                     <Button text="Submit" type="primary" size="md" className="w-full mt-[40px]" />
                 </form>
                 <h3 className="text-[17px] sm:text-[19px] text-center mt-[30px] ">
-                    Return to{" "}
-                    <span className="underline cursor-pointer text-[#2984C9] hover:text-[#2471AB]"><a href="/login">Sign In</a></span>
+                    {/* Return to{" "} */}
+                    <span className="underline cursor-pointer text-[#2984C9] hover:text-[#2471AB]" ><a href="/login">Sign In</a></span>
+                    {" | "}
+                    <span className="underline cursor-pointer text-[#2984C9] hover:text-[#2471AB]">Register</span>
                 </h3>
             </div>
             <div className="hidden lg:flex flex-col items-center justify-center w-full h-full">
