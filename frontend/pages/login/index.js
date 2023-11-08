@@ -69,14 +69,21 @@ export default function Login() {
                         value={formData.password}
                         onChange={handleChange}
                     />
-                    <h5 className="text-[14px] underline cursor-pointer hover:text-[#2984C9] hover:scale-110 transition-all ease-in-out duration-300">
+                    <h5 
+                        onClick={() => router.push("/forgot-password")}
+                        className="text-[14px] underline cursor-pointer hover:text-[#2984C9] hover:scale-110 transition-all ease-in-out duration-300"
+                    >
                         Forgot Password?
                     </h5>
                     <Button text="Login" type="primary" size="md" className="w-full mt-[40px]" />
                 </form>
                 <h3 className="text-[17px] sm:text-[19px] text-center mt-[30px] mx-[20px] sm:mx-0">
                     Don't have an account?{" "}
-                    <span className="underline cursor-pointer text-[#2984C9] hover:text-[#2471AB]">Register</span>
+                    <span 
+                        onClick={() => router.push("/register")}
+                        className="underline cursor-pointer text-[#2984C9] hover:text-[#2471AB]">
+                            Register
+                    </span>
                 </h3>
             </div>
         </div>

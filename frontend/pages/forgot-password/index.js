@@ -1,9 +1,13 @@
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 import { AuthContext } from "@/utils/context/AuthContext";
+import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 
 export default function ForgotPassword() {
+
+    const router = useRouter();
+
     return (
         <div className="flex flex-col lg:flex-row items-center justify-center min-h-screen overflow-hidden relative mx-[35px] sm:mx-[40px] lg:mx-0">
             <div className="flex flex-col items-center justify-center w-full h-full lg:ml-[60px]">
@@ -19,9 +23,9 @@ export default function ForgotPassword() {
                 </form>
                 <h3 className="text-[17px] sm:text-[19px] text-center mt-[30px] ">
                     {/* Return to{" "} */}
-                    <span className="underline cursor-pointer text-[#2984C9] hover:text-[#2471AB]" ><a href="/login">Sign In</a></span>
+                    <span onClick={() => router.push("/login")} className="underline cursor-pointer text-[#2984C9] hover:text-[#2471AB]" >Sign In</span>
                     {" | "}
-                    <span className="underline cursor-pointer text-[#2984C9] hover:text-[#2471AB]"><a href="/register">Register</a></span>
+                    <span onClick={() => router.push("/register")} className="underline cursor-pointer text-[#2984C9] hover:text-[#2471AB]">Register</span>
                 </h3>
             </div>
             <div className="hidden lg:flex flex-col items-center justify-center w-full h-full">

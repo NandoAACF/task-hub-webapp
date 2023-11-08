@@ -2,10 +2,13 @@ import Button from "@/components/Button";
 import Input from "@/components/Input";
 import { AuthContext } from "@/utils/context/AuthContext";
 import useNotifications from "@/utils/hooks/useNotifications";
+import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 
 export default function Register() {
     const { registerUser } = useContext(AuthContext);
+    const router = useRouter();
+
     const [formData, setFormData] = useState({
         username: "",
         email: "",
@@ -28,6 +31,7 @@ export default function Register() {
             const response = await registerUser(formData);
             if (response) {
                 onSuccess("Registrasi berhasil");
+                router.push("/login");
             } else {
                 onError("Registrasi tidak berhasil, email mungkin sudah terdaftar");
             }
@@ -84,14 +88,21 @@ export default function Register() {
                         value={formData.passwordConfirmation}
                         onChange={handleChange}
                     />
-                    <h5 className="text-[14px] underline cursor-pointer hover:text-[#2984C9] hover:scale-110 transition-all ease-in-out duration-300">
+                    <h5 
+                        onClick={() => router.push("/forgot-password")}
+                        className="text-[14px] underline cursor-pointer hover:text-[#2984C9] hover:scale-110 transition-all ease-in-out duration-300"
+                    >
                         Forgot Password?
                     </h5>
                     <Button text="Register" type="primary" size="md" className="w-full mt-[40px]" />
                 </form>
                 <h3 className="text-[17px] sm:text-[19px] text-center mt-[30px] ">
                     Already have an account?{" "}
-                    <span className="underline cursor-pointer text-[#2984C9] hover:text-[#2471AB]">Login</span>
+                    <span 
+                        onClick={() => router.push("/login")}
+                        className="underline cursor-pointer text-[#2984C9] hover:text-[#2471AB]">
+                            Login
+                    </span>
                 </h3>
             </div>
         </div>
