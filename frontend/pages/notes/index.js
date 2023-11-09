@@ -125,12 +125,36 @@ export default function Notes() {
                                 router.push("/notes/1");
                             }}
                         />
-                        <CardNote />
-                        <CardNote />
-                        <CardNote />
-                        <CardNote />
-                        <CardNote />
-                        <CardNote />
+                        <CardNote
+                            onClick={() => {
+                                router.push("/notes/2");
+                            }}
+                        />
+                        <CardNote
+                            onClick={() => {
+                                router.push("/notes/3");
+                            }}
+                        />
+                        <CardNote
+                            onClick={() => {
+                                router.push("/notes/4");
+                            }}
+                        />
+                        <CardNote
+                            onClick={() => {
+                                router.push("/notes/5");
+                            }}
+                        />
+                        <CardNote
+                            onClick={() => {
+                                router.push("/notes/6");
+                            }}
+                        />
+                        <CardNote
+                            onClick={() => {
+                                router.push("/notes/7");
+                            }}
+                        />
                     </div>
                 </div>
             </div>
