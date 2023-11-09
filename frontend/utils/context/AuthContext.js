@@ -28,7 +28,9 @@ export function AuthContextProvider ({children}) {
     });
 
     useEffect(() => {
-      if(userInfo?.length) localStorage.setItem('user-info', JSON.stringify(userInfo));
+      if(userInfo !== null && userInfo !== undefined) {
+        localStorage.setItem('user-info', JSON.stringify(userInfo));
+      }
     }, [userInfo]);
     
     const loginUser = async (data) => {
