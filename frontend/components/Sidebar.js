@@ -23,7 +23,7 @@ export default function Sidebar() {
                         </Link>
                     </div>
                     <div className="text-[25px] sm:text-[35px] bg-[#1e3c53] transition-all ease-in-out duration-200 hover:scale-110 rounded-lg p-[8px] sm:p-[15px] cursor-pointer">
-                        <Link href="/">
+                        <Link href="/user-profile">
                             <CgProfile color="white" />
                         </Link>
                     </div>
