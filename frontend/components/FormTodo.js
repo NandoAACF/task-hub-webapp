@@ -91,7 +91,7 @@ export default function FormTodo({ id, isUpdate = false, handleExit }) {
                             <select className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[100px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200">
                                 <option value="hold">Hold</option>
                                 <option value="inprogress">In Progress</option>
-                                <option value="done">Done</option>
+                                <option value="done" selected={true}>Done</option>
                             </select>
                         </div>
                         <div className="flex flex-row items-center justify-start gap-[10px]">
