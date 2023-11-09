@@ -75,8 +75,8 @@ export default function FormNote({ id, isUpdate = false, handleExit }) {
                         <div className="flex flex-col relative w-[200px] sm:w-[400px] md:w-[600px]">
                             <input
                                 type="text"
-                                className=" bg-white border-[1px] border-slate-300 rounded-[10px] w-full py-[5px] px-[9px] mt-[2px] focus:border-[4px] outline-none text-[22px] font-semibold"
-                                placeholder="Title"
+                                className=" bg-white border-[1px] border-slate-300 rounded-[10px] w-full py-[5px] px-[10px] mt-[2px] focus:border-[4px] outline-none text-[22px] font-semibold"
+                                placeholder="Add Title"
                                 name="title"
                                 defaultValue={initialPayload?.title}
                             />
@@ -84,16 +84,16 @@ export default function FormNote({ id, isUpdate = false, handleExit }) {
                         <div className="flex flex-col relative w-[200px] sm:w-[400px] md:w-[600px]">
                             <input
                                 type="text"
-                                className=" bg-white border-[1px] border-slate-300 rounded-[10px] w-full py-[5px] px-[9px] mt-[2px] focus:border-[4px] outline-none text-[18px] font-medium"
-                                placeholder="Topic"
+                                className=" bg-white border-[1px] border-slate-300 rounded-[10px] w-full py-[5px] px-[10px] mt-[2px] focus:border-[4px] outline-none text-[18px] font-medium"
+                                placeholder="Add Topic"
                                 name="topic"
                                 defaultValue={initialPayload?.topic}
                             />
                         </div>
                         <div className="flex flex-col relative w-[200px] sm:w-[400px] md:w-[600px]">
                             <textarea
-                                className=" bg-white border-[1px] border-slate-300 rounded-[10px] w-full py-[5px] px-[9px] mt-[2px] focus:border-[4px] outline-none min-h-[100px] max-h-[300px]"
-                                placeholder="Description"
+                                className=" bg-white border-[1px] border-slate-300 rounded-[10px] w-full py-[5px] px-[10px] mt-[2px] focus:border-[4px] outline-none min-h-[100px] max-h-[300px]"
+                                placeholder="Add your note here"
                                 name="description"
                                 defaultValue={initialPayload?.desc}
                             />
