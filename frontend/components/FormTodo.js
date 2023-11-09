@@ -113,6 +113,7 @@ export default function FormTodo({ id, isUpdate = false, handleExit }) {
                             <textarea
                                 className=" bg-white border-[1px] border-slate-300 rounded-[10px] w-full py-[5px] px-[9px] mt-[2px] focus:border-[4px] outline-none min-h-[100px] max-h-[300px]"
                                 placeholder="Description"
+                                maxLength={500}
                             />
                         </div>
                         <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-end gap-[20px] w-full mt-[16px] sm:mt-[20px]">
