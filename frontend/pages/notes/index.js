@@ -33,10 +33,6 @@ export default function Notes() {
         }
     }, [userInfo.isLoggedIn, router]);
 
-    if (!userInfo.isLoggedIn) {
-        return null;
-    }
-
     useEffect(() => {
         const fetchData = async () => {
             const data = await useAxios(`/notes/list/${userInfo.userInfo.id}`, "GET");
@@ -97,7 +93,9 @@ export default function Notes() {
                             <h3 className="text-[15px] sm:text-[18px]">Topic:</h3>
                             <select className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[105px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200">
                                 <option value="newest">All</option>
+                                <option value="oldest">Umum</option>
                                 <option value="oldest">Topik A</option>
+                                <option value="oldest">Topik B</option>
                             </select>
                         </div>
                     </div>
