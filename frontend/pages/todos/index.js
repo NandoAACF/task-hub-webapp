@@ -97,7 +97,7 @@ export default function Todos() {
                         </div>
                     </div>
                     <div className="flex flex-col flex-wrap items-start justify-start mt-[30px] mb-[70px] w-full relative gap-[20px]">
-                        {todosData && 
+                        {todosData &&
                             todosData.map((todo, index) => (
                                 <CardTodo
                                     key={index}
@@ -108,9 +108,8 @@ export default function Todos() {
                                     valuePriority={todo.priority}
                                     valueCat={todo.category}
                                 />
-                            ))
-                        }
-                        {/* <CardTodo
+                            ))}
+                        <CardTodo
                             status="Hold"
                             title="My Todo Title"
                             description="My todo description."
@@ -149,7 +148,7 @@ export default function Todos() {
                             deadline="25 December 2023"
                             valuePriority="Low"
                             valueCat="Category B"
-                        /> */}
+                        />
                     </div>
                 </div>
             </div>
