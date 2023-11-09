@@ -32,10 +32,6 @@ export default function Todos() {
         }
     }, [userInfo.isLoggedIn, router]);
 
-    if (!userInfo.isLoggedIn) {
-        return null;
-    }
-
     useEffect(() => {
         const fetchData = async () => {
             const data = await useAxios(`/todos/list/${userInfo.userInfo.id}`, "GET");
