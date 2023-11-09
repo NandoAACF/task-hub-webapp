@@ -91,7 +91,7 @@ export default function FormTodo({ id, isUpdate = false, handleExit }) {
                             <select className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[100px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200">
                                 <option value="hold">Hold</option>
                                 <option value="inprogress">In Progress</option>
-                                <option value="done" selected={true}>Done</option>
+                                <option value="done">Done</option>
                             </select>
                         </div>
                         <div className="flex flex-row items-center justify-start gap-[10px]">
@@ -113,7 +113,6 @@ export default function FormTodo({ id, isUpdate = false, handleExit }) {
                             <textarea
                                 className=" bg-white border-[1px] border-slate-300 rounded-[10px] w-full py-[5px] px-[9px] mt-[2px] focus:border-[4px] outline-none min-h-[100px] max-h-[300px]"
                                 placeholder="Description"
-                                maxLength={500}
                             />
                         </div>
                         <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-end gap-[20px] w-full mt-[16px] sm:mt-[20px]">
