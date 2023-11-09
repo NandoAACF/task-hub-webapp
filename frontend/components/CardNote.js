@@ -32,10 +32,10 @@ export default function CardNote({
     return (
         <>
             <div
-                className="flex flex-row items-start justify-start w-full xl:w-[500px] h-[215px] rounded-[20px] shadow-lg shadow-[999999]/[29%] relative cursor-pointer hover:bg-slate-100 transition-all ease-in-out duration-200 bg-slate-50"
-                onClick={onClick}
-            >
-                <div className="flex flex-col items-start justify-start my-[14px] mx-[25px]">
+                className="flex flex-row items-start justify-start w-full xl:w-[500px] h-[215px] rounded-[20px] shadow-lg shadow-[999999]/[29%] relative cursor-pointer hover:bg-slate-100 transition-all ease-in-out duration-200 bg-slate-50">
+                <div onClick={onClick}
+                      className="flex flex-col items-start justify-start my-[14px] mx-[25px]"
+                >
                     <h1 className="text-[26px] sm:text-[30px] font-semibold line-clamp-1">{title}</h1>
                     <h3 className="text-[19px] sm:text-[22px] text-slate-400 line-clamp-1">{topic}</h3>
                     <h6 className="text-[15px] sm:text-[16px] mt-[3px] ml-[2px] line-clamp-3">{description}</h6>
