@@ -25,6 +25,8 @@ export default function NotesById() {
     const [noteData, setNoteData] = useState(null);
     const [activeIcon, setActiveIcon] = useState("notes");
 
+    const [isFavorite, setIsFavorite] = useState();
+
     const { onSuccess } = useNotifications();
 
     const router = useRouter();
@@ -34,9 +36,17 @@ export default function NotesById() {
         const fetchData = async () => {
             const data = await useAxios(`/notes/${id}`, "GET");
             setNoteData(data);
+            setIsFavorite(data.favorite);
         };
         fetchData();
     }, [noteData]);
+
+    
+
+    const handleAddToFavorite = async () => {
+        await useAxios(`/notes/${id}`, "PUT", { favorite: !isFavorite });
+        setIsFavorite(!isFavorite);
+    };
 
     const handleRemove = async () => {
         await useAxios(`/notes/${id}`, "DELETE");
@@ -85,7 +95,11 @@ export default function NotesById() {
                             >
                                 <AiFillDelete />
                             </div>
-                            <div className="cursor-pointer hover:scale-[118%] transition-all ease-in-out duration-200 hover:bg-[#2984C9] hover:text-white rounded-xl p-[5px]">
+                            <div onClick={handleAddToFavorite}
+                                 className= {`cursor-pointer hover:scale-[118%] transition-all ease-in-out duration-200 hover:bg-[#2984C9] hover:text-white rounded-xl p-[5px] ${
+                                    isFavorite === true ? "text-red-500 fill-current" : ""
+                                }`}
+                            >
                                 <MdFavorite />
                             </div>
                         </div>
