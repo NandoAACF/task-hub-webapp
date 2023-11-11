@@ -25,6 +25,7 @@ export default function Notes() {
     const [notesData, setNotesData] = useState(null);
     const [noteId, setNoteId] = useState(null);
     const [activeIcon, setActiveIcon] = useState("notes");
+    const [showFavorite, setShowFavorite] = useState("all");
 
     const router = useRouter();
 
@@ -36,8 +37,9 @@ export default function Notes() {
 
     useEffect(() => {
         const fetchData = async () => {
+            const favoriteFilter = showFavorite === "favorite" ? "?favorite=true" : "";
             const data = await useAxios(
-                `/notes/list/${userInfo.userInfo.id}`,
+                `/notes/list/${userInfo.userInfo.id}${favoriteFilter}`,
                 "GET"
             );
             setNotesData(data);
@@ -92,9 +94,12 @@ export default function Notes() {
                             <h3 className="text-[15px] sm:text-[18px]">
                                 Show:
                             </h3>
-                            <select className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[105px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200">
-                                <option value="newest">All</option>
-                                <option value="oldest">Favorite</option>
+                            <select className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[105px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200"
+                                    value = {showFavorite}
+                                    onChange={(e) => setShowFavorite(e.target.value)}
+                            >
+                                <option value="all">All</option>
+                                <option value="favorite">Favorite</option>
                             </select>
                         </div>
                         <div className="flex flex-row items-center justify-start gap-[10px]">
