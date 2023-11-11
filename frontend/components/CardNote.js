@@ -22,6 +22,7 @@ export default function CardNote({
     };
 
     const handleToogleEdit = () => {
+        console.log('handle toogle edit');
         handleEditClick(id);
     };
 
@@ -57,10 +58,10 @@ export default function CardNote({
                     <div
                         onClick={handleAddToFavorite}
                         className={`text-[21px] sm:text-[25px] text-white mt-[15px] transition-all ease-in-out duration-200 hover:scale-110 rounded-lg p-[5px] cursor-pointer ${
-                            isFavorite ? "text-red-500" : ""
+                            isFavorite === true ? "text-red-500 fill-current" : ""
                         }`}
                     >
-                        <MdFavorite />
+                        <MdFavorite fill={isFavorite ? "red" : "currentColor"} />
                     </div>
                 </div>
             </div>
