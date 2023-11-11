@@ -24,6 +24,7 @@ export default function Notes() {
     const { userInfo } = useContext(AuthContext);
     const [notesData, setNotesData] = useState(null);
     const [noteId, setNoteId] = useState(null);
+    const [activeIcon, setActiveIcon] = useState("notes");
 
     const router = useRouter();
 
@@ -35,7 +36,10 @@ export default function Notes() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const data = await useAxios(`/notes/list/${userInfo.userInfo.id}`, "GET");
+            const data = await useAxios(
+                `/notes/list/${userInfo.userInfo.id}`,
+                "GET"
+            );
             setNotesData(data);
         };
         fetchData();
@@ -66,7 +70,7 @@ export default function Notes() {
     return (
         <>
             <div className="flex flex-row items-start justify-start min-h-[100vh] relative overflow-hidden">
-                <Sidebar />
+                <Sidebar activeIcon={activeIcon} />
                 <div className="flex flex-col items-start justify-start ml-[100px] sm:ml-[160px] mr-[30px] sm:mr-[70px]">
                     <h2 className="text-[23px] sm:text-[48px] md:text-[53px] font-semibold mt-[20px]">
                         <span className="bg-gradient-to-r from-[#2984C9] via-[#3681B8] to-[#0B3654] text-transparent bg-clip-text">
@@ -76,21 +80,27 @@ export default function Notes() {
                     </h2>
                     <div className="flex flex-row flex-wrap items-start justify-start gap-x-[70px] gap-y-[10px] mt-[20px] md:mt-[28px]">
                         <div className="flex flex-row items-center justify-start gap-[10px]">
-                            <h3 className="text-[15px] sm:text-[18px]">Sort By:</h3>
+                            <h3 className="text-[15px] sm:text-[18px]">
+                                Sort By:
+                            </h3>
                             <select className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[105px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200">
                                 <option value="newest">Latest</option>
                                 <option value="oldest">Oldest</option>
                             </select>
                         </div>
                         <div className="flex flex-row items-center justify-start gap-[10px]">
-                            <h3 className="text-[15px] sm:text-[18px]">Show:</h3>
+                            <h3 className="text-[15px] sm:text-[18px]">
+                                Show:
+                            </h3>
                             <select className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[105px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200">
                                 <option value="newest">All</option>
                                 <option value="oldest">Favorite</option>
                             </select>
                         </div>
                         <div className="flex flex-row items-center justify-start gap-[10px]">
-                            <h3 className="text-[15px] sm:text-[18px]">Topic:</h3>
+                            <h3 className="text-[15px] sm:text-[18px]">
+                                Topic:
+                            </h3>
                             <select className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[105px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200">
                                 <option value="newest">All</option>
                                 <option value="oldest">Umum</option>
@@ -104,7 +114,7 @@ export default function Notes() {
                             notesData.map((note, index) => (
                                 <CardNote
                                     onClick={() => {
-                                        router.push(`/notes/${note.id}`)
+                                        router.push(`/notes/${note.id}`);
                                     }}
                                     key={index}
                                     id={note.id}
@@ -167,15 +177,31 @@ export default function Notes() {
             {/* Modal create note */}
             {create ? <FormNote handleExit={handleExit} /> : ""}
             {/* Modal update note */}
-            {update ? <FormNote id={noteId} isUpdate={true} handleExit={handleExit} /> : ""}
+            {update ? (
+                <FormNote id={noteId} isUpdate={true} handleExit={handleExit} />
+            ) : (
+                ""
+            )}
             {/* Modal remove note */}
             {remove ? (
                 <div className="flex flex-col items-center justify-center bg-opacity-50 bg-black w-full min-h-[100vh] overflow-hidden top-0 left-0 z-50 fixed">
                     <div className="flex flex-col items-start justify-start bg-white rounded-2xl p-[30px] overflow-hidden relative max-h-[95vh]">
-                        <h4 className="text-[25px] font-bold -mt-[3px]">Are you sure want to remove this note?</h4>
+                        <h4 className="text-[25px] font-bold -mt-[3px]">
+                            Are you sure want to remove this note?
+                        </h4>
                         <div className="flex flex-row items-center justify-end gap-[20px] w-full mt-[20px]">
-                            <Button text="Yes" type="secondary" size="sm" onClick={handleRemove} />
-                            <Button text="No" type="secondary" size="sm" onClick={handleExit} />
+                            <Button
+                                text="Yes"
+                                type="secondary"
+                                size="sm"
+                                onClick={handleRemove}
+                            />
+                            <Button
+                                text="No"
+                                type="secondary"
+                                size="sm"
+                                onClick={handleExit}
+                            />
                         </div>
                     </div>
                 </div>
