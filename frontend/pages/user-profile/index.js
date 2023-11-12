@@ -1,14 +1,51 @@
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 import { AuthContext } from "@/utils/context/AuthContext";
+import useAxios from "@/utils/hooks/useAxios";
+import useNotifications from "@/utils/hooks/useNotifications";
 import { useContext, useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Sidebar from "@/components/Sidebar";
 
 export default function UserProfile() {
-    const { userInfo } = useContext(AuthContext);
+    const { userInfo, setUserInfo } = useContext(AuthContext);
     const [activeIcon, setActiveIcon] = useState("user-profile");
     const router = useRouter();
+    const { onError, onSuccess } = useNotifications();
+
+    const [formData, setFormData] = useState({
+        username: userInfo.userInfo.username,
+        email: userInfo.userInfo.email,
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value,
+        });
+    };
+
+    const handleUpdate = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await useAxios(`/users/${userInfo.userInfo.id}`, "PUT", formData);
+            if (response) {
+                onSuccess("Username berhasil diganti. Silakan login ulang");
+                setUserInfo((prevUserInfo) => ({
+                    ...prevUserInfo,
+                    userInfo: {
+                      ...prevUserInfo.userInfo,
+                      username: formData.username,
+                    },
+                  }));
+            } else {
+                onError("Username tidak berhasil diganti");
+            }
+        } catch (err) {
+            onError(err);
+        }
+    };
 
     useEffect(() => {
         if (!userInfo.isLoggedIn) {
@@ -39,7 +76,9 @@ export default function UserProfile() {
                             <input
                                 type="text"
                                 className=" bg-white border-[1px] border-slate-300 rounded-[10px] w-full py-[7px] px-[9px] mt-[2px] focus:border-[4px] outline-none"
-                                value={userInfo.userInfo.username}
+                                name="username"
+                                defaultValue={formData.username}
+                                onChange={handleChange}
                             />
                         </div>
                         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-start gap-[6px] sm:gap-[70px]">
@@ -49,7 +88,8 @@ export default function UserProfile() {
                             <input
                                 type="email"
                                 className=" bg-black bg-opacity-20 border-[1px] border-slate-300 rounded-[10px] w-full py-[7px] px-[9px] mt-[2px] focus:border-[4px] outline-none cursor-not-allowed text-slate-500"
-                                value={userInfo.userInfo.email}
+                                name="email"
+                                value={formData.email}
                                 disabled
                             />
                         </div>
@@ -65,6 +105,7 @@ export default function UserProfile() {
                                 type="primary"
                                 size="sm"
                                 className=""
+                                onClick={handleUpdate}
                             />
                         </div>
                     </form>
