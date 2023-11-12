@@ -37,6 +37,7 @@ export default function Login() {
             onError(err);
         }
     };
+    
     return (
         <div className="flex flex-col lg:flex-row items-center justify-center min-h-screen overflow-hidden relative my-[50px] lg:my-0">
             <div className="flex flex-col items-center justify-center w-full h-full lg:ml-[50px]">
