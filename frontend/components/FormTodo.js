@@ -25,12 +25,14 @@ export default function FormTodo({ id, isUpdate = false, handleExit }) {
         e.preventDefault();
         const userId = userInfo.userInfo.id;
         const title = e.target.title.value;
-        const topic = e.target.topic.value;
+        const priority = e.target.priority.value;
+        const deadline = e.target.deadline.value;
         const desc = e.target.description.value;
         const payload = {
             userId,
             title,
-            topic,
+            priority,
+            deadline,
             desc,
             updateDate: new Date().toLocaleDateString(),
         };

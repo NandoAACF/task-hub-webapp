@@ -2,7 +2,7 @@ import axiosInstance from "@/utils/axiosInstance";
 import Cookies from "js-cookie";
 
 // Hook untuk melakukan request ke API
-const useAxios = async (url, method, data, isProtected=true) => {
+const useAxios = async (url, method, data, isProtected = true, params = {}) => {
   try {
     const headers = {};
     if(isProtected) {
@@ -16,7 +16,8 @@ const useAxios = async (url, method, data, isProtected=true) => {
       url,
       method,
       data,
-      headers
+      headers,
+      params
     });
 
     return res.data;
