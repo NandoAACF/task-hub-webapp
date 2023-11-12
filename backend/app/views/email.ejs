@@ -61,7 +61,7 @@
 <body>
     <div class="email-container">
         <h1>Reset Password</h1>
-        <p>Hello [User],</p>
+        <p>Hello <%= username %>,</p>
         <p>We received a request to reset your password. If you didn't make this request, you can ignore this email. Otherwise, click the button below to reset your password:</p>
         <div class="button-container">
             <a href="http://localhost:3000/reset-password/<%= userId %>" class="reset-button">Reset Password</a>
