@@ -50,7 +50,6 @@ export default function Notes() {
                 params
             );
             setNotesData(data);
-            console.log(notesData)
         };
 
         if (router.isReady) {

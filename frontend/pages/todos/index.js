@@ -35,17 +35,52 @@ export default function Todos() {
 
     useEffect(() => {
         const fetchData = async () => {
+            const params = {
+                sortBy: router.query.sortBy,
+                category: router.query.category,
+                deadline: router.query.deadline,
+                status: router.query.status,
+                priority: router.query.priority,
+            };
+
             const data = await useAxios(
                 `/todos/list/${userInfo.userInfo.id}`,
-                "GET"
+                "GET",
+                null,
+                true,
+                params
             );
             setTodosData(data);
+            console.log(todosData);
         };
-        fetchData();
-    }, [todosData]);
+
+        if (router.isReady) {
+            fetchData();
+        }
+    }, [router.isReady, router.query]);
 
     const handleExit = () => {
         setCreate(false);
+    };
+
+    const handleFilter = () => {
+        let sortByValue = document.getElementById("sortBy").value;
+        let deadlineValue = document.getElementById("deadline").value;
+        let priorityValue = document.getElementById("priority").value;
+        let statusValue = document.getElementById("status").value;
+        let categoryValue = document.getElementById("category").value;
+
+
+        router.push({
+            pathname: router.pathname,
+            query: {
+                sortBy: sortByValue,
+                deadline: deadlineValue,
+                priority: priorityValue,
+                status: statusValue,
+                category: categoryValue
+            },
+        });
     };
 
     return (
@@ -59,28 +94,35 @@ export default function Todos() {
                         </span>{" "}
                         Todos.
                     </h2>
-                    <div className="flex flex-row flex-wrap items-start justify-start gap-x-[70px] gap-y-[10px] mt-[20px] md:mt-[28px]">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-x-[20px] gap-y-[20px] mt-[20px] md:mt-[28px]">
                         <div className="flex flex-row items-center justify-start gap-[10px]">
                             <h3 className="text-[15px] sm:text-[18px]">
                                 Sort By:
                             </h3>
-                            <select className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[105px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200">
-                                <option value="deadlinedesc">
-                                    Deadline Desc
-                                </option>
-                                <option value="deadlineasc">
-                                    Deadline Asc
-                                </option>
+                            <select id="sortBy" className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[105px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200">
                                 <option value="latest">Latest</option>
                                 <option value="oldest">Oldest</option>
                             </select>
                         </div>
                         <div className="flex flex-row items-center justify-start gap-[10px]">
                             <h3 className="text-[15px] sm:text-[18px]">
+                                Sort By Deadline:
+                            </h3>
+                            <select id="deadline" className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[105px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200">
+                                <option value="desc">
+                                    Descending
+                                </option>
+                                <option value="asc">
+                                    Ascending
+                                </option>
+                            </select>
+                        </div>
+                        <div className="flex flex-row items-center justify-start gap-[10px]">
+                            <h3 className="text-[15px] sm:text-[18px]">
                                 Filter Priority:
                             </h3>
-                            <select className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[100px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200">
-                                <option value="all_priority">All</option>
+                            <select id="priority" className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[100px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200">
+                                <option value="">All</option>
                                 <option value="high">High</option>
                                 <option value="medium">Medium</option>
                                 <option value="low">Low</option>
@@ -90,23 +132,31 @@ export default function Todos() {
                             <h3 className="text-[15px] sm:text-[18px]">
                                 Filter Category:
                             </h3>
-                            <select className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[100px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200">
-                                <option value="all_category">All</option>
+                            <select id="category" className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[100px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200">
+                                <option value="">All</option>
                                 <option value="category_a">Category A</option>
                                 <option value="category_b">Category B</option>
+                                <option value="Umum">Umum</option>
+                                <option value="Tugas">Tugas</option>
                             </select>
                         </div>
                         <div className="flex flex-row items-center justify-start gap-[10px]">
                             <h3 className="text-[15px] sm:text-[18px]">
                                 Filter Status:
                             </h3>
-                            <select className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[100px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200">
-                                <option value="all_status">All</option>
-                                <option value="hold">Hold</option>
-                                <option value="inprogress">In Progress</option>
-                                <option value="done">Done</option>
+                            <select id="status" className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[100px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200">
+                                <option value="">All</option>
+                                <option value="Hold">Hold</option>
+                                <option value="InProgress">In Progress</option>
+                                <option value="Done">Done</option>
                             </select>
                         </div>
+                        <Button
+                            text="Apply Filters"
+                            type="primary"
+                            size="sm"
+                            onClick={handleFilter}
+                        />
                     </div>
                     <div className="flex flex-col flex-wrap items-start justify-start mt-[30px] mb-[70px] w-full relative gap-[20px]">
                         {todosData &&
