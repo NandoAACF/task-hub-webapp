@@ -20,7 +20,10 @@ import { useRouter } from "next/router";
 
 export default function Todos() {
     const [create, setCreate] = useState(false);
+    const [update, setUpdate] = useState(false);
+    const [remove, setRemove] = useState(false);
     const [todosData, setTodosData] = useState(null);
+    const [todoId, setTodoId] = useState(null);
 
     const { userInfo } = useContext(AuthContext);
     const [activeIcon, setActiveIcon] = useState("todos");
@@ -59,8 +62,26 @@ export default function Todos() {
         }
     }, [router.isReady, router.query]);
 
+    const handleEditClick = (id) => {
+        setTodoId(id);
+        setUpdate(true);
+    };
+
+    const handleDeleteClick = (id) => {
+        setTodoId(id);
+        setRemove(true);
+    };
+
+    const handleRemove = async () => {
+        await useAxios(`/todos/${todoId}`, "DELETE");
+        onSuccess("Todos removed succesfully");
+        setRemove(false);
+    };
+
     const handleExit = () => {
         setCreate(false);
+        setUpdate(false);
+        setRemove(false);
     };
 
     const handleFilter = () => {
@@ -70,7 +91,6 @@ export default function Todos() {
         let statusValue = document.getElementById("status").value;
         let categoryValue = document.getElementById("category").value;
 
-
         router.push({
             pathname: router.pathname,
             query: {
@@ -78,7 +98,7 @@ export default function Todos() {
                 deadline: deadlineValue,
                 priority: priorityValue,
                 status: statusValue,
-                category: categoryValue
+                category: categoryValue,
             },
         });
     };
@@ -99,7 +119,10 @@ export default function Todos() {
                             <h3 className="text-[15px] sm:text-[18px]">
                                 Sort By:
                             </h3>
-                            <select id="sortBy" className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[105px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200">
+                            <select
+                                id="sortBy"
+                                className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[105px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200"
+                            >
                                 <option value="latest">Latest</option>
                                 <option value="oldest">Oldest</option>
                             </select>
@@ -108,20 +131,22 @@ export default function Todos() {
                             <h3 className="text-[15px] sm:text-[18px]">
                                 Sort By Deadline:
                             </h3>
-                            <select id="deadline" className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[105px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200">
-                                <option value="desc">
-                                    Descending
-                                </option>
-                                <option value="asc">
-                                    Ascending
-                                </option>
+                            <select
+                                id="deadline"
+                                className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[105px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200"
+                            >
+                                <option value="desc">Descending</option>
+                                <option value="asc">Ascending</option>
                             </select>
                         </div>
                         <div className="flex flex-row items-center justify-start gap-[10px]">
                             <h3 className="text-[15px] sm:text-[18px]">
                                 Filter Priority:
                             </h3>
-                            <select id="priority" className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[100px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200">
+                            <select
+                                id="priority"
+                                className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[100px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200"
+                            >
                                 <option value="">All</option>
                                 <option value="high">High</option>
                                 <option value="medium">Medium</option>
@@ -132,7 +157,10 @@ export default function Todos() {
                             <h3 className="text-[15px] sm:text-[18px]">
                                 Filter Category:
                             </h3>
-                            <select id="category" className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[100px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200">
+                            <select
+                                id="category"
+                                className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[100px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200"
+                            >
                                 <option value="">All</option>
                                 <option value="category_a">Category A</option>
                                 <option value="category_b">Category B</option>
@@ -144,7 +172,10 @@ export default function Todos() {
                             <h3 className="text-[15px] sm:text-[18px]">
                                 Filter Status:
                             </h3>
-                            <select id="status" className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[100px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200">
+                            <select
+                                id="status"
+                                className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[100px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200"
+                            >
                                 <option value="">All</option>
                                 <option value="Hold">Hold</option>
                                 <option value="InProgress">In Progress</option>
@@ -169,6 +200,8 @@ export default function Todos() {
                                     deadline={todo.deadline}
                                     valuePriority={todo.priority}
                                     valueCat={todo.category}
+                                    handleEditClick={handleEditClick}
+                                    handleDeleteClick={handleDeleteClick}
                                 />
                             ))}
                         <CardTodo
@@ -224,6 +257,38 @@ export default function Todos() {
             </div>
             {/* Modal create todo */}
             {create ? <FormTodo handleExit={handleExit} /> : ""}
+            {/* Modal update todo */}
+            {update ? (
+                <FormTodo id={todoId} isUpdate={true} handleExit={handleExit} />
+            ) : (
+                ""
+            )}
+            {/* Modal remove todo */}
+            {remove ? (
+                <div className="flex flex-col items-center justify-center bg-opacity-50 bg-black w-full min-h-[100vh] overflow-hidden top-0 left-0 z-50 fixed">
+                    <div className="flex flex-col items-start justify-start bg-white rounded-2xl p-[30px] overflow-hidden relative max-h-[95vh]">
+                        <h4 className="text-[25px] font-bold -mt-[3px]">
+                            Are you sure want to remove this todo?
+                        </h4>
+                        <div className="flex flex-row items-center justify-end gap-[20px] w-full mt-[20px]">
+                            <Button
+                                text="Yes"
+                                type="secondary"
+                                size="sm"
+                                onClick={handleRemove}
+                            />
+                            <Button
+                                text="No"
+                                type="secondary"
+                                size="sm"
+                                onClick={handleExit}
+                            />
+                        </div>
+                    </div>
+                </div>
+            ) : (
+                ""
+            )}
         </>
     );
 }
