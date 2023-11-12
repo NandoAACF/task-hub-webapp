@@ -40,6 +40,10 @@ app.get("/reset-password-page/:id", (req, res) => {
     res.render("resetPassword");
 });
 
+app.get("/email", (req, res) => {
+    res.render("email", { userId: 3424});
+});
+
 // Untuk mengakses file yang sudah disimpan di folder uploads
 app.use("/api/images", express.static(path.join(__dirname, "app", "/uploads/")));
 
