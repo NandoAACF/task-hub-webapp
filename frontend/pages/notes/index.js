@@ -108,9 +108,7 @@ export default function Notes() {
                             </h3>
                             <select className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[105px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200">
                                 <option value="newest">All</option>
-                                <option value="oldest">Umum</option>
                                 <option value="oldest">Topik A</option>
-                                <option value="oldest">Topik B</option>
                             </select>
                         </div>
                     </div>
@@ -138,36 +136,12 @@ export default function Notes() {
                                 router.push("/notes/1");
                             }}
                         />
-                        <CardNote
-                            onClick={() => {
-                                router.push("/notes/2");
-                            }}
-                        />
-                        <CardNote
-                            onClick={() => {
-                                router.push("/notes/3");
-                            }}
-                        />
-                        <CardNote
-                            onClick={() => {
-                                router.push("/notes/4");
-                            }}
-                        />
-                        <CardNote
-                            onClick={() => {
-                                router.push("/notes/5");
-                            }}
-                        />
-                        <CardNote
-                            onClick={() => {
-                                router.push("/notes/6");
-                            }}
-                        />
-                        <CardNote
-                            onClick={() => {
-                                router.push("/notes/7");
-                            }}
-                        />
+                        <CardNote />
+                        <CardNote />
+                        <CardNote />
+                        <CardNote />
+                        <CardNote />
+                        <CardNote />
                     </div>
                 </div>
             </div>
