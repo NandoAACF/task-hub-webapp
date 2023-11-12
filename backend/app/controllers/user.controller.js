@@ -152,7 +152,7 @@ exports.sendResetPasswordEmail = async (req, res) => {
         }
 
         // Konten dari email yang dikirimkan sehingga user diarahkan ke halaman untuk reset password
-        ejs.renderFile(path.join(__dirname, '..', 'views', 'email.ejs'), { userId: user.id }, (err, data) => {
+        ejs.renderFile(path.join(__dirname, '..', 'views', 'email.ejs'), { userId: user.id, username: user.username }, (err, data) => {
             if(err) {
                 return res.status(500).send({
                     message: err.message || "Some error occurred while generating email content.",
@@ -161,7 +161,7 @@ exports.sendResetPasswordEmail = async (req, res) => {
 
             // Buat mendefenisikan email penerima
             const mailOptions = {
-                from: process.env.SENDER_EMAIL,
+                from: '"Taskify" <' + process.env.SENDER_EMAIL + '>',
                 to: email,
                 subject: 'Reset Password',
                 html: data,
