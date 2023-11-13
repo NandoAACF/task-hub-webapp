@@ -25,6 +25,7 @@ export default function Todos() {
     const [todosData, setTodosData] = useState(null);
     const [todoId, setTodoId] = useState(null);
 
+    const { onSuccess } = useNotifications();
     const { userInfo } = useContext(AuthContext);
     const [activeIcon, setActiveIcon] = useState("todos");
 
@@ -54,7 +55,6 @@ export default function Todos() {
                 params
             );
             setTodosData(data);
-            console.log(todosData);
         };
 
         if (router.isReady) {
@@ -193,7 +193,11 @@ export default function Todos() {
                         {todosData &&
                             todosData.map((todo, index) => (
                                 <CardTodo
+                                    onClick={() => {
+                                        router.push(`/todos/${todo.id}`);
+                                    }}
                                     key={index}
+                                    id={todo.id}
                                     status={todo.status}
                                     title={todo.title}
                                     description={todo.desc}
@@ -211,30 +215,6 @@ export default function Todos() {
                             deadline="2 December 2023"
                             valuePriority="High"
                             valueCat="Category A"
-                        />
-                        <CardTodo
-                            status="In Progress"
-                            title="My Todo 2 Title"
-                            description="My todo 2 description."
-                            deadline="22 December 2023"
-                            valuePriority="Medium"
-                            valueCat="Category B"
-                        />
-                        <CardTodo
-                            status="Done"
-                            title="My Todo 3 Title"
-                            description="My todo 3 description.My todo 3 description.My todo 3 description.My todo 3 description.My todo 3 description.My todo 3 description.My todo 3 description.My todo 3 description.My todo 3 description.My todo 3 description."
-                            deadline="25 December 2023"
-                            valuePriority="Low"
-                            valueCat="Category B"
-                        />
-                        <CardTodo
-                            status="Done"
-                            title="My Todo 3 Title"
-                            description="My todo 3 description.My todo 3 description.My todo 3 description.My todo 3 description.My todo 3 description.My todo 3 description.My todo 3 description.My todo 3 description.My todo 3 description.My todo 3 description."
-                            deadline="25 December 2023"
-                            valuePriority="Low"
-                            valueCat="Category B"
                         />
                         <CardTodo
                             status="Done"

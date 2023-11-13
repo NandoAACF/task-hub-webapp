@@ -26,7 +26,7 @@ export default function FormTodo({ id, isUpdate = false, handleExit }) {
         const userId = userInfo.userInfo.id;
         const title = e.target.title.value;
         const category = e.target.category.value;
-        const _status = e.target.status;
+        const status = e.target.status.value;
         const priority = e.target.priority.value;
         const deadline = e.target.deadline.value;
         const desc = e.target.description.value;
@@ -34,7 +34,7 @@ export default function FormTodo({ id, isUpdate = false, handleExit }) {
             userId,
             title,
             category,
-            _status,
+            status,
             priority,
             deadline,
             desc,
@@ -49,7 +49,7 @@ export default function FormTodo({ id, isUpdate = false, handleExit }) {
         const response = await useAxios("/todos", "POST", todoData);
 
         if (response) {
-            onSuccess("Todo added succesfully");
+            onSuccess("Todos added succesfully");
             handleExit();
         }
     };
@@ -60,7 +60,7 @@ export default function FormTodo({ id, isUpdate = false, handleExit }) {
 
         if (response) {
             handleExit();
-            onSuccess("Todo updated succesfully");
+            onSuccess("Todos updated succesfully");
         }
     };
 
@@ -104,9 +104,9 @@ export default function FormTodo({ id, isUpdate = false, handleExit }) {
                                 className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[100px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200"
                                 name="status"
                             >
-                                <option value="hold">Hold</option>
-                                <option value="inprogress">In Progress</option>
-                                <option value="done">Done</option>
+                                <option value="Hold">Hold</option>
+                                <option value="InProgress">In Progress</option>
+                                <option value="Done">Done</option>
                             </select>
                         </div>
                         <div className="flex flex-row items-center justify-start gap-[10px]">
