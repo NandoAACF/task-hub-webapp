@@ -7,7 +7,7 @@ module.exports = (app) => {
     router.post("/register", users.register);
     router.post("/login", users.login);
     router.post("/forgot-password", users.sendResetPasswordEmail);
-    router.post("/reset-password/:id", users.resetPassword);
+    router.post("/reset-password", users.resetPassword);
 
     // Jika user mengakses endpoint /api/auth, maka akan diarahkan ke router yang telah dibuat di atas
     app.use("/api/auth", router);

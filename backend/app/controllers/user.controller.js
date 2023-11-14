@@ -150,9 +150,11 @@ exports.sendResetPasswordEmail = async (req, res) => {
                 message: "Your email hasn't been registered. Create a new account!",
             });
         }
+        // Menambahkan token khusus untuk reset password
+        const resetToken = jwt.sign({ email: user.email }, process.env.AUTH_REFRESH_TOKEN, { expiresIn: "1h" });
 
         // Konten dari email yang dikirimkan sehingga user diarahkan ke halaman untuk reset password
-        ejs.renderFile(path.join(__dirname, '..', 'views', 'email.ejs'), { userId: user.id, username: user.username }, (err, data) => {
+        ejs.renderFile(path.join(__dirname, '..', 'views', 'email.ejs'), { username: user.username, email: user.email, resetToken }, (err, data) => {
             if(err) {
                 return res.status(500).send({
                     message: err.message || "Some error occurred while generating email content.",
@@ -165,12 +167,6 @@ exports.sendResetPasswordEmail = async (req, res) => {
                 to: email,
                 subject: 'Reset Password',
                 html: data,
-                attachments: [
-                    {
-                        filename: 'email.ejs',
-                        content: data
-                    }
-                ]
             };
 
             transporter.sendMail(mailOptions, (err, info) => {
@@ -192,31 +188,40 @@ exports.sendResetPasswordEmail = async (req, res) => {
     }
 };
 
-exports.resetPassword = (req, res) => {
+exports.resetPassword = async (req, res) => {
     const userId = req.params.id;
-    const { new_password, new_password_confirmation } = req.body;
+    const { resetToken, email, new_password, new_password_confirmation } = req.body;
 
-    if (new_password !== new_password_confirmation) {
-        return res.status(400).send({
-            message: "Password and password confirmation do not match",
+    try {
+        const decodedToken = jwt.verify(resetToken, process.env.AUTH_REFRESH_TOKEN);
+        
+        if (decodedToken.email !== email) {
+            return res.status(401).send({
+                message: "Invalid token for the provided email.",
+            });
+        }
+
+        if (new_password !== new_password_confirmation) {
+            return res.status(400).send({
+                message: "Password and password confirmation do not match",
+            });
+        }
+
+        const salt = bcrypt.genSaltSync(10);
+        const hashedNewPassword = bcrypt.hashSync(new_password, salt);
+
+        const result = await User.findOneAndUpdate({ email }, { password: hashedNewPassword });
+
+        if (!result) {
+            return res.status(404).send({
+                message: `Cannot update User with email = ${email}. Maybe User was not found!`,
+            });
+        }
+
+        return res.status(200).send({ message: "Password was reset successfully." });
+    } catch (err) {
+        return res.status(401).send({
+            message: "Invalid or expired token.",
         });
     }
-    const salt = bcrypt.genSaltSync(10);
-    const hashedNewPassword = bcrypt.hashSync(new_password, salt);
-
-    User.findByIdAndUpdate(userId, { password: hashedNewPassword })
-        .then((result) => {
-            if (!result) {
-                res.status(404).send({
-                    message: `Cannot update User with id = ${id}. Maybe User was not found!`,
-                });
-            } else {
-                res.status(200).send({ message: "Password was reset successfully." });
-            }
-        })
-        .catch((err) => {
-            res.status(500).send({
-                message: err.message || "Some error occurred while resetting password.",
-            });
-        });
 };
