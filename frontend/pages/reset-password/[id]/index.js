@@ -1,11 +1,42 @@
 import Button from "@/components/Button";
 import Input from "@/components/Input";
-import { AuthContext } from "@/utils/context/AuthContext";
+import useAxios from "@/utils/hooks/useAxios";
+import useNotifications from "@/utils/hooks/useNotifications";
 import { useRouter } from "next/router";
-import { useContext, useState } from "react";
+import { useState } from "react";
 
 export default function ResetPassword() {
     const router = useRouter();
+    const { token, email } = router.query;
+    const { onSuccess, onError } = useNotifications();
+
+    const [formData, setFormData] = useState({
+        resetToken: token,
+        email: email,
+        new_password: "",
+        new_password_confirmation: ""
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value
+        });
+    };
+
+    const handleResetPassword = async (e) => {
+        e.preventDefault();
+        const response = await useAxios("/auth/reset-password", "POST", formData, false);
+        if (response) {
+            onSuccess("Password was reset successfully");
+            router.push("/login");
+        }
+        else {
+            onError("Password reset failed");
+        }
+    };  
+
 
     return (
         <div className="flex flex-col lg:flex-row items-center justify-center min-h-screen overflow-hidden relative mx-[35px] sm:mx-[40px] lg:mx-0">
@@ -13,18 +44,24 @@ export default function ResetPassword() {
                 <h1 className="text-[42px] sm:text-[52px] md:text-[60px] font-semibold text-center -mt-[20px]">
                     Reset Password{" "}
                 </h1>
-                <form className="flex flex-col items-start justify-center w-full h-full gap-[14px] md:pl-[15%] md:pr-[15%] pl-[10%] pr-[10%] relative mt-[35px]">
+                <form onSubmit={handleResetPassword}
+                      className="flex flex-col items-start justify-center w-full h-full gap-[14px] md:pl-[15%] md:pr-[15%] pl-[10%] pr-[10%] relative mt-[35px]"
+                >
                     <Input
                         label="Password"
                         type="password"
                         className="w-full"
-                        name="password"
+                        name="new_password"
+                        value={formData.new_password}
+                        onChange={handleChange}
                     />
                     <Input
                         label="Confirm Password"
                         type="password"
                         className="w-full"
-                        name="passwordConfirmation"
+                        name="new_password_confirmation"
+                        value={formData.new_password_confirmation}
+                        onChange={handleChange}
                     />
                     <Button
                         text="Reset Password"
