@@ -48,7 +48,7 @@ export default function Todos() {
             };
 
             const data = await useAxios(
-                `/todos/list/${userInfo.userInfo.id}`,
+                `/todos/list/${userInfo?.userInfo?.id}`,
                 "GET",
                 null,
                 true,

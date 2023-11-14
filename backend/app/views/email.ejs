@@ -64,7 +64,7 @@
         <p>Hello <%= username %>,</p>
         <p>We received a request to reset your password. If you didn't make this request, you can ignore this email. Otherwise, click the button below to reset your password:</p>
         <div class="button-container">
-            <a href="http://localhost:3000/reset-password/<%= userId %>" class="reset-button">Reset Password</a>
+            <a href="http://localhost:3000/reset-password?token=<%= resetToken %>&email=<%= email %>" class="reset-button">Reset Password</a>
         </div>
         <p>If you have any issues, please contact support.</p>
     </div>
