@@ -215,6 +215,8 @@ export default function Todos() {
                             deadline="2 December 2023"
                             valuePriority="High"
                             valueCat="Category A"
+                            handleEditClick={handleEditClick}
+                            handleDeleteClick={handleDeleteClick}
                         />
                         <CardTodo
                             status="Done"
@@ -223,6 +225,8 @@ export default function Todos() {
                             deadline="25 December 2023"
                             valuePriority="Low"
                             valueCat="Category B"
+                            handleEditClick={handleEditClick}
+                            handleDeleteClick={handleDeleteClick}
                         />
                     </div>
                 </div>
