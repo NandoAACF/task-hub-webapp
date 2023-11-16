@@ -27,7 +27,6 @@ export default function ResetPassword() {
 
     const handleResetPassword = async (e) => {
         e.preventDefault();
-        console.log(formData);
         const response = await useAxios("/auth/reset-password", "POST", formData, false);
         if (response) {
             onSuccess("Password was reset successfully");
