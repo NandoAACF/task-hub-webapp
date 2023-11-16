@@ -23,7 +23,7 @@ export default function Todos() {
     const [update, setUpdate] = useState(false);
     const [remove, setRemove] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    
+
     const { onSuccess } = useNotifications();
     const { userInfo } = useContext(AuthContext);
     const [todosData, setTodosData] = useState(null);
@@ -112,7 +112,7 @@ export default function Todos() {
                         Todos.
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-[20px] gap-y-[20px] mt-[20px] md:mt-[28px]">
-                        <div className="flex flex-row items-center justify-start gap-[10px]">
+                        <div className="flex flex-row items-center justify-between gap-[10px]">
                             <h3 className="text-[15px] sm:text-[18px]">Sort By:</h3>
                             <select
                                 id="sortBy"
@@ -122,7 +122,7 @@ export default function Todos() {
                                 <option value="oldest">Oldest</option>
                             </select>
                         </div>
-                        <div className="flex flex-row items-center justify-start gap-[10px]">
+                        <div className="flex flex-row items-center justify-between gap-[10px]">
                             <h3 className="text-[15px] sm:text-[18px]">Sort By Deadline:</h3>
                             <select
                                 id="deadline"
@@ -132,7 +132,7 @@ export default function Todos() {
                                 <option value="asc">Ascending</option>
                             </select>
                         </div>
-                        <div className="flex flex-row items-center justify-start gap-[10px]">
+                        <div className="flex flex-row items-center justify-between gap-[10px]">
                             <h3 className="text-[15px] sm:text-[18px]">Filter Priority:</h3>
                             <select
                                 id="priority"
@@ -144,7 +144,7 @@ export default function Todos() {
                                 <option value="low">Low</option>
                             </select>
                         </div>
-                        <div className="flex flex-row items-center justify-start gap-[10px]">
+                        <div className="flex flex-row items-center justify-between gap-[10px]">
                             <h3 className="text-[15px] sm:text-[18px]">Filter Category:</h3>
                             <select
                                 id="category"
@@ -157,7 +157,7 @@ export default function Todos() {
                                 <option value="Tugas">Tugas</option>
                             </select>
                         </div>
-                        <div className="flex flex-row items-center justify-start gap-[10px]">
+                        <div className="flex flex-row items-center justify-between gap-[10px]">
                             <h3 className="text-[15px] sm:text-[18px]">Filter Status:</h3>
                             <select
                                 id="status"

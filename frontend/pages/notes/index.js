@@ -102,7 +102,7 @@ export default function Notes() {
                         </span>{" "}
                         Notes.
                     </h2>
-                    <div className="flex flex-row flex-wrap items-start justify-start gap-x-[70px] gap-y-[10px] mt-[20px] md:mt-[28px]">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 gap-x-[70px] gap-y-[20px] mt-[20px] md:mt-[28px]">
                         <div className="flex flex-row items-center justify-start gap-[10px]">
                             <h3 className="text-[15px] sm:text-[18px]">Sort By:</h3>
                             <select
@@ -135,9 +135,9 @@ export default function Notes() {
                                 <option value="Hiburan">Hiburan</option>
                             </select>
                         </div>
-                        <div className="flex items-center justify-start mt-[7px] sm:mt-0">
-                            <Button text="Apply Filters" type="primary" size="sm" onClick={handleFilter} />
-                        </div>
+                        <Button text="Apply Filters" type="primary" size="sm" onClick={handleFilter} />
+                        {/* <div className="flex items-center justify-start mt-[7px] sm:mt-0">
+                        </div> */}
                     </div>
                     <div className="flex flex-row flex-wrap items-start justify-start mt-[25px] sm:mt-[31px] gap-[40px] sm:gap-[60px] mb-[70px] w-full relative">
                         {notesData &&
