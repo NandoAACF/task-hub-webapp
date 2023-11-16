@@ -73,6 +73,7 @@ export default function Notes() {
         await useAxios(`/notes/${noteId}`, "DELETE");
         onSuccess("Notes removed succesfully");
         setRemove(false);
+        router.replace("/notes");
     };
 
     const handleExit = () => {
@@ -132,7 +133,7 @@ export default function Notes() {
                                 id="favorite"
                                 className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[105px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200"
                             >
-                                <option value="false">All</option>
+                                <option value="">All</option>
                                 <option value="true">Favorite</option>
                             </select>
                         </div>
@@ -168,10 +169,11 @@ export default function Notes() {
                                     title={note.title}
                                     topic={note.topic}
                                     description={note.desc}
-                                    favorite={note?.favorite}
+                                    favorite={note.favorite}
                                     updatedAt={note.updatedAt}
                                     handleEditClick={handleEditClick}
                                     handleDeleteClick={handleDeleteClick}
+
                                 />
                             ))}
                         {/* Kalau diklik, dia auto menuju /notes/[id] */}

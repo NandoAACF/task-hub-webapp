@@ -80,6 +80,7 @@ export default function Todos() {
         await useAxios(`/todos/${todoId}`, "DELETE");
         onSuccess("Todos removed succesfully");
         setRemove(false);
+        router.replace("/todos");
     };
 
     const handleExit = () => {
