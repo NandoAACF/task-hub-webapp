@@ -3,6 +3,7 @@ import { AuthContext } from "@/utils/context/AuthContext";
 import useAxios from "@/utils/hooks/useAxios";
 import useNotifications from "@/utils/hooks/useNotifications";
 import { useContext, useEffect, useState } from "react";
+import moment from "moment";
 
 export default function FormTodo({ id, isUpdate = false, handleExit }) {
     const { onSuccess, onError } = useNotifications();
@@ -126,6 +127,7 @@ export default function FormTodo({ id, isUpdate = false, handleExit }) {
                                 type="datetime-local"
                                 className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[100px] sm:w-[210px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200"
                                 name="deadline"
+                                defaultValue={initialPayload?.deadline ? moment(initialPayload.deadline).format("YYYY-MM-DDTHH:mm") : ""}
                             />
                         </div>
                         <div className="flex flex-col relative w-[200px] sm:w-[400px] md:w-[600px]">
