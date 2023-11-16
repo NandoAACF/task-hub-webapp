@@ -123,8 +123,8 @@ export default function FormTodo({ id, isUpdate = false, handleExit }) {
                         <div className="flex flex-row items-center justify-start gap-[10px]">
                             <h3 className="text-[18px]">Deadline:</h3>
                             <input
-                                type="date"
-                                className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[100px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200"
+                                type="datetime-local"
+                                className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[100px] sm:w-[210px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200"
                                 name="deadline"
                             />
                         </div>
