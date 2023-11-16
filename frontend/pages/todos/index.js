@@ -47,13 +47,7 @@ export default function Todos() {
                 priority: router.query.priority,
             };
 
-            const data = await useAxios(
-                `/todos/list/${userInfo?.userInfo?.id}`,
-                "GET",
-                null,
-                true,
-                params
-            );
+            const data = await useAxios(`/todos/list/${userInfo?.userInfo?.id}`, "GET", null, true, params);
             setTodosData(data);
         };
 
@@ -114,11 +108,9 @@ export default function Todos() {
                         </span>{" "}
                         Todos.
                     </h2>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-x-[20px] gap-y-[20px] mt-[20px] md:mt-[28px]">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-[20px] gap-y-[20px] mt-[20px] md:mt-[28px]">
                         <div className="flex flex-row items-center justify-start gap-[10px]">
-                            <h3 className="text-[15px] sm:text-[18px]">
-                                Sort By:
-                            </h3>
+                            <h3 className="text-[15px] sm:text-[18px]">Sort By:</h3>
                             <select
                                 id="sortBy"
                                 className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[105px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200"
@@ -128,9 +120,7 @@ export default function Todos() {
                             </select>
                         </div>
                         <div className="flex flex-row items-center justify-start gap-[10px]">
-                            <h3 className="text-[15px] sm:text-[18px]">
-                                Sort By Deadline:
-                            </h3>
+                            <h3 className="text-[15px] sm:text-[18px]">Sort By Deadline:</h3>
                             <select
                                 id="deadline"
                                 className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[105px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200"
@@ -140,9 +130,7 @@ export default function Todos() {
                             </select>
                         </div>
                         <div className="flex flex-row items-center justify-start gap-[10px]">
-                            <h3 className="text-[15px] sm:text-[18px]">
-                                Filter Priority:
-                            </h3>
+                            <h3 className="text-[15px] sm:text-[18px]">Filter Priority:</h3>
                             <select
                                 id="priority"
                                 className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[100px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200"
@@ -154,9 +142,7 @@ export default function Todos() {
                             </select>
                         </div>
                         <div className="flex flex-row items-center justify-start gap-[10px]">
-                            <h3 className="text-[15px] sm:text-[18px]">
-                                Filter Category:
-                            </h3>
+                            <h3 className="text-[15px] sm:text-[18px]">Filter Category:</h3>
                             <select
                                 id="category"
                                 className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[100px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200"
@@ -169,9 +155,7 @@ export default function Todos() {
                             </select>
                         </div>
                         <div className="flex flex-row items-center justify-start gap-[10px]">
-                            <h3 className="text-[15px] sm:text-[18px]">
-                                Filter Status:
-                            </h3>
+                            <h3 className="text-[15px] sm:text-[18px]">Filter Status:</h3>
                             <select
                                 id="status"
                                 className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[100px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200"
@@ -182,14 +166,9 @@ export default function Todos() {
                                 <option value="Done">Done</option>
                             </select>
                         </div>
-                        <Button
-                            text="Apply Filters"
-                            type="primary"
-                            size="sm"
-                            onClick={handleFilter}
-                        />
+                        <Button text="Apply Filters" type="primary" size="sm" onClick={handleFilter} />
                     </div>
-                    <div className="flex flex-col flex-wrap items-start justify-start mt-[30px] mb-[70px] w-full relative gap-[20px]">
+                    <div className="flex flex-col flex-wrap items-start justify-start mt-[30px] mb-[110px] w-full relative gap-[20px]">
                         {todosData &&
                             todosData.map((todo, index) => (
                                 <CardTodo
@@ -232,7 +211,7 @@ export default function Todos() {
                 </div>
             </div>
             <div
-                className="fixed right-[50px] bottom-[40px] text-[60px] sm:text-[90px] text-[#2984C9] hover:text-[#396688] active:text-[#223e53] transition-all ease-in-out duration-200 cursor-pointer hover:scale-110"
+                className="fixed right-[50px] bottom-[40px] text-[60px] sm:text-[90px] text-black hover:text-[#396688] active:text-[#223e53] transition-all ease-in-out duration-200 cursor-pointer hover:scale-110"
                 onClick={() => {
                     setCreate(true);
                 }}
@@ -242,31 +221,15 @@ export default function Todos() {
             {/* Modal create todo */}
             {create ? <FormTodo handleExit={handleExit} /> : ""}
             {/* Modal update todo */}
-            {update ? (
-                <FormTodo id={todoId} isUpdate={true} handleExit={handleExit} />
-            ) : (
-                ""
-            )}
+            {update ? <FormTodo id={todoId} isUpdate={true} handleExit={handleExit} /> : ""}
             {/* Modal remove todo */}
             {remove ? (
                 <div className="flex flex-col items-center justify-center bg-opacity-50 bg-black w-full min-h-[100vh] overflow-hidden top-0 left-0 z-50 fixed">
                     <div className="flex flex-col items-start justify-start bg-white rounded-2xl p-[30px] overflow-hidden relative max-h-[95vh]">
-                        <h4 className="text-[25px] font-bold -mt-[3px]">
-                            Are you sure want to remove this todo?
-                        </h4>
+                        <h4 className="text-[25px] font-bold -mt-[3px]">Are you sure want to remove this todo?</h4>
                         <div className="flex flex-row items-center justify-end gap-[20px] w-full mt-[20px]">
-                            <Button
-                                text="Yes"
-                                type="secondary"
-                                size="sm"
-                                onClick={handleRemove}
-                            />
-                            <Button
-                                text="No"
-                                type="secondary"
-                                size="sm"
-                                onClick={handleExit}
-                            />
+                            <Button text="Yes" type="secondary" size="sm" onClick={handleRemove} />
+                            <Button text="No" type="secondary" size="sm" onClick={handleExit} />
                         </div>
                     </div>
                 </div>
