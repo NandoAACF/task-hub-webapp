@@ -90,6 +90,13 @@ export default function Notes() {
             },
         });
     };
+    
+    const handleResetFilter = () => {
+        router.push({
+            pathname: router.pathname,
+            query: {},
+        });
+    };
 
     return (
         <>
@@ -136,6 +143,7 @@ export default function Notes() {
                             </select>
                         </div>
                         <Button text="Apply Filters" type="primary" size="sm" onClick={handleFilter} />
+                        <Button text="Reset Filters" type="primary" size="sm" onClick={handleResetFilter} />
                         {/* <div className="flex items-center justify-start mt-[7px] sm:mt-0">
                         </div> */}
                     </div>

@@ -19,7 +19,7 @@ export default function CardNote({
 
     const handleAddToFavorite = async () => {
         await useAxios(`/notes/${id}`, "PUT", { favorite: !isFavorite });
-        setIsFavorite(!isFavorite);
+        setIsFavorite((prevIsFavorite) => !prevIsFavorite);
     };
 
     const handleToogleEdit = () => {
@@ -59,7 +59,7 @@ export default function CardNote({
                     <div
                         onClick={handleAddToFavorite}
                         className={`text-[21px] sm:text-[25px] text-white mt-[15px] transition-all ease-in-out duration-200 hover:scale-110 rounded-lg p-[5px] cursor-pointer ${
-                            isFavorite === true ? "text-red-500 fill-current" : ""
+                            isFavorite ? "text-red-500 fill-current" : ""
                         }`}
                     >
                         <MdFavorite fill={isFavorite ? "red" : "currentColor"} />
