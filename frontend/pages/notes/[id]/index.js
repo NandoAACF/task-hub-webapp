@@ -11,6 +11,7 @@ import useAxios from "@/utils/hooks/useAxios";
 import useNotifications from "@/utils/hooks/useNotifications";
 import { AuthContext } from "@/utils/context/AuthContext";
 import { router, useRouter } from "next/router";
+import moment from "moment";
 
 import CardNote from "@/components/CardNote";
 import Input from "@/components/Input";
@@ -114,7 +115,7 @@ export default function NotesById() {
                             {noteData?.topic}
                         </h3>
                         <h4 className="text-[16px] sm:text-[19px] text-slate-400 ml-[7px] sm:ml-0">
-                            Last Updated: {noteData?.updateAt}
+                            Last Updated: {moment(noteData?.updatedAt).format("HH MMM YYYY HH:mm")}
                         </h4>
                     </div>
                     <h5 className="text-[17px] ml-[7px] mt-[17px]">

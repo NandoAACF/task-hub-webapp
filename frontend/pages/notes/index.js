@@ -152,7 +152,7 @@ export default function Notes() {
                                     topic={note.topic}
                                     description={note.desc}
                                     favorite={note.favorite}
-                                    updateDate={note.updateDate}
+                                    updatedAt={note.updatedAt}
                                     handleEditClick={handleEditClick}
                                     handleDeleteClick={handleDeleteClick}
                                 />
