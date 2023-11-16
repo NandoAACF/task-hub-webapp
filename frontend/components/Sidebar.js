@@ -12,45 +12,36 @@ export default function Sidebar({ activeIcon }) {
         <>
             <div className="fixed flex flex-col items-center justify-between w-[70px] sm:w-[110px] h-[100vh] bg-[#2984C9]">
                 <div className="flex flex-col items-start justify-start gap-[20px] mt-[30px]">
-                    <div
-                        className={`text-[25px] sm:text-[35px] transition-all ease-in-out duration-200 hover:scale-110 rounded-lg p-[8px] sm:p-[15px] cursor-pointer
-                        ${
-                            activeIcon === "todos"
-                                ? "bg-[#1e3c53]"
-                                : "hover:bg-[#2b587a] active:bg-[#1e3c53]"
-                        }`}
-                    >
-                        <Link href="/todos">
+                    <Link href="/todos">
+                        <div
+                            className={`text-[25px] sm:text-[35px] transition-all ease-in-out duration-200 hover:scale-110 rounded-lg p-[8px] sm:p-[15px] cursor-pointer
+                        ${activeIcon === "todos" ? "bg-[#1e3c53]" : "hover:bg-[#2b587a] active:bg-[#1e3c53]"}`}
+                        >
                             <FaTasks color="white" />
-                        </Link>
-                    </div>
-                    <div
-                        className={`text-[25px] sm:text-[35px] transition-all ease-in-out duration-200 hover:scale-110 rounded-lg p-[8px] sm:p-[15px] cursor-pointer
-                        ${
-                            activeIcon === "notes"
-                                ? "bg-[#1e3c53]"
-                                : "hover:bg-[#2b587a] active:bg-[#1e3c53]"
-                        }`}
-                    >
-                        <Link href="/notes">
+                        </div>
+                    </Link>
+                    <Link href="/notes">
+                        <div
+                            className={`text-[25px] sm:text-[35px] transition-all ease-in-out duration-200 hover:scale-110 rounded-lg p-[8px] sm:p-[15px] cursor-pointer
+                        ${activeIcon === "notes" ? "bg-[#1e3c53]" : "hover:bg-[#2b587a] active:bg-[#1e3c53]"}`}
+                        >
                             <CgNotes color="white" />
-                        </Link>
-                    </div>
-                    <div
-                        className={`text-[25px] sm:text-[35px] transition-all ease-in-out duration-200 hover:scale-110 rounded-lg p-[8px] sm:p-[15px] cursor-pointer
-                        ${
-                            activeIcon === "user-profile"
-                                ? "bg-[#1e3c53]"
-                                : "hover:bg-[#2b587a] active:bg-[#1e3c53]"
-                        }`}
-                    >
-                        <Link href="/user-profile">
+                        </div>
+                    </Link>
+                    <Link href="/user-profile">
+                        <div
+                            className={`text-[25px] sm:text-[35px] transition-all ease-in-out duration-200 hover:scale-110 rounded-lg p-[8px] sm:p-[15px] cursor-pointer
+                        ${activeIcon === "user-profile" ? "bg-[#1e3c53]" : "hover:bg-[#2b587a] active:bg-[#1e3c53]"}`}
+                        >
                             <CgProfile color="white" />
-                        </Link>
-                    </div>
+                        </div>
+                    </Link>
                 </div>
-                <div className="text-[25px] sm:text-[35px] hover:bg-[#2b587a] active:bg-[#1e3c53] transition-all ease-in-out duration-300 hover:scale-110 rounded-lg p-[8px] sm:p-[15px] cursor-pointer mb-[30px]">
-                    <TbLogout2 color="white" onClick={logoutUser} />
+                <div
+                    className="text-[25px] sm:text-[35px] hover:bg-[#2b587a] active:bg-[#1e3c53] transition-all ease-in-out duration-300 hover:scale-110 rounded-lg p-[8px] sm:p-[15px] cursor-pointer mb-[30px]"
+                    onClick={logoutUser}
+                >
+                    <TbLogout2 color="white" />
                 </div>
             </div>
         </>
