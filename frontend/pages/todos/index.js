@@ -22,11 +22,12 @@ export default function Todos() {
     const [create, setCreate] = useState(false);
     const [update, setUpdate] = useState(false);
     const [remove, setRemove] = useState(false);
-    const [todosData, setTodosData] = useState(null);
-    const [todoId, setTodoId] = useState(null);
-
+    const [isLoading, setIsLoading] = useState(false);
+    
     const { onSuccess } = useNotifications();
     const { userInfo } = useContext(AuthContext);
+    const [todosData, setTodosData] = useState(null);
+    const [todoId, setTodoId] = useState(null);
     const [activeIcon, setActiveIcon] = useState("todos");
 
     const router = useRouter();
@@ -39,6 +40,7 @@ export default function Todos() {
 
     useEffect(() => {
         const fetchData = async () => {
+            setIsLoading(false);
             const params = {
                 sortBy: router.query.sortBy,
                 category: router.query.category,
@@ -51,10 +53,10 @@ export default function Todos() {
             setTodosData(data);
         };
 
-        if (router.isReady) {
+        if (router.isReady || isLoading) {
             fetchData();
         }
-    }, [router.isReady, router.query]);
+    }, [router.isReady, router.query, isLoading]);
 
     const handleEditClick = (id) => {
         setTodoId(id);
@@ -76,6 +78,7 @@ export default function Todos() {
         setCreate(false);
         setUpdate(false);
         setRemove(false);
+        setIsLoading(true);
     };
 
     const handleFilter = () => {
