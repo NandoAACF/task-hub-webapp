@@ -187,7 +187,7 @@ export default function Todos() {
                                     handleDeleteClick={handleDeleteClick}
                                 />
                             ))}
-                        <CardTodo
+                        {/* <CardTodo
                             status="Hold"
                             title="My Todo Title"
                             description="My todo description."
@@ -206,7 +206,7 @@ export default function Todos() {
                             valueCat="Category B"
                             handleEditClick={handleEditClick}
                             handleDeleteClick={handleDeleteClick}
-                        />
+                        /> */}
                     </div>
                 </div>
             </div>
