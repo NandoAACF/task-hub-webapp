@@ -2,13 +2,14 @@ import useAxios from "@/utils/hooks/useAxios";
 import { useState } from "react";
 import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 import { MdFavorite } from "react-icons/md";
+import moment from "moment";
 
 export default function CardNote({
     id,
     title = "My Title",
     topic = "My Topic",
     description = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
-    updateDate = "12/12/2021",
+    updatedAt,
     favorite = false,
     handleEditClick,
     handleDeleteClick,
@@ -40,7 +41,7 @@ export default function CardNote({
                     <h1 className="text-[26px] sm:text-[30px] font-semibold line-clamp-1">{title}</h1>
                     <h3 className="text-[19px] sm:text-[22px] text-slate-400 line-clamp-1">{topic}</h3>
                     <h6 className="text-[15px] sm:text-[16px] mt-[3px] ml-[2px] line-clamp-3">{description}</h6>
-                    <h4 className="text-[14px] mt-[5px] ml-[2px] text-slate-500">Updated at: {updateDate}</h4>
+                    <h4 className="text-[14px] mt-[5px] ml-[2px] text-slate-500">Updated at: {moment(updatedAt).format("HH MMM YYYY HH:mm")}</h4>
                 </div>
                 <div className="hidden sm:flex flex-col items-center justify-start min-w-[50px] sm:min-w-[60px] h-full bg-[#2984C9] rounded-r-[20px] shadow-lg shadow-[999999]/[29%]">
                     <div
