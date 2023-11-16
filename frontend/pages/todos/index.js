@@ -100,6 +100,13 @@ export default function Todos() {
         });
     };
 
+    const handleResetFilter = () => {
+        router.push({
+            pathname: router.pathname,
+            query: {},
+        });
+    };
+
     return (
         <>
             <div className="flex flex-row items-start justify-start min-h-[100vh] relative overflow-hidden">
@@ -169,7 +176,10 @@ export default function Todos() {
                                 <option value="Done">Done</option>
                             </select>
                         </div>
-                        <Button text="Apply Filters" type="primary" size="sm" onClick={handleFilter} />
+                        <div className="flex justify-center gap-5">
+                            <Button text="Apply Filters" type="primary" size="xsm" onClick={handleFilter} />
+                            <Button text="Reset Filters" type="resetfilter" size="xsm" onClick={handleResetFilter} />
+                        </div>
                     </div>
                     <div className="flex flex-col flex-wrap items-start justify-start mt-[30px] mb-[110px] w-full relative gap-[20px]">
                         {todosData &&

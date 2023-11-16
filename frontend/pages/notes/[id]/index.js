@@ -61,10 +61,6 @@ export default function NotesById() {
         setRemove(false);
     };
 
-    const handleGoBack = () => {
-        router.replace("/notes");
-    };
-
     return (
         <>
             <div className="flex flex-row items-start justify-start min-h-[100vh] relative overflow-hidden">
