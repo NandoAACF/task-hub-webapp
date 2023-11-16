@@ -16,7 +16,7 @@ export default function CardNote({
     onClick,
 }) {
     const [isFavorite, setIsFavorite] = useState(favorite);
-    console.log(isFavorite);
+
     const handleAddToFavorite = async () => {
         await useAxios(`/notes/${id}`, "PUT", { favorite: !isFavorite });
         setIsFavorite(prevState => !prevState);
