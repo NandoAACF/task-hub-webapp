@@ -142,8 +142,10 @@ export default function Notes() {
                                 <option value="Hiburan">Hiburan</option>
                             </select>
                         </div>
-                        <Button text="Apply Filters" type="primary" size="sm" onClick={handleFilter} />
-                        <Button text="Reset Filters" type="primary" size="sm" onClick={handleResetFilter} />
+                        <div className="flex justify-center gap-5">
+                            <Button text="Apply Filters" type="primary" size="xsm" onClick={handleFilter} />
+                            <Button text="Reset Filters" type="resetfilter" size="xsm" onClick={handleResetFilter} />
+                        </div>
                         {/* <div className="flex items-center justify-start mt-[7px] sm:mt-0">
                         </div> */}
                     </div>
@@ -159,7 +161,7 @@ export default function Notes() {
                                     title={note.title}
                                     topic={note.topic}
                                     description={note.desc}
-                                    favorite={note.favorite}
+                                    favorite={note?.favorite}
                                     updatedAt={note.updatedAt}
                                     handleEditClick={handleEditClick}
                                     handleDeleteClick={handleDeleteClick}

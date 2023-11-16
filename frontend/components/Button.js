@@ -33,6 +33,8 @@ export default function Button({
             return `text-white bg-red-500 hover:bg-red-600 active:bg-red-700 hover:shadow-lg hover:shadow-red-500/[29%] hover:-translate-y-[6px]`;
         if (type == "disabled")
             return `bg-gradient-to-b from-[#6F6B3C] to-[#695435] cursor-not-allowed text-[#3F3C48] pointer-events-none`;
+        if (type == "resetfilter")
+            return `text-[#2984C9] bg-slate-100 hover:bg-slate-200 active:bg-slate-300 hover:shadow-lg hover:shadow-[#2471AB]/[29%] hover:-translate-y-[6px]`;
         if (type == "disabledsecondary")
             return `bg-transparant ring-[2px] ring-white ring-inset text-white ring-opacity-60 text-[#747680] cursor-not-allowed pointer-events-none`;
         if (type == "logout") return `bg-[#878888] text-white hover:bg-black`;
