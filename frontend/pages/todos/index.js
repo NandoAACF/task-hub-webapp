@@ -38,6 +38,14 @@ export default function Todos() {
         }
     }, [userInfo.isLoggedIn, router]);
 
+    const [categoryOptions, setCategoryOptions] = useState([
+        { value: "", label: "All" },
+        { value: "category_a", label: "Category A" },
+        { value: "category_b", label: "Category B" },
+        { value: "Umum", label: "Umum" },
+        { value: "Tugas", label: "Tugas" },
+    ]);
+
     useEffect(() => {
         const fetchData = async () => {
             setIsLoading(false);
@@ -135,6 +143,7 @@ export default function Todos() {
                                 id="deadline"
                                 className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[105px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200"
                             >
+                                <option value="">Default</option>
                                 <option value="desc">Descending</option>
                                 <option value="asc">Ascending</option>
                             </select>
@@ -157,11 +166,11 @@ export default function Todos() {
                                 id="category"
                                 className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[100px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200"
                             >
-                                <option value="">All</option>
-                                <option value="category_a">Category A</option>
-                                <option value="category_b">Category B</option>
-                                <option value="Umum">Umum</option>
-                                <option value="Tugas">Tugas</option>
+                                {categoryOptions.map((category) => (
+                                    <option key={category.value} value={category.value}>
+                                        {category.label}
+                                    </option>
+                                ))}
                             </select>
                         </div>
                         <div className="flex flex-row items-center justify-between gap-[10px]">
@@ -232,9 +241,9 @@ export default function Todos() {
                 <RiAddCircleFill />
             </div>
             {/* Modal create todo */}
-            {create ? <FormTodo handleExit={handleExit} /> : ""}
+            {create ? <FormTodo handleExit={handleExit} setCategories={setCategoryOptions} /> : ""}
             {/* Modal update todo */}
-            {update ? <FormTodo id={todoId} isUpdate={true} handleExit={handleExit} /> : ""}
+            {update ? <FormTodo id={todoId} isUpdate={true} handleExit={handleExit} setCategories={setCategoryOptions} /> : ""}
             {/* Modal remove todo */}
             {remove ? (
                 <div className="flex flex-col items-center justify-center bg-opacity-50 bg-black w-full min-h-[100vh] overflow-hidden top-0 left-0 z-50 fixed">

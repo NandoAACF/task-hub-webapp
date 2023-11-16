@@ -35,6 +35,12 @@ export default function Notes() {
         }
     }, [userInfo.isLoggedIn, router]);
 
+    const [topicOptions, setTopicOptions] = useState([
+        { value: "", label: "All" },
+        { value: "Umum", label: "Umum" },
+        { value: "Hiburan", label: "Hiburan" },
+    ]);
+
     useEffect(() => {
         const fetchData = async () => {
             setIsLoading(false);
@@ -136,10 +142,11 @@ export default function Notes() {
                                 id="topic"
                                 className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[105px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200"
                             >
-                                <option value="">All</option>
-                                <option value="topikA">Topik A</option>
-                                <option value="Umum">Umum</option>
-                                <option value="Hiburan">Hiburan</option>
+                                {topicOptions.map((topic) => (
+                                    <option key={topic.value} value={topic.value}>
+                                        {topic.label}
+                                    </option>
+                                ))}
                             </select>
                         </div>
                         <div className="flex justify-center gap-5">
@@ -191,9 +198,9 @@ export default function Notes() {
                 <RiAddCircleFill />
             </div>
             {/* Modal create note */}
-            {create ? <FormNote handleExit={handleExit} /> : ""}
+            {create ? <FormNote handleExit={handleExit} setTopics={setTopicOptions} /> : ""}
             {/* Modal update note */}
-            {update ? <FormNote id={noteId} isUpdate={true} handleExit={handleExit} /> : ""}
+            {update ? <FormNote id={noteId} isUpdate={true} handleExit={handleExit} setTopics={setTopicOptions} /> : ""}
             {/* Modal remove note */}
             {remove ? (
                 <div className="flex flex-col items-center justify-center bg-opacity-50 bg-black w-full min-h-[100vh] overflow-hidden top-0 left-0 z-50 fixed">

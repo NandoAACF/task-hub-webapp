@@ -5,7 +5,7 @@ import useNotifications from "@/utils/hooks/useNotifications";
 import { useContext, useEffect, useState } from "react";
 import moment from "moment";
 
-export default function FormTodo({ id, isUpdate = false, handleExit }) {
+export default function FormTodo({ id, isUpdate = false, handleExit, setCategories }) {
     const { onSuccess, onError } = useNotifications();
     const { userInfo } = useContext(AuthContext);
     const [initialPayload, setInitialPayload] = useState({});
@@ -70,6 +70,13 @@ export default function FormTodo({ id, isUpdate = false, handleExit }) {
         else handleCreate(e);
     };
 
+    const handleCreateCategory = (newCategory) => {
+        setCategories((prevCategories) => [
+            ...prevCategories,
+            { value: newCategory, label: newCategory},
+        ]);
+    };
+
     return (
         <>
             <div className="flex flex-col items-center justify-center bg-opacity-50 bg-black w-full min-h-[100vh] overflow-hidden top-0 left-0 z-50 fixed">
@@ -97,6 +104,7 @@ export default function FormTodo({ id, isUpdate = false, handleExit }) {
                                 placeholder="Category"
                                 name="category"
                                 defaultValue={initialPayload?.category}
+                                onBlur={(e) => handleCreateCategory(e.target.value)}
                             />
                         </div>
                         <div className="flex flex-row items-center justify-start gap-[10px]">
