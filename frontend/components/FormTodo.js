@@ -104,6 +104,13 @@ export default function FormTodo({ id, isUpdate = false, handleExit }) {
                             <select
                                 className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[100px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200"
                                 name="status"
+                                value={initialPayload?.status}
+                                onChange={(e) =>
+                                    setInitialPayload({
+                                        ...initialPayload,
+                                        status: e.target.value,
+                                    })
+                                }
                             >
                                 <option value="Hold">Hold</option>
                                 <option value="InProgress">In Progress</option>
@@ -115,6 +122,13 @@ export default function FormTodo({ id, isUpdate = false, handleExit }) {
                             <select
                                 className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[100px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200"
                                 name="priority"
+                                value={initialPayload?.priority}
+                                onChange={(e) =>
+                                    setInitialPayload({
+                                        ...initialPayload,
+                                        priority: e.target.value,
+                                    })
+                                }
                             >
                                 <option value="high">High</option>
                                 <option value="medium">Medium</option>
@@ -127,7 +141,13 @@ export default function FormTodo({ id, isUpdate = false, handleExit }) {
                                 type="datetime-local"
                                 className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[100px] sm:w-[210px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200"
                                 name="deadline"
-                                defaultValue={initialPayload?.deadline ? moment(initialPayload.deadline).format("YYYY-MM-DDTHH:mm") : ""}
+                                defaultValue={
+                                    initialPayload?.deadline
+                                        ? moment(
+                                              initialPayload.deadline
+                                          ).format("YYYY-MM-DDTHH:mm")
+                                        : ""
+                                }
                             />
                         </div>
                         <div className="flex flex-col relative w-[200px] sm:w-[400px] md:w-[600px]">
