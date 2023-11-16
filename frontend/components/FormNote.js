@@ -4,7 +4,7 @@ import useAxios from "@/utils/hooks/useAxios";
 import useNotifications from "@/utils/hooks/useNotifications";
 import { useContext, useEffect, useState } from "react";
 
-export default function FormNote({ id, isUpdate = false, handleExit }) {
+export default function FormNote({ id, isUpdate = false, handleExit, setTopics }) {
     const { onSuccess, onError } = useNotifications();
     const { userInfo } = useContext(AuthContext);
     const [initialPayload, setInitialPayload] = useState({});
@@ -63,6 +63,13 @@ export default function FormNote({ id, isUpdate = false, handleExit }) {
         else handleCreate(e);
     };
 
+    const handleCreateTopic = (newTopic) => {
+        setTopics((prevTopics) => [
+            ...prevTopics,
+            { value: newTopic, label: newTopic},
+        ]);
+    };
+
     return (
         <>
             <div className="flex flex-col items-center justify-center bg-opacity-50 bg-black w-full min-h-[100vh] overflow-hidden top-0 left-0 z-50 fixed">
@@ -88,6 +95,7 @@ export default function FormNote({ id, isUpdate = false, handleExit }) {
                                 placeholder="Add Topic"
                                 name="topic"
                                 defaultValue={initialPayload?.topic}
+                                onBlur={(e) =>  handleCreateTopic(e.target.value)}
                             />
                         </div>
                         <div className="flex flex-col relative w-[200px] sm:w-[400px] md:w-[600px]">
