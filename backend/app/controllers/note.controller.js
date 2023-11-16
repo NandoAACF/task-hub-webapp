@@ -117,7 +117,9 @@ exports.findByUserId = (req, res) => {
         sortedCondition.updatedAt = 1;
     } else if (sortBy === "latest") {
         sortedCondition.updatedAt = -1;
-    }
+    } else {
+        sortedCondition.createdAt = -1;
+    };
 
     Note.find(filteredData)
         .sort(sortedCondition)
