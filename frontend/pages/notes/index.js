@@ -39,16 +39,10 @@ export default function Notes() {
             const params = {
                 sortBy: router.query.sortBy,
                 topic: router.query.topic,
-                favorite: router.query.favorite
+                favorite: router.query.favorite,
             };
 
-            const data = await useAxios(
-                `/notes/list/${userInfo.userInfo.id}`,
-                "GET",
-                null,
-                true,
-                params
-            );
+            const data = await useAxios(`/notes/list/${userInfo.userInfo.id}`, "GET", null, true, params);
             setNotesData(data);
         };
 
@@ -89,7 +83,7 @@ export default function Notes() {
             query: {
                 sortBy: sortByValue,
                 favorite: favoriteValue,
-                topic: topicValue
+                topic: topicValue,
             },
         });
     };
@@ -107,43 +101,39 @@ export default function Notes() {
                     </h2>
                     <div className="flex flex-row flex-wrap items-start justify-start gap-x-[70px] gap-y-[10px] mt-[20px] md:mt-[28px]">
                         <div className="flex flex-row items-center justify-start gap-[10px]">
-                            <h3 className="text-[15px] sm:text-[18px]">
-                                Sort By:
-                            </h3>
-                            <select id="sortBy" className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[105px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200">
+                            <h3 className="text-[15px] sm:text-[18px]">Sort By:</h3>
+                            <select
+                                id="sortBy"
+                                className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[105px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200"
+                            >
                                 <option value="latest">Latest</option>
                                 <option value="oldest">Oldest</option>
                             </select>
                         </div>
                         <div className="flex flex-row items-center justify-start gap-[10px]">
-                            <h3 className="text-[15px] sm:text-[18px]">
-                                Show:
-                            </h3>
-                            <select id="favorite" className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[105px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200"
-
+                            <h3 className="text-[15px] sm:text-[18px]">Show:</h3>
+                            <select
+                                id="favorite"
+                                className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[105px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200"
                             >
                                 <option value="false">All</option>
                                 <option value="true">Favorite</option>
                             </select>
                         </div>
                         <div className="flex flex-row items-center justify-start gap-[10px]">
-                            <h3 className="text-[15px] sm:text-[18px]">
-                                Topic:
-                            </h3>
-                            <select id="topic" className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[105px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200">
+                            <h3 className="text-[15px] sm:text-[18px]">Topic:</h3>
+                            <select
+                                id="topic"
+                                className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[105px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200"
+                            >
                                 <option value="">All</option>
                                 <option value="topikA">Topik A</option>
                                 <option value="Umum">Umum</option>
                                 <option value="Hiburan">Hiburan</option>
                             </select>
                         </div>
-                        <div className="flex items-center justify-start">
-                        <Button
-                            text="Apply Filters"
-                            type="primary"
-                            size="sm"
-                            onClick={handleFilter}
-                        />
+                        <div className="flex items-center justify-start mt-[7px] sm:mt-0">
+                            <Button text="Apply Filters" type="primary" size="sm" onClick={handleFilter} />
                         </div>
                     </div>
                     <div className="flex flex-row flex-wrap items-start justify-start mt-[25px] sm:mt-[31px] gap-[40px] sm:gap-[60px] mb-[70px] w-full relative">
@@ -165,7 +155,7 @@ export default function Notes() {
                                 />
                             ))}
                         {/* Kalau diklik, dia auto menuju /notes/[id] */}
-                        <CardNote
+                        {/* <CardNote
                             onClick={() => {
                                 router.push("/notes/1");
                             }}
@@ -175,12 +165,12 @@ export default function Notes() {
                         <CardNote />
                         <CardNote />
                         <CardNote />
-                        <CardNote />
+                        <CardNote /> */}
                     </div>
                 </div>
             </div>
             <div
-                className="fixed right-[50px] bottom-[40px] text-[60px] sm:text-[90px] text-[#2984C9] hover:text-[#396688] active:text-[#223e53] transition-all ease-in-out duration-200 cursor-pointer hover:scale-110"
+                className="fixed right-[50px] bottom-[40px] text-[60px] sm:text-[90px] text-black hover:text-[#396688] active:text-[#223e53] transition-all ease-in-out duration-200 cursor-pointer hover:scale-110"
                 onClick={() => {
                     setCreate(true);
                 }}
@@ -190,31 +180,15 @@ export default function Notes() {
             {/* Modal create note */}
             {create ? <FormNote handleExit={handleExit} /> : ""}
             {/* Modal update note */}
-            {update ? (
-                <FormNote id={noteId} isUpdate={true} handleExit={handleExit} />
-            ) : (
-                ""
-            )}
+            {update ? <FormNote id={noteId} isUpdate={true} handleExit={handleExit} /> : ""}
             {/* Modal remove note */}
             {remove ? (
                 <div className="flex flex-col items-center justify-center bg-opacity-50 bg-black w-full min-h-[100vh] overflow-hidden top-0 left-0 z-50 fixed">
                     <div className="flex flex-col items-start justify-start bg-white rounded-2xl p-[30px] overflow-hidden relative max-h-[95vh]">
-                        <h4 className="text-[25px] font-bold -mt-[3px]">
-                            Are you sure want to remove this note?
-                        </h4>
+                        <h4 className="text-[25px] font-bold -mt-[3px]">Are you sure want to remove this note?</h4>
                         <div className="flex flex-row items-center justify-end gap-[20px] w-full mt-[20px]">
-                            <Button
-                                text="Yes"
-                                type="secondary"
-                                size="sm"
-                                onClick={handleRemove}
-                            />
-                            <Button
-                                text="No"
-                                type="secondary"
-                                size="sm"
-                                onClick={handleExit}
-                            />
+                            <Button text="Yes" type="secondary" size="sm" onClick={handleRemove} />
+                            <Button text="No" type="secondary" size="sm" onClick={handleExit} />
                         </div>
                     </div>
                 </div>
