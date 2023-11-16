@@ -117,9 +117,9 @@ exports.findByUserId = (req, res) => {
     const validPriorityValues = ["low", "medium", "high"];
 
     const filterMappings = {
-        category,
-        status: status && validStatusValues.includes(status) ? status : undefined,
-        priority: priority && validPriorityValues.includes(priority) ? priority : undefined,
+        category: category || undefined,
+        status: validStatusValues.includes(status) ? status : undefined,
+        priority: validPriorityValues.includes(priority) ? priority : undefined,
         userId,
     };
 

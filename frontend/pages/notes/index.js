@@ -19,6 +19,7 @@ export default function Notes() {
     const [create, setCreate] = useState(false);
     const [update, setUpdate] = useState(false);
     const [remove, setRemove] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const { onSuccess } = useNotifications();
     const { userInfo } = useContext(AuthContext);
@@ -36,6 +37,7 @@ export default function Notes() {
 
     useEffect(() => {
         const fetchData = async () => {
+            setIsLoading(false);
             const params = {
                 sortBy: router.query.sortBy,
                 topic: router.query.topic,
@@ -46,10 +48,10 @@ export default function Notes() {
             setNotesData(data);
         };
 
-        if (router.isReady) {
+        if (router.isReady || isLoading) {
             fetchData();
         }
-    }, [router.isReady, router.query]);
+    }, [router.isReady, router.query, isLoading]);
 
     const handleEditClick = (id) => {
         setNoteId(id);
@@ -71,6 +73,7 @@ export default function Notes() {
         setCreate(false);
         setUpdate(false);
         setRemove(false);
+        setIsLoading(true);
     };
 
     const handleFilter = () => {
