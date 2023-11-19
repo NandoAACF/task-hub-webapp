@@ -1,5 +1,5 @@
 import useAxios from "@/utils/hooks/useAxios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 import { MdFavorite } from "react-icons/md";
 import moment from "moment";
@@ -16,6 +16,10 @@ export default function CardNote({
     onClick,
 }) {
     const [isFavorite, setIsFavorite] = useState(favorite);
+
+    useEffect(() => {
+        setIsFavorite(favorite);
+    }, [favorite]);
 
     const handleAddToFavorite = async () => {
         await useAxios(`/notes/${id}`, "PUT", { favorite: !isFavorite });
