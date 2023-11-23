@@ -91,11 +91,13 @@ export default function Todos() {
     };
 
     const handleFilter = () => {
-        let sortByValue = document.getElementById("sortBy").value;
-        let deadlineValue = document.getElementById("deadline").value;
+        let sortValue = document.getElementById("sort").value;
         let priorityValue = document.getElementById("priority").value;
         let statusValue = document.getElementById("status").value;
         let categoryValue = document.getElementById("category").value;
+
+        let sortByValue = sortValue === "latest" || sortValue === "oldest" ? sortValue : "";
+        let deadlineValue = sortValue === "asc" || sortValue === "desc" ? sortValue : "";
 
         router.push({
             pathname: router.pathname,
@@ -131,22 +133,13 @@ export default function Todos() {
                         <div className="flex flex-row items-center justify-between gap-[10px]">
                             <h3 className="text-[15px] sm:text-[18px]">Sort By:</h3>
                             <select
-                                id="sortBy"
+                                id="sort"
                                 className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[105px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200"
                             >
+                                <option value="desc">Deadline Desc</option>
+                                <option value="asc">Deadline Asc</option>
                                 <option value="latest">Latest</option>
                                 <option value="oldest">Oldest</option>
-                            </select>
-                        </div>
-                        <div className="flex flex-row items-center justify-between gap-[10px]">
-                            <h3 className="text-[15px] sm:text-[18px]">Sort By Deadline:</h3>
-                            <select
-                                id="deadline"
-                                className="bg-white border-[1px] border-slate-300 rounded-[10px] w-[105px] sm:w-[150px] py-[5px] px-[7px] mt-[2px] hover:bg-white cursor-pointer outline-none transition-all ease-in-out duration-200"
-                            >
-                                <option value="">Default</option>
-                                <option value="desc">Descending</option>
-                                <option value="asc">Ascending</option>
                             </select>
                         </div>
                         <div className="flex flex-row items-center justify-between gap-[10px]">
@@ -206,6 +199,7 @@ export default function Todos() {
                                     deadline={todo.deadline}
                                     valuePriority={todo.priority}
                                     valueCat={todo.category}
+                                    updatedAt={todo.updatedAt}
                                     handleEditClick={handleEditClick}
                                     handleDeleteClick={handleDeleteClick}
                                 />

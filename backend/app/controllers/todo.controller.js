@@ -138,6 +138,7 @@ exports.findByUserId = (req, res) => {
     };
 
     const sortedCondition = {};
+    
     if (deadline && sortMappings[deadline]) {
         sortedCondition.deadline = sortMappings[deadline];
     }
@@ -146,9 +147,10 @@ exports.findByUserId = (req, res) => {
         sortedCondition.updatedAt = sortMappings[sortBy];
     }
 
-    else {
-        sortedCondition.createdAt = -1;
-    }
+    if (!deadline && !sortBy) {{
+        sortedCondition.deadline = -1;
+    }}
+
 
     // Mengecek jika ada value status untuk query yang invalid
     if (status && !validStatusValues.includes(status)) {
