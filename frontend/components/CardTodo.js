@@ -41,7 +41,7 @@ export default function CardTodo({
                             {moment(deadline).format("DD MMM YYYY HH:mm")}
                         </h4>
                     </div>
-                    <div className="text-[12px] mt-[2px]">Updated at: {moment(updatedAt).format("DD MMM YYYY HH:mm")}</div>
+                    {/* <div className="text-[12px] mt-[2px]">Updated at: {moment(updatedAt).format("DD MMM YYYY HH:mm")}</div> */}
                     <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-[9px] mt-[15px] sm:mt-[5px]">
                         <TagTodo
                             type={tagType1}
