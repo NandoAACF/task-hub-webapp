@@ -7,6 +7,7 @@ Taskify Web App adalah sebuah aplikasi web yang digunakan untuk mengelola todo d
 
 ## 🔥 API Documentation Postman **(Wajib Dibaca)**
 **https://documenter.getpostman.com/view/29914685/2s9YCASWgw**
+Link backend URL: https://task-hub-webapp-qdic.vercel.app/
 
 ## 📦 Fitur & Endpoint Web App
 1.  Create / Register User <br>
