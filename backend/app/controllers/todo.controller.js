@@ -148,7 +148,7 @@ exports.findByUserId = (req, res) => {
     }
 
     if (!deadline && !sortBy) {{
-        sortedCondition.deadline = -1;
+        sortedCondition.deadline = 1;
     }}
 
 
