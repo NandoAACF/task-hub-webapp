@@ -14,8 +14,8 @@ export default function UserProfile() {
     const { onError, onSuccess } = useNotifications();
 
     const [formData, setFormData] = useState({
-        username: userInfo.userInfo.username,
-        email: userInfo.userInfo.email,
+        username: userInfo.userInfo?.username,
+        email: userInfo.userInfo?.email,
     });
 
     const handleChange = (e) => {
@@ -36,7 +36,7 @@ export default function UserProfile() {
                     ...prevUserInfo,
                     userInfo: {
                       ...prevUserInfo.userInfo,
-                      username: formData.username,
+                      username: formData?.username,
                     },
                   }));
             } else {
@@ -64,7 +64,7 @@ export default function UserProfile() {
                 <div className="flex flex-col items-start justify-start ml-[100px] sm:ml-[160px] mr-[30px] sm:mr-[70px]">
                     <h2 className="text-[23px] sm:text-[48px] md:text-[53px] font-semibold mt-[20px]">
                         <span className="bg-gradient-to-r from-[#2984C9] via-[#3681B8] to-[#0B3654] text-transparent bg-clip-text">
-                            {userInfo.userInfo.username}'s
+                            {userInfo.userInfo?.username}'s
                         </span>{" "}
                         Profile.
                     </h2>
