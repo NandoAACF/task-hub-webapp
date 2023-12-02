@@ -38,7 +38,6 @@ export default function Todos() {
         }
     }, [userInfo.isLoggedIn, router]);
 
-    const [categoryData, setcategoryData] = useState(null);
     const [categoryOptions, setCategoryOptions] = useState([
         { value: "", label: "All" }
     ]);
@@ -82,7 +81,7 @@ export default function Todos() {
             fetchCategoryData();
         }
 
-    }, [router.isReady,  categoryOptions]); // Watches for changes in 'data' variable
+    }, [router.isReady,  categoryOptions]);
     
     const handleEditClick = (id) => {
         setTodoId(id);
