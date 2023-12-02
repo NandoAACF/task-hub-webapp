@@ -38,12 +38,9 @@ export default function Todos() {
         }
     }, [userInfo.isLoggedIn, router]);
 
+    const [categoryData, setcategoryData] = useState(null);
     const [categoryOptions, setCategoryOptions] = useState([
-        { value: "", label: "All" },
-        { value: "category_a", label: "Category A" },
-        { value: "category_b", label: "Category B" },
-        { value: "Umum", label: "Umum" },
-        { value: "Tugas", label: "Tugas" },
+        { value: "", label: "All" }
     ]);
 
     useEffect(() => {
@@ -66,6 +63,27 @@ export default function Todos() {
         }
     }, [router.isReady, router.query, isLoading]);
 
+    useEffect(() => {
+        const fetchCategoryData = async () => {
+            const fetchedCategoryData = await useAxios(`/todos/findUniqueCategories/${userInfo?.userInfo?.id}`, "GET", null, true);
+
+            const newCategoryOptions = fetchedCategoryData.map(newCategory => ({
+                value: newCategory,
+                label: newCategory,
+            }));
+
+            setCategoryOptions(prevOptions => [
+                { value: "", label: "All" },
+                ...newCategoryOptions,
+            ]);
+        };
+
+        if (router.isReady || isLoading) {
+            fetchCategoryData();
+        }
+
+    }, [router.isReady,  categoryOptions]); // Watches for changes in 'data' variable
+    
     const handleEditClick = (id) => {
         setTodoId(id);
         setUpdate(true);

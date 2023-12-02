@@ -257,3 +257,20 @@ exports.sortByLatest = (req, res) => {
             });
         });
 };
+
+exports.findUniqueCategories = async (req, res) => {
+    try {
+        const userId = req.params.userId; // Assuming userId is passed as a parameter
+
+        const categories = await Todo.find({ userId: userId }).distinct('category');
+
+        res.status(200).send(categories);
+    } catch (error) {
+        res.status(500).send({
+            message: error.message || "Some error occurred while retrieving unique categories.",
+        });
+    }
+};
+
+
+

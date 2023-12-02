@@ -20,6 +20,7 @@ module.exports = (app) => {
     router.get("/sortdeadlinedesc", todos.sortByDeadlineDesc);
     router.get("/sortbyoldest", todos.sortByOldest);
     router.get("/sortbylatest", todos.sortByLatest);
+    router.get("/findUniqueCategories/:userId", todos.findUniqueCategories);
 
     // Jika user mengakses endpoint /api/todos, maka akan diarahkan ke router yang telah dibuat di atas
     app.use("/api/todos", router);
