@@ -36,9 +36,7 @@ export default function Notes() {
     }, [userInfo.isLoggedIn, router]);
 
     const [topicOptions, setTopicOptions] = useState([
-        { value: "", label: "All" },
-        { value: "Umum", label: "Umum" },
-        { value: "Hiburan", label: "Hiburan" },
+        { value: "", label: "All" }
     ]);
 
     useEffect(() => {
@@ -58,6 +56,28 @@ export default function Notes() {
             fetchData();
         }
     }, [router.isReady, router.query, isLoading]);
+
+    useEffect(() => {
+        const fetchTopicData = async () => {
+            const fetchedTopicData = await useAxios(`/notes/findUniqueTopic/${userInfo?.userInfo?.id}`, "GET", null, true);
+
+            const newTopicOptions = fetchedTopicData.map(newTopic => ({
+                value: newTopic,
+                label: newTopic,
+            }));
+
+            setTopicOptions(prevOptions => [
+                { value: "", label: "All" },
+                ...newTopicOptions,
+            ]);
+        };
+
+        if (router.isReady || isLoading) {
+            fetchTopicData();
+        }
+
+    }, [router.isReady,  topicOptions]);
+
 
     const handleEditClick = (id) => {
         setNoteId(id);

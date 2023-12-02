@@ -18,6 +18,7 @@ module.exports = (app) => {
     router.put("/:id", notes.update);
     router.delete("/:id", notes.delete);
     router.delete("/list/:userId", notes.deleteAllNotesByUserId);
+    router.get("/findUniqueTopic/:userId", notes.findUniqueTopic);
 
     // Jika user mengakses endpoint /api/notes, maka akan diarahkan ke router yang telah dibuat di atas
     app.use("/api/notes", router);
