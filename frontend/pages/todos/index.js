@@ -129,6 +129,11 @@ export default function Todos() {
     };
 
     const handleResetFilter = () => {
+        document.getElementById("sort").value = "asc";
+        document.getElementById("priority").value = "";
+        document.getElementById("category").value = "";
+        document.getElementById("status").value = "";
+        
         router.push({
             pathname: router.pathname,
             query: {},

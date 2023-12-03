@@ -119,6 +119,10 @@ export default function Notes() {
     };
     
     const handleResetFilter = () => {
+        document.getElementById("sortBy").value = "latest";
+        document.getElementById("favorite").value = "";
+        document.getElementById("topic").value = "";
+
         router.push({
             pathname: router.pathname,
             query: {},
