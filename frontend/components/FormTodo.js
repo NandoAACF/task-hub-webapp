@@ -3,7 +3,7 @@ import { AuthContext } from "@/utils/context/AuthContext";
 import useAxios from "@/utils/hooks/useAxios";
 import useNotifications from "@/utils/hooks/useNotifications";
 import { useContext, useEffect, useState } from "react";
-import moment from "moment";
+import moment from "moment-timezone";
 
 export default function FormTodo({ id, isUpdate = false, handleExit, setCategories }) {
     const { onSuccess, onError } = useNotifications();
@@ -29,7 +29,7 @@ export default function FormTodo({ id, isUpdate = false, handleExit, setCategori
         const category = e.target.category.value;
         const status = e.target.status.value;
         const priority = e.target.priority.value;
-        const deadline = e.target.deadline.value;
+        const deadline = moment.tz(e.target.deadline.value, "Asia/Jakarta").toISOString();
         const desc = e.target.description.value;
         const payload = {
             userId,

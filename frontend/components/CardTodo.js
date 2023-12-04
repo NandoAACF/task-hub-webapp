@@ -2,7 +2,7 @@ import { MdDateRange } from "react-icons/md";
 import TagTodo from "@/components/TagTodo";
 import StatusTodo from "@/components/StatusTodo";
 import { AiFillEdit, AiFillDelete } from "react-icons/ai";
-import moment from "moment";
+import moment from "moment-timezone";
 
 export default function CardTodo({
     id,
@@ -37,7 +37,7 @@ export default function CardTodo({
                     <div className="flex flex-row items-center justify-start gap-[6px] text-[16px] sm:text-[18px]">
                         <MdDateRange />
                         <h4 className="text-[14px] sm:text-[15px] mt-[3px]">
-                            {moment(deadline).format("DD MMM YYYY HH:mm A")}
+                            {moment(deadline).tz("Asia/Jakarta").format("DD MMM YYYY HH:mm A")}
                         </h4>
                     </div>
                     <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-[9px] mt-[15px] sm:mt-[5px]">
