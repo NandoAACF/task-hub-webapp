@@ -25,7 +25,7 @@ export default function Login() {
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        const passwordFieldError = !(/^.{8,12}$/.test(formData.password));
+        const passwordFieldError = !(/^.{8,20}$/.test(formData.password));
         if (passwordFieldError) {
             onError("Periksa kembali isian anda");
             return;

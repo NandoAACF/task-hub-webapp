@@ -27,7 +27,7 @@ export default function Register() {
 
     const handleRegister = async (e) => {
         e.preventDefault();
-        const passwordFieldError = !(formData.password === formData.passwordConfirmation && /^.{8,12}$/.test(formData.password));
+        const passwordFieldError = !(formData.password === formData.passwordConfirmation && /^.{8,20}$/.test(formData.password));
         if (passwordFieldError) {
             onError("Periksa kembali isian anda");
             return;

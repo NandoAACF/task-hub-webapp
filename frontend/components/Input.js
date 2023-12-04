@@ -8,9 +8,9 @@ export default function Input({
     error,
 }) {
     const getPasswordError = () => {
-        const passwordRegex = /^.{8,12}$/;
+        const passwordRegex = /^.{8,20}$/;
         if (error === "passwordError" && value.trim() !== "" && !passwordRegex.test(value)) {
-            return "Password should be between 8 and 12 characters";
+            return "Password should be between 8 and 20 characters";
         }
         return "";
     };

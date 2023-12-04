@@ -27,7 +27,7 @@ export default function ChangePassword() {
 
     const handleResetPassword = async (e) => {
         e.preventDefault();
-        const passwordFieldError = !(formData.new_password === formData.new_password_confirmation && /^.{8,12}$/.test(formData.new_password));
+        const passwordFieldError = !(formData.new_password === formData.new_password_confirmation && /^.{8,20}$/.test(formData.new_password));
         if (passwordFieldError) {
             onError("Periksa kembali isian anda");
             return;
