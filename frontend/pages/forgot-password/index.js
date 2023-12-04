@@ -52,6 +52,7 @@ export default function ForgotPassword() {
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
+                        error="emailError"
                     />
                     <Button text="Submit" type="primary" size="md" className="w-full mt-[40px]" />
                 </form>

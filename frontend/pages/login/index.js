@@ -25,6 +25,12 @@ export default function Login() {
 
     const handleLogin = async (e) => {
         e.preventDefault();
+        const passwordFieldError = !(/^.{8,12}$/.test(formData.password));
+        if (passwordFieldError) {
+            onError("Periksa kembali isian anda");
+            return;
+        }
+
         try {
             const response = await loginUser(formData);
             if (response) {
@@ -61,6 +67,7 @@ export default function Login() {
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
+                        error="emailError"
                     />
                     <Input
                         label="Password"
@@ -69,6 +76,7 @@ export default function Login() {
                         name="password"
                         value={formData.password}
                         onChange={handleChange}
+                        error="passwordError"
                     />
                     <h5 
                         onClick={() => router.push("/forgot-password")}

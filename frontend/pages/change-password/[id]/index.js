@@ -27,6 +27,11 @@ export default function ChangePassword() {
 
     const handleResetPassword = async (e) => {
         e.preventDefault();
+        const passwordFieldError = !(formData.new_password === formData.new_password_confirmation && /^.{8,12}$/.test(formData.new_password));
+        if (passwordFieldError) {
+            onError("Periksa kembali isian anda");
+            return;
+        }
         const response = await useAxios(`/users/change-password/${id}`, "PUT", formData);
         if (response) {
             onSuccess("Password was changed successfully. Please login again");
@@ -54,6 +59,7 @@ export default function ChangePassword() {
                         name="current_password"
                         value={formData.current_password}
                         onChange={handleChange}
+                        error="passwordError"
                     />
                     <Input
                         label="New Password"
@@ -62,6 +68,7 @@ export default function ChangePassword() {
                         name="new_password"
                         value={formData.new_password}
                         onChange={handleChange}
+                        error="passwordError"
                     />
                     <Input
                         label="Confirm New Password"
@@ -70,6 +77,7 @@ export default function ChangePassword() {
                         name="new_password_confirmation"
                         value={formData.new_password_confirmation}
                         onChange={handleChange}
+                        error="passwordError"
                     />
                     <Button
                         text="Change Password"

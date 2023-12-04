@@ -27,6 +27,11 @@ export default function Register() {
 
     const handleRegister = async (e) => {
         e.preventDefault();
+        const passwordFieldError = !(formData.password === formData.passwordConfirmation && /^.{8,12}$/.test(formData.password));
+        if (passwordFieldError) {
+            onError("Periksa kembali isian anda");
+            return;
+        }
         try {
             const response = await registerUser(formData);
             if (response) {
@@ -71,6 +76,7 @@ export default function Register() {
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
+                        error="emailError"
                     />
                     <Input
                         label="Password"
@@ -79,6 +85,7 @@ export default function Register() {
                         name="password"
                         value={formData.password}
                         onChange={handleChange}
+                        error="passwordError"
                     />
                     <Input
                         label="Confirm Password"
@@ -87,6 +94,7 @@ export default function Register() {
                         name="passwordConfirmation"
                         value={formData.passwordConfirmation}
                         onChange={handleChange}
+                        error="passwordError"
                     />
                     <h5 
                         onClick={() => router.push("/forgot-password")}
@@ -94,9 +102,9 @@ export default function Register() {
                     >
                         Forgot Password?
                     </h5>
-                    <Button text="Register" type="primary" size="md" className="w-full mt-[40px]" />
+                    <Button text="Register" type="primary" size="md" className="w-full mt-[35px]" />
                 </form>
-                <h3 className="text-[17px] sm:text-[19px] text-center mt-[30px] ">
+                <h3 className="text-[17px] sm:text-[19px] text-center mt-[20px] mb-[10px]">
                     Already have an account?{" "}
                     <span 
                         onClick={() => router.push("/login")}
