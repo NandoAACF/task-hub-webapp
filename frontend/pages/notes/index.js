@@ -14,6 +14,7 @@ import FormNote from "@/components/FormNote";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
 import CardNote from "@/components/CardNote";
+import ProtectedRoute from "@/utils/context/ProtectedRoute";
 
 export default function Notes() {
     const [create, setCreate] = useState(false);
@@ -48,7 +49,7 @@ export default function Notes() {
                 favorite: router.query.favorite,
             };
 
-            const data = await useAxios(`/notes/list/${userInfo.userInfo.id}`, "GET", null, true, params);
+            const data = await useAxios(`/notes/list/${userInfo.userInfo?.id}`, "GET", null, true, params);
             setNotesData(data);
         };
 
@@ -61,14 +62,14 @@ export default function Notes() {
         const fetchTopicData = async () => {
             const fetchedTopicData = await useAxios(`/notes/findUniqueTopic/${userInfo?.userInfo?.id}`, "GET", null, true);
 
-            const newTopicOptions = fetchedTopicData.map(newTopic => ({
+            const newTopicOptions = fetchedTopicData?.map(newTopic => ({
                 value: newTopic,
                 label: newTopic,
             }));
 
             setTopicOptions([
                 { value: "", label: "All" },
-                ...newTopicOptions,
+                ...(newTopicOptions || []),
             ]);
         };
 
@@ -130,7 +131,7 @@ export default function Notes() {
     };
 
     return (
-        <>
+        <ProtectedRoute>
             <div className="flex flex-row items-start justify-start min-h-[100vh] relative overflow-hidden">
                 <Sidebar activeIcon={activeIcon} />
                 <div className="flex flex-col items-start justify-start ml-[100px] sm:ml-[160px] mr-[30px] sm:mr-[70px]">
@@ -241,6 +242,6 @@ export default function Notes() {
             ) : (
                 ""
             )}
-        </>
+        </ProtectedRoute>
     );
 }

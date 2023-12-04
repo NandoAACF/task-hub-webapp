@@ -7,6 +7,7 @@ import { useContext, useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Sidebar from "@/components/Sidebar";
 import Link from "next/link";
+import ProtectedRoute from "@/utils/context/ProtectedRoute";
 
 export default function UserProfile() {
     const { userInfo, setUserInfo } = useContext(AuthContext);
@@ -59,7 +60,7 @@ export default function UserProfile() {
     }
 
     return (
-        <>
+        <ProtectedRoute>
             <div className="flex flex-row items-start justify-start min-h-[100vh] relative overflow-hidden">
                 <Sidebar activeIcon={activeIcon} />
                 <div className="flex flex-col items-start justify-start ml-[100px] sm:ml-[160px] mr-[30px] sm:mr-[70px]">
@@ -114,6 +115,6 @@ export default function UserProfile() {
                     </form>
                 </div>
             </div>
-        </>
+        </ProtectedRoute>
     );
 }

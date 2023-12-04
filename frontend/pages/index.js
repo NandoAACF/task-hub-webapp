@@ -11,7 +11,10 @@ export default function Home() {
 
     useEffect(() => {
         if (!userInfo.isLoggedIn) {
-            router.replace("/login");
+            window.location.href = "/login";
+        }
+        else {
+            window.location.href= "/todos";
         }
     }, [userInfo.isLoggedIn, router]);
 

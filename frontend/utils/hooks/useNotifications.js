@@ -1,7 +1,7 @@
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function useNotifications() {
+const  useNotifications = () => {
   const onError = (message) => {
     toast.error(message, {
       position: 'top-right',

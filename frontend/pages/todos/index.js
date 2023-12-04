@@ -5,6 +5,7 @@ import { MdFavorite } from "react-icons/md";
 import { MdDateRange } from "react-icons/md";
 
 import { useState, useEffect, useContext } from "react";
+import ProtectedRoute from "@/utils/context/ProtectedRoute";
 
 import TagTodo from "@/components/TagTodo";
 import StatusTodo from "@/components/StatusTodo";
@@ -73,7 +74,7 @@ export default function Todos() {
 
             setCategoryOptions([
                 { value: "", label: "All" },
-                ...newCategoryOptions,
+                ...(newCategoryOptions || []),
             ]);
         };
 
@@ -141,7 +142,7 @@ export default function Todos() {
     };
 
     return (
-        <>
+        <ProtectedRoute>
             <div className="flex flex-row items-start justify-start min-h-[100vh] relative overflow-hidden">
                 <Sidebar activeIcon={activeIcon} />
                 <div className="flex flex-col items-start justify-start ml-[100px] sm:ml-[160px] mr-[30px] sm:mr-[70px] relative w-full">
@@ -275,6 +276,6 @@ export default function Todos() {
             ) : (
                 ""
             )}
-        </>
+        </ProtectedRoute>
     );
 }
