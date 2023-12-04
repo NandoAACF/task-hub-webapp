@@ -3,7 +3,7 @@ import Input from "@/components/Input";
 import useAxios from "@/utils/hooks/useAxios";
 import useNotifications from "@/utils/hooks/useNotifications";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function ResetPassword() {
     const router = useRouter();
@@ -11,11 +11,21 @@ export default function ResetPassword() {
     const { onSuccess, onError } = useNotifications();
 
     const [formData, setFormData] = useState({
-        resetToken: token ? token.toString(): undefined,
-        email: email?.toString(),
+        resetToken: "",
+        email: "",
         new_password: "",
         new_password_confirmation: ""
     });
+
+    useEffect(() => {
+        if(token && email) {
+            setFormData((prevFormData) => ({
+                ...prevFormData,
+                resetToken: token.toString(),
+                email: email.toString()
+            }))
+        }
+    }, [router.query]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
