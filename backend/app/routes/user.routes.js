@@ -12,6 +12,7 @@ module.exports = (app) => {
     router.get("/:id", users.findOne);
     router.delete("/:id", users.delete);
     router.put("/:id", users.update);
+    router.put("/change-password/:id", users.changePassword);
 
     // Jika user mengakses endpoint /api/users, maka akan diarahkan ke router yang telah dibuat di atas
     app.use("/api/users", router);

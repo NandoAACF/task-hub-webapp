@@ -6,6 +6,7 @@ import useNotifications from "@/utils/hooks/useNotifications";
 import { useContext, useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Sidebar from "@/components/Sidebar";
+import Link from "next/link";
 
 export default function UserProfile() {
     const { userInfo, setUserInfo } = useContext(AuthContext);
@@ -94,12 +95,14 @@ export default function UserProfile() {
                             />
                         </div>
                         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-center sm:justify-start gap-[14px] mt-[15px] sm:mt-[8px]">
-                            <Button
-                                text="Reset Password"
-                                type="resetpassword"
-                                size="sm"
-                                className=""
-                            />
+                            <Link href={`/change-password/${userInfo.userInfo.id}`} passHref>
+                                <Button 
+                                    text="Change Password" 
+                                    type="resetpassword" 
+                                    size="sm" 
+                                    className="" 
+                                />
+                            </Link>
                             <Button
                                 text="Save Changes"
                                 type="primary"

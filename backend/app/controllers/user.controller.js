@@ -43,7 +43,7 @@ exports.login = async (req, res) => {
         const user = await User.findOne({ email: req.body.email });
         if (!user) return res.status(404).send({message: "User not found"});
 
-        const isPasswordCorrect = await bcrypt.compareSync(req.body.password, user.password);
+        const isPasswordCorrect = bcrypt.compareSync(req.body.password, user.password);
         if (!isPasswordCorrect) return res.status(400).send({message: "Wrong password"});
 
         //Membuat token
@@ -189,7 +189,6 @@ exports.sendResetPasswordEmail = async (req, res) => {
 };
 
 exports.resetPassword = async (req, res) => {
-    const userId = req.params.id;
     const { resetToken, email, new_password, new_password_confirmation } = req.body;
 
     try {
@@ -222,6 +221,35 @@ exports.resetPassword = async (req, res) => {
     } catch (err) {
         return res.status(401).send({
             message: "Invalid or expired token.",
+        });
+    }
+};
+
+exports.changePassword = async (req, res) => {
+    const userId = req.params.id;
+    const { current_password, new_password, new_password_confirmation } = req.body;
+    
+    try {
+        const user = await User.findById(userId);
+        const isPasswordCorrect = bcrypt.compareSync(current_password, user.password);
+        
+        if (!isPasswordCorrect) {
+            return res.status(400).send({ message: "Wrong password." });
+        }
+
+        if (new_password != new_password_confirmation) {
+            return res.status(400).send({ message: "New password and confirmation dont match"});
+        }
+
+        const hashedNewPassword = bcrypt.hashSync(new_password, 10);
+        user.password = hashedNewPassword;
+
+        await user.save();
+
+        return res.status(200).send({ message: "Password has been changed successfully."});
+    } catch (err) {
+        return res.status(500).send({
+            message: err.message || "Some error occurred while changing the password.",
         });
     }
 };

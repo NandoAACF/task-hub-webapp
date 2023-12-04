@@ -9,6 +9,8 @@ export default function ChangePassword() {
     const router = useRouter();
     const { onSuccess, onError } = useNotifications();
 
+    const { id } = router.query;
+
     const [formData, setFormData] = useState({
         current_password: "",
         new_password: "",
@@ -25,9 +27,9 @@ export default function ChangePassword() {
 
     const handleResetPassword = async (e) => {
         e.preventDefault();
-        const response = await useAxios("/auth/change-password", "POST", formData, false);
+        const response = await useAxios(`/users/change-password/${id}`, "PUT", formData);
         if (response) {
-            onSuccess("Password was changed successfully");
+            onSuccess("Password was changed successfully. Please login again");
             router.push("/login");
         }
         else {
@@ -49,8 +51,8 @@ export default function ChangePassword() {
                         label="Current Password"
                         type="password"
                         className="w-full"
-                        name="new_password"
-                        value={formData.new_password}
+                        name="current_password"
+                        value={formData.current_password}
                         onChange={handleChange}
                     />
                     <Input
