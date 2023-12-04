@@ -11,7 +11,7 @@ export default function ResetPassword() {
     const { onSuccess, onError } = useNotifications();
 
     const [formData, setFormData] = useState({
-        resetToken: token?.toString(),
+        resetToken: token.toString() || undefined,
         email: email?.toString(),
         new_password: "",
         new_password_confirmation: ""

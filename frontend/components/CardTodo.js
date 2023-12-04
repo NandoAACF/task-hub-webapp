@@ -9,12 +9,11 @@ export default function CardTodo({
     status = "Hold",
     title = "My Todo Title",
     description = "My todo description.",
-    deadline = "2 December 2023",
+    deadline = "Todo deadline",
     tagType1 = "Priority",
     valuePriority = "High",
     tagType2 = "Category",
     valueCat = "Category A",
-    updatedAt,
     handleEditClick,
     handleDeleteClick,
 }) {
@@ -38,7 +37,7 @@ export default function CardTodo({
                     <div className="flex flex-row items-center justify-start gap-[6px] text-[16px] sm:text-[18px]">
                         <MdDateRange />
                         <h4 className="text-[14px] sm:text-[15px] mt-[3px]">
-                            {moment(deadline).format("DD MMM YYYY HH:mm")}
+                            {moment(deadline).format("DD MMM YYYY HH:mm A")}
                         </h4>
                     </div>
                     <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-[9px] mt-[15px] sm:mt-[5px]">

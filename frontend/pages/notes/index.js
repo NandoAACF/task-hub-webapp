@@ -66,7 +66,7 @@ export default function Notes() {
                 label: newTopic,
             }));
 
-            setTopicOptions(prevOptions => [
+            setTopicOptions([
                 { value: "", label: "All" },
                 ...newTopicOptions,
             ]);

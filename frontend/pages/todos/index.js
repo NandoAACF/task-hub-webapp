@@ -71,7 +71,7 @@ export default function Todos() {
                 label: newCategory,
             }));
 
-            setCategoryOptions(prevOptions => [
+            setCategoryOptions([
                 { value: "", label: "All" },
                 ...newCategoryOptions,
             ]);
