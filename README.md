@@ -2,13 +2,19 @@
     Taskify Web App
 </h1>
 
+## 🔗All Links
+- **Deployed Website:** https://taskify-platform.vercel.app/ 
+- **Deployment Repository Github:** https://github.com/HizkiaJoyIvan/task-hub-webapp 
+- **Link Video Presentasi:**
+- **Link Google Slide:**
+- **Link API Documentation Postman:** https://documenter.getpostman.com/view/29914685/2s9YCASWgw
+- **Backend URL:** https://task-hub-webapp-api.vercel.app/ 
+
 ## 📝 Deskripsi Web App
 Taskify Web App adalah sebuah aplikasi web yang digunakan untuk mengelola todo dan notes pengguna. Aplikasi ini menggunakan fitur authentication dan authorization supaya pengguna bisa mengakses datanya di mana pun dan kapan pun sesuai hak aksesnya. <br>
-Link menuju website: https://task-hub-webapp.vercel.app/
 
 ## 🔥 API Documentation Postman **(Wajib Dibaca)**
 **https://documenter.getpostman.com/view/29914685/2s9YCASWgw** <br>
-Link backend URL: https://task-hub-webapp-api.vercel.app/
 
 ## 📦 Fitur & Endpoint Web App
 1.  Create / Register User <br>
@@ -258,6 +264,8 @@ Link backend URL: https://task-hub-webapp-api.vercel.app/
 - NodeJS
 - ExpressJS
 - MongoDB
+- NextJs
+- TailwindCSS
 
 ## 👨‍💻 Step to Run Backend
 1. Clone this repository
@@ -278,6 +286,21 @@ Link backend URL: https://task-hub-webapp-api.vercel.app/
     ```````````
 5. Understand the API via Postman Documentation **(please read this for better understanding)**
     https://documenter.getpostman.com/view/29914685/2s9YCASWgw
+
+## 👨‍💻 Step to Run Frontend
+1. Go to backend directory
+    ```````````
+    cd frontend
+    ```````````
+2. Install NPM Packages
+    ```````````
+    npm install
+    ```````````
+3. Run App
+    ```````````
+    npm run dev
+    ```````````
+4. You will be redirected to login page, you can register first if you don't have an account.
 
 
 ## Thank You 😀
