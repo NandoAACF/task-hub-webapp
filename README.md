@@ -4,7 +4,7 @@
 
 ## 🔗All Links
 - **Deployed Website:** https://taskify-platform.vercel.app/ 
-- **Video Presentasi:** https://youtu.be/OUtFHvu9JRM?si=x8yGgnAXsGIrgxGp 
+- **Video Presentasi:** https://youtu.be/7DLk-AK5v-8
 - **Google Slide:** https://docs.google.com/presentation/d/1PP_AgDEzd76tSuOjYS2UcZUHDvrBQDIWxN9P3hxBGmk/edit?usp=sharing
 - **Deployment Repository Github:** https://github.com/HizkiaJoyIvan/task-hub-webapp 
 - **API Documentation Postman:** https://documenter.getpostman.com/view/29914685/2s9YCASWgw
