@@ -4,11 +4,11 @@
 
 ## 🔗All Links
 - **Deployed Website:** https://taskify-platform.vercel.app/ 
+- **Video Presentasi:** https://youtu.be/OUtFHvu9JRM?si=x8yGgnAXsGIrgxGp 
+- **Google Slide:** https://docs.google.com/presentation/d/1PP_AgDEzd76tSuOjYS2UcZUHDvrBQDIWxN9P3hxBGmk/edit?usp=sharing
 - **Deployment Repository Github:** https://github.com/HizkiaJoyIvan/task-hub-webapp 
-- **Link Video Presentasi:**
-- **Link Google Slide:**
-- **Link API Documentation Postman:** https://documenter.getpostman.com/view/29914685/2s9YCASWgw
-- **Backend URL:** https://task-hub-webapp-api.vercel.app/ 
+- **API Documentation Postman:** https://documenter.getpostman.com/view/29914685/2s9YCASWgw
+- **Backend URL:** https://taskify-platform-api.vercel.app/  (jika link backend error, silakan refresh pagenya)
 
 ## 📝 Deskripsi Web App
 Taskify Web App adalah sebuah aplikasi web yang digunakan untuk mengelola todo dan notes pengguna. Aplikasi ini menggunakan fitur authentication dan authorization supaya pengguna bisa mengakses datanya di mana pun dan kapan pun sesuai hak aksesnya. <br>
